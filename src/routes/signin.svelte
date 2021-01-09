@@ -16,19 +16,28 @@
   }
   button {
     display: block;
-    margin: 2rem 0 0 auto;
   }
   section {
     width: 100%;
+  }
+  .btn-group {
+    display: flex;
+    flex-flow: row nowrap;
+    place-content: space-between;
+    place-items: center;
+    margin-top: 2rem;
   }
   /* TODO: Mobile dimensions at min-width 601px */
 </style>
 
 <main>
   <section>
-    <h1>Sign In</h1>
+    <h1>Sign in</h1>
     <input type="text" placeholder="Email or username" />
     <input type="password" placeholder="Enter your password" />
-    <button>Sign In</button>
+    <div class="btn-group">
+      <a href="#">Create account</a>
+      <button>Sign In</button>
+    </div>
   </section>
 </main>
