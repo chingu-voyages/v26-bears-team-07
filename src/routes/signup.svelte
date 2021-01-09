@@ -32,12 +32,13 @@
 
 <main>
   <section>
-    <h1>Sign in</h1>
+    <h1>Create your Account</h1>
     <input type="text" placeholder="Email or username" />
     <input type="password" placeholder="Enter your password" />
+    <input type="password" placeholder="Confirm your password" />
     <div class="btn-group">
-      <a href="/signup">Create account</a>
-      <button>Sign In</button>
+      <a href="/signin">Sign in instead</a>
+      <button>Sign Up</button>
     </div>
   </section>
 </main>
