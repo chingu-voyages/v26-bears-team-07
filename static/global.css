@@ -24,6 +24,23 @@ a {
   color: inherit;
 }
 
+button {
+  border-radius: 2px;
+  border: 0.8px solid #dadce0;
+  background: none;
+  font-weight: 500;
+  line-height: 1.71429;
+  padding: 2px 24px 0;
+}
+
+input {
+  border: 1px solid #dadce0;
+  border-radius: 4px;
+  min-height: 28px;
+  line-height: 24px;
+  padding: 13px 15px;
+}
+
 @media (min-width: 400px) {
   body {
     font-size: 16px;
