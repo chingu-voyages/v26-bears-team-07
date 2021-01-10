@@ -1,0 +1,51 @@
+// These queries are in FQL which can be executed via Fauna shell, CLI, or VSCode extension.
+// Serves as reference for commands ran outside of those defined in the codebase
+// for example it might be useful for mocking a schema as FQL does not require 
+// defined schemas like GQL
+
+// Note that all its impacts are shown concisely in the Fauna dashboard and a lot of these
+//   operations can be achieved right from its UI
+
+CreateCollection({name: "Users"})
+
+Create(
+  Collection("Users"),
+  {
+    data: {
+      name: "test"
+    },
+    credentials: {
+      password: "test"
+    }
+  }
+)
+
+CreateIndex({
+  name: "Users_by_name",
+  source: Collection("Users"),
+  terms: [{field: ["data", "name"]}],
+  unique: true
+})
+
+// Let the user read data about itself
+// Must have role User created in dashboard
+Update(
+  Role("User"),
+  {
+    privileges: [
+      {
+        resource: Collection("Users"),
+        actions: {
+          read: Query(
+            Lambda("ref",
+              Equals(
+                Identity(),
+                Var("ref")
+              )
+            )
+          )
+        }
+      }
+    ]
+  }
+)
