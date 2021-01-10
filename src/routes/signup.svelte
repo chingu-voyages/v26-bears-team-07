@@ -30,6 +30,10 @@
   /* TODO: Mobile dimensions at min-width 601px */
 </style>
 
+<svelte:head>
+  <title>Create your Account</title>
+</svelte:head>
+
 <main>
   <section>
     <h1>Create your Account</h1>

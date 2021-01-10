@@ -30,6 +30,10 @@
   /* TODO: Mobile dimensions at min-width 601px */
 </style>
 
+<svelte:head>
+  <title>Sign in</title>
+</svelte:head>
+
 <main>
   <section>
     <h1>Sign in</h1>
