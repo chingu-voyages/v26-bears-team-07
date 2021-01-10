@@ -27,7 +27,7 @@
     place-items: center;
     margin-top: 2rem;
   }
-  /* TODO: Mobile dimensions at min-width 601px */
+  /* TODO: Desktop dimensions at min-width 601px */
 </style>
 
 <svelte:head>
