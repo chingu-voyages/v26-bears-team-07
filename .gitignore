@@ -8,4 +8,4 @@ public
 .netlify
 .env
 .faunarc
-/.vscode/
+.vscode
