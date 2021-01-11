@@ -1,17 +1,10 @@
-var faunadb = require("faunadb"),
-  q = faunadb.query;
+const { login } = require("./utils/auth");
 
 exports.handler = async ({ body }) => {
   var { name, password } = JSON.parse(body);
 
-  var client = new faunadb.Client({ secret: process.env.FAUNA_KEY });
   try {
-    var { secret = null } = await client.query(
-      q.Login(q.Match(q.Index("Users_by_name"), name), {
-        password,
-        ttl: q.TimeAdd(q.Now(), 30, "days"),
-      })
-    );
+    var { secret = null } = await login(name, password);
   } catch (error) {
     return {
       statusCode: 400,
