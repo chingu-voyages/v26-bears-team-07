@@ -2,6 +2,7 @@ var faunadb = require("faunadb"),
   q = faunadb.query;
 
 exports.handler = async ({ body }) => {
+  // Signs up then logs in and responds with a token for the client to consume.
   var { name, password } = JSON.parse(body);
 
   var client = new faunadb.Client({ secret: process.env.FAUNA_KEY });
