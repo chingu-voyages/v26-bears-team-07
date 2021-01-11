@@ -38,3 +38,6 @@ Sort of like a landing home page. TBD -->
   <strong>Try editing this file (src/routes/index.svelte) to test live
     reloading.</strong>
 </p>
+
+<a href="/signin">Sign in</a>
+<a href="/signup">Sign up</a>
