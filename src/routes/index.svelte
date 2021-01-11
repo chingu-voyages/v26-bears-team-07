@@ -39,5 +39,6 @@ Sort of like a landing home page. TBD -->
     reloading.</strong>
 </p>
 
+<a href="/home">Home</a>
 <a href="/signin">Sign in</a>
 <a href="/signup">Sign up</a>
