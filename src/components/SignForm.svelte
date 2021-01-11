@@ -1,5 +1,11 @@
 <script>
+  import { createEventDispatcher } from "svelte";
+
   export let up;
+  let name = "",
+    pw = "",
+    pwConfirm = "";
+  const dispatch = createEventDispatcher();
   let title = !up ? "Sign in" : "Create your Account";
 </script>
 
@@ -30,12 +36,25 @@
   <title>{title}</title>
 </svelte:head>
 
-<form on:submit|preventDefault>
+<form
+  on:submit|preventDefault={() => dispatch('submit', { name, pw, pwConfirm })}>
   <h1>{title}</h1>
-  <input type="text" placeholder="Email or username" required />
-  <input type="password" placeholder="Enter your password" required />
+  <input
+    type="text"
+    placeholder="Email or username"
+    bind:value={name}
+    required />
+  <input
+    type="password"
+    placeholder="Enter your password"
+    bind:value={pw}
+    required />
   {#if up}
-    <input type="password" placeholder="Confirm your password" required />
+    <input
+      type="password"
+      placeholder="Confirm your password"
+      bind:value={pwConfirm}
+      required />
   {/if}
   <div class="btn-group">
     <a
