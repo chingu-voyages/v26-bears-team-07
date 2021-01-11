@@ -1,5 +1,6 @@
+<!-- TODO: We should decide whether the main page should display information on the app
+Sort of like a landing home page. TBD -->
 <script>
-
 </script>
 
 <style>

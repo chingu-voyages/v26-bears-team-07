@@ -28,7 +28,7 @@ CreateIndex({
 })
 
 // Let the user read data about itself
-// Must have role User created in dashboard
+// Must have role User created via dashboard or shell
 Update(
   Role("User"),
   {
