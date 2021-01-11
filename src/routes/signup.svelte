@@ -1,5 +1,6 @@
 <script>
   import SignForm from "../components/SignForm.svelte";
+  // TODO: If signed in, redirect to either account sign out, or home page.
 </script>
 
 <style>

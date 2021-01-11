@@ -1,7 +1,7 @@
 <script>
   import { goto } from "@sapper/app";
 
-  export let up;
+  export let up = false;
   let name = "",
     password = "",
     confirm = "";
