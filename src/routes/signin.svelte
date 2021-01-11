@@ -14,5 +14,5 @@
 </style>
 
 <main>
-  <SignForm on:submit={({ detail }) => console.log(detail)} />
+  <SignForm />
 </main>

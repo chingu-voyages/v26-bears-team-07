@@ -1,12 +1,31 @@
 <script>
-  import { createEventDispatcher } from "svelte";
+  import { goto } from "@sapper/app";
 
   export let up;
   let name = "",
-    pw = "",
+    password = "",
     confirm = "";
-  const dispatch = createEventDispatcher();
   let title = !up ? "Sign in" : "Create your Account";
+
+  async function handleSubmit() {
+    if (up && password != confirm) return; // TODO: Error handling if confirm isn't same as password
+
+    var res = await fetch(`/.netlify/functions/${!up ? "signin" : "signup"}`, {
+      method: "POST",
+      body: JSON.stringify({
+        name,
+        password,
+      }),
+    });
+    var { secret = null } = await res.json();
+    if (secret) {
+      localStorage.setItem("secret", secret);
+      // TODO: Update the auth store with secret b/c Sapper will client-side route
+      await goto("/home");
+    } else {
+      // TODO: Client-side error handling if password/user incorrect
+    }
+  }
 </script>
 
 <style>
@@ -36,11 +55,14 @@
   <title>{title}</title>
 </svelte:head>
 
-<form
-  on:submit|preventDefault={() => dispatch('submit', { name, pw, confirm })}>
+<form on:submit|preventDefault={handleSubmit}>
   <h1>{title}</h1>
   <input type="text" placeholder="Username" bind:value={name} required />
-  <input type="password" placeholder="Password" bind:value={pw} required />
+  <input
+    type="password"
+    placeholder="Password"
+    bind:value={password}
+    required />
   {#if up}
     <input
       type="password"
