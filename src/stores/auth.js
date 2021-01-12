@@ -6,7 +6,7 @@ export const authStore = writable();
 
 export function init() {
   // Initializes secret into store if logged in.
-  // Used in app's layout
+  // Used in app's _layout
   onMount(() => {
     let secret = localStorage.getItem("secret");
     if (secret) {
