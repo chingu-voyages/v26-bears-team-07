@@ -1,5 +1,6 @@
 <script>
   import { goto } from "@sapper/app";
+  import { authStore } from "../stores/auth";
 
   export let up = false;
   let name = "",
@@ -20,7 +21,7 @@
     var { secret = null } = await res.json();
     if (secret) {
       localStorage.setItem("secret", secret);
-      // TODO: Update the auth store with secret b/c Sapper will client-side route
+      $authStore = secret;
       await goto("/home");
     } else {
       // TODO: Client-side error handling if password/user incorrect
