@@ -29,6 +29,35 @@
   }
 </script>
 
+<svelte:head>
+  <title>{title}</title>
+</svelte:head>
+
+<form on:submit|preventDefault={handleSubmit}>
+  <h1>{title}</h1>
+  <input type="text" placeholder="Username" bind:value={name} required />
+  <input
+    type="password"
+    placeholder="Password"
+    bind:value={password}
+    required
+  />
+  {#if up}
+    <input
+      type="password"
+      placeholder="Confirm"
+      bind:value={confirm}
+      required
+    />
+  {/if}
+  <div class="btn-group">
+    <a href={!up ? "/signup" : "/signin"}
+      >{!up ? "Create account" : "Sign in instead"}</a
+    >
+    <button>{!up ? "Sign In" : "Sign Up"}</button>
+  </div>
+</form>
+
 <style>
   h1 {
     text-align: center;
@@ -51,29 +80,3 @@
   }
   /* TODO: Desktop dimensions at min-width 601px */
 </style>
-
-<svelte:head>
-  <title>{title}</title>
-</svelte:head>
-
-<form on:submit|preventDefault={handleSubmit}>
-  <h1>{title}</h1>
-  <input type="text" placeholder="Username" bind:value={name} required />
-  <input
-    type="password"
-    placeholder="Password"
-    bind:value={password}
-    required />
-  {#if up}
-    <input
-      type="password"
-      placeholder="Confirm"
-      bind:value={confirm}
-      required />
-  {/if}
-  <div class="btn-group">
-    <a
-      href={!up ? '/signup' : '/signin'}>{!up ? 'Create account' : 'Sign in instead'}</a>
-    <button>{!up ? 'Sign In' : 'Sign Up'}</button>
-  </div>
-</form>
