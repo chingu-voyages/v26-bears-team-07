@@ -3,6 +3,22 @@ Sort of like a landing home page. TBD -->
 <script>
 </script>
 
+<svelte:head>
+  <title>TODO: Title</title>
+</svelte:head>
+
+<h1>Great success!</h1>
+
+<p>
+  <strong
+    >Try editing this file (src/routes/index.svelte) to test live reloading.</strong
+  >
+</p>
+
+<a href="/home">Home</a>
+<a href="/signin">Sign in</a>
+<a href="/signup">Sign up</a>
+
 <style>
   h1,
   p {
@@ -27,18 +43,3 @@ Sort of like a landing home page. TBD -->
     }
   }
 </style>
-
-<svelte:head>
-  <title>TODO: Title</title>
-</svelte:head>
-
-<h1>Great success!</h1>
-
-<p>
-  <strong>Try editing this file (src/routes/index.svelte) to test live
-    reloading.</strong>
-</p>
-
-<a href="/home">Home</a>
-<a href="/signin">Sign in</a>
-<a href="/signup">Sign up</a>

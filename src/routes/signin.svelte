@@ -3,6 +3,10 @@
   // TODO: If signed in, redirect to either account sign out, or home page.
 </script>
 
+<main>
+  <SignForm />
+</main>
+
 <style>
   main {
     display: grid;
@@ -13,7 +17,3 @@
 
   /* TODO: Desktop dimensions at min-width 601px */
 </style>
-
-<main>
-  <SignForm />
-</main>

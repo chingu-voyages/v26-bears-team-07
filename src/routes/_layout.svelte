@@ -7,7 +7,7 @@
   init();
 </script>
 
+<slot />
+
 <style>
 </style>
-
-<slot />
