@@ -1,13 +1,12 @@
 <script>
   import TabItem from "./TabItem.svelte";
+  import NewClass from "./NewClass.svelte";
   let hamburgers = "images/align-justify.svg",
     plus = "images/plus.svg";
   export let className = "AppName";
   export let role = "student";
 
-  const handleTabClick = () => {
-    console.log(this);
-  };
+  let showNewClass = false;
 </script>
 
 <nav class="global-nav flex-r">
@@ -22,20 +21,26 @@
   {#if role}
     <div class="center-content">
       <ul class="nav-tabs">
-        <TabItem isActive={true} on:click={handleTabClick}>Stream</TabItem>
-        <TabItem isActive={false} on:click={handleTabClick}>Classwork</TabItem>
-        <TabItem isActive={false} on:click={handleTabClick}>People</TabItem>
+        <TabItem isActive={true}>Stream</TabItem>
+        <TabItem isActive={false}>Classwork</TabItem>
+        <TabItem isActive={false}>People</TabItem>
         {#if role === "teacher"}
-          <TabItem isActive={false} on:click={handleTabClick}>Grades</TabItem>
+          <TabItem isActive={false}>Grades</TabItem>
         {/if}
       </ul>
     </div>
   {/if}
   <ul class="flex-r">
-    <li class="plus"><img alt="add-class" src={plus} /></li>
+    <li class="plus" on:click={() => (showNewClass = true)}>
+      <img alt="add-class" src={plus} />
+    </li>
     <li class="user"><span class="avatar" /></li>
   </ul>
 </nav>
+
+{#if showNewClass}
+  <NewClass on:cancel={() => (showNewClass = false)} />
+{/if}
 
 <style>
   * {
