@@ -97,7 +97,12 @@
   }
 
   .plus img {
+    cursor: pointer;
     margin-right: 30px;
+  }
+
+  .plus img:hover {
+    background-color: #eee;
   }
 
   .avatar {

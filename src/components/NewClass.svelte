@@ -13,13 +13,13 @@
 <div transition:fly={{ y: 200 }} class="modal">
   <h1>New Class</h1>
   <div class="content">
-    <label for="class">Class Name</label>
+    <label for="class">Class Name: </label>
     <input type="text" />
-    <label for="section">Section</label>
+    <label for="section">Section: </label>
     <input type="text" />
-    <label for="subject">Subject</label>
+    <label for="subject">Subject: </label>
     <input type="text" />
-    <label for="room">Room</label>
+    <label for="room">Room: </label>
     <input type="text" />
   </div>
   <footer>
@@ -61,6 +61,11 @@
 
   .content {
     padding: 1rem;
+  }
+
+  input {
+    display: block;
+    width: 100%;
   }
 
   footer {
