@@ -5,6 +5,7 @@ type User {
 type Class {
   name: String!
   owner: User! @relation
+  link: String!
 }
 
 type ClassRole {
@@ -18,13 +19,13 @@ enum Role {
   student
 }
 
-type Comment {
-  message: String!
-  author: User! @relation
-}
-
 type Stream {
   message: String!
   author: User! @relation
   class: Class! @relation
+}
+
+type Comment {
+  message: String!
+  author: User! @relation
 }
