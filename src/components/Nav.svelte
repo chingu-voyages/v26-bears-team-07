@@ -1,8 +1,12 @@
 <script>
+  import TabItem from "./TabItem.svelte";
+  import NewClass from "./NewClass.svelte";
   let hamburgers = "images/align-justify.svg",
     plus = "images/plus.svg";
   export let className = "AppName";
-  export let role = "teacher";
+  export let role = "student";
+
+  let showNewClass = false;
 </script>
 
 <nav class="global-nav flex-r">
@@ -14,29 +18,29 @@
       <span>{className}</span>
     </div>
   </div>
-  <div class="center-content">
-    <ul class="nav-tabs">
-      <li class="tab-item">
-        <a href="#">Stream</a>
-      </li>
-      <li class="tab-item">
-        <a href="#">Classwork</a>
-      </li>
-      <li class="tab-item">
-        <a href="#">People</a>
-      </li>
-      {#if role === "teacher"}
-        <li class="tab-item">
-          <a href="#">Grades</a>
-        </li>
-      {/if}
-    </ul>
-  </div>
+  {#if role}
+    <div class="center-content">
+      <ul class="nav-tabs">
+        <TabItem isActive={true}>Stream</TabItem>
+        <TabItem isActive={false}>Classwork</TabItem>
+        <TabItem isActive={false}>People</TabItem>
+        {#if role === "teacher"}
+          <TabItem isActive={false}>Grades</TabItem>
+        {/if}
+      </ul>
+    </div>
+  {/if}
   <ul class="flex-r">
-    <li class="plus"><img alt="add-class" src={plus} /></li>
+    <li class="plus" on:click={() => (showNewClass = true)}>
+      <img alt="add-class" src={plus} />
+    </li>
     <li class="user"><span class="avatar" /></li>
   </ul>
 </nav>
+
+{#if showNewClass}
+  <NewClass on:cancel={() => (showNewClass = false)} />
+{/if}
 
 <style>
   * {
@@ -65,6 +69,7 @@
   .left-content {
     display: flex;
     align-items: center;
+    height: 100%;
   }
 
   .class-burger {
@@ -80,17 +85,24 @@
     /* width: 2vw; */
   }
 
+  .center-content {
+    height: 68px;
+  }
+
   .nav-tabs {
     display: flex;
     padding: none;
-  }
-
-  .tab-item {
-    padding: none;
+    justify-content: center;
+    height: 100%;
   }
 
   .plus img {
+    cursor: pointer;
     margin-right: 30px;
+  }
+
+  .plus img:hover {
+    background-color: #eee;
   }
 
   .avatar {
@@ -107,8 +119,6 @@
       display: flex;
       order: 3;
       width: 100%;
-      text-align: center;
-      padding-bottom: 20px;
       justify-content: center;
     }
   }
