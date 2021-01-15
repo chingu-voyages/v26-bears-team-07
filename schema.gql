@@ -1,0 +1,30 @@
+type User {
+  name: String! @unique
+}
+
+type Class {
+  name: String!
+  owner: User! @relation
+}
+
+type ClassRole {
+  role: Role!
+  user: User! @relation
+  class: Class! @relation
+}
+
+enum Role {
+  teacher
+  student
+}
+
+type Comment {
+  message: String!
+  author: User! @relation
+}
+
+type Stream {
+  message: String!
+  author: User! @relation
+  class: Class! @relation
+}
