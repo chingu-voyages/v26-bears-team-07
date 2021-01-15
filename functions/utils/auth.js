@@ -11,7 +11,7 @@ const {
 
 exports.login = (name, password) =>
   query(
-    Login(Match(Index("Users_by_name"), name), {
+    Login(Match(Index("unique_User_name"), name), {
       password,
       ttl: TimeAdd(Now(), 30, "days"),
     })
@@ -19,7 +19,7 @@ exports.login = (name, password) =>
 
 exports.createUser = (name, password) =>
   query(
-    Create(Collection("Users"), {
+    Create(Collection("User"), {
       data: {
         name,
       },
