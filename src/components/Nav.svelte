@@ -1,8 +1,13 @@
 <script>
+  import TabItem from "./TabItem.svelte";
   let hamburgers = "images/align-justify.svg",
     plus = "images/plus.svg";
   export let className = "AppName";
-  export let role = "teacher";
+  export let role = "student";
+
+  const handleTabClick = () => {
+    console.log(this);
+  };
 </script>
 
 <nav class="global-nav flex-r">
@@ -14,24 +19,18 @@
       <span>{className}</span>
     </div>
   </div>
-  <div class="center-content">
-    <ul class="nav-tabs">
-      <li class="tab-item">
-        <a href="#">Stream</a>
-      </li>
-      <li class="tab-item">
-        <a href="#">Classwork</a>
-      </li>
-      <li class="tab-item">
-        <a href="#">People</a>
-      </li>
-      {#if role === "teacher"}
-        <li class="tab-item">
-          <a href="#">Grades</a>
-        </li>
-      {/if}
-    </ul>
-  </div>
+  {#if role}
+    <div class="center-content">
+      <ul class="nav-tabs">
+        <TabItem isActive={true} on:click={handleTabClick}>Stream</TabItem>
+        <TabItem isActive={false} on:click={handleTabClick}>Classwork</TabItem>
+        <TabItem isActive={false} on:click={handleTabClick}>People</TabItem>
+        {#if role === "teacher"}
+          <TabItem isActive={false} on:click={handleTabClick}>Grades</TabItem>
+        {/if}
+      </ul>
+    </div>
+  {/if}
   <ul class="flex-r">
     <li class="plus"><img alt="add-class" src={plus} /></li>
     <li class="user"><span class="avatar" /></li>
@@ -65,6 +64,7 @@
   .left-content {
     display: flex;
     align-items: center;
+    height: 100%;
   }
 
   .class-burger {
@@ -80,13 +80,15 @@
     /* width: 2vw; */
   }
 
+  .center-content {
+    height: 68px;
+  }
+
   .nav-tabs {
     display: flex;
     padding: none;
-  }
-
-  .tab-item {
-    padding: none;
+    justify-content: center;
+    height: 100%;
   }
 
   .plus img {
@@ -107,8 +109,6 @@
       display: flex;
       order: 3;
       width: 100%;
-      text-align: center;
-      padding: 30px 0;
       justify-content: center;
     }
   }
