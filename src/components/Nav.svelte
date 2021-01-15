@@ -108,7 +108,7 @@
       order: 3;
       width: 100%;
       text-align: center;
-      padding-bottom: 20px;
+      padding: 30px 0;
       justify-content: center;
     }
   }
