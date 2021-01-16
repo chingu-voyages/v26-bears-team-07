@@ -98,11 +98,13 @@
 
   .plus img {
     cursor: pointer;
-    margin-right: 30px;
+    padding: 10px;
+    margin-right: 20px;
+    border-radius: 50%;
   }
 
   .plus img:hover {
-    background-color: #eee;
+    background-color: rgb(245, 245, 245);
   }
 
   .avatar {
