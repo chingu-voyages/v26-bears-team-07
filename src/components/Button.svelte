@@ -13,6 +13,7 @@
     color: #555;
     font-size: 0.9rem;
     padding: 0.6rem 0.5rem;
+    cursor: pointer;
   }
 
   button:hover {
