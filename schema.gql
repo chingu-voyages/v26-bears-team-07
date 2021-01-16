@@ -7,17 +7,8 @@ type Class {
   owner: User! @relation
   link: String! @unique
   invite: String!
-}
-
-type ClassRole {
-  role: Role!
-  user: User! @relation
-  class: Class! @relation
-}
-
-enum Role {
-  teacher
-  student
+  teachers: [User]! @relation
+  students: [User]! @relation
 }
 
 type Stream {
