@@ -30,20 +30,3 @@ type Comment {
   message: String!
   author: User!
 }
-
-# multiple relational mode
-# type User {
-#   name: String! @unique
-#   owns: [Class]! @relation(name: "owner_role")
-#   teaches: [Class]! @relation(name: "teacher_role")
-#   attends: [Class]! @relation(name: "student_role")
-# }
-
-# type Class {
-#   name: String!
-#   owner: User! @relation(name: "owner_role")
-#   link: String! @unique
-#   invite: String!
-#   teachers: [User]! @relation(name: "teacher_role")
-#   students: [User]! @relation(name: "student_role")
-# }
