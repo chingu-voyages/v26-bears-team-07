@@ -14,7 +14,7 @@ exports.handler = async ({ body }) => {
   }
 
   if (ref) {
-    var { secret = null } = await login(name, password);
+    var { secret = "", instance = "" } = await login(name, password);
 
     return (
       secret && {
