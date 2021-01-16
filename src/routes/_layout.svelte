@@ -2,14 +2,14 @@
   Similar to layout in Gatsby, present on all pages -->
 <script>
   import { init } from "../stores/auth";
-  import Nav from "../components/Nav.svelte"
+  import Header from "../components/Header/Header.svelte";
 
   // Initialize auth store for the app
   init();
 </script>
 
 
-<Nav />
+<Header />
 <slot />
 
 <style>
