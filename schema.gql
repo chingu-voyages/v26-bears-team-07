@@ -23,4 +23,5 @@ type Stream {
 type Comment {
   message: String!
   author: User!
+  stream: Stream!
 }
