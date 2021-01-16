@@ -2,22 +2,31 @@ type User {
   name: String! @unique
 }
 
+type ClassRole {
+  class: Class!
+  user: User!
+  role: Role!
+}
+
+enum Role {
+  student
+  teacher
+}
+
 type Class {
   name: String!
-  owner: User! @relation
+  owner: User!
   link: String! @unique
   invite: String!
-  teachers: [User!] @relation
-  students: [User!] @relation
 }
 
 type Stream {
   message: String!
-  author: User! @relation
-  class: Class! @relation
+  author: User!
+  class: Class!
 }
 
 type Comment {
   message: String!
-  author: User! @relation
+  author: User!
 }
