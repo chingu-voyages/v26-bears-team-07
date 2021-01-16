@@ -6,27 +6,6 @@
 // Note that all its impacts are shown concisely in the Fauna dashboard and a lot of these
 //   operations can be achieved right from its UI
 
-CreateCollection({name: "Users"})
-
-Create(
-  Collection("Users"),
-  {
-    data: {
-      name: "test"
-    },
-    credentials: {
-      password: "test"
-    }
-  }
-)
-
-CreateIndex({
-  name: "Users_by_name",
-  source: Collection("Users"),
-  terms: [{field: ["data", "name"]}],
-  unique: true
-})
-
 // Let the user read data about itself
 // Must have role User created via dashboard or shell
 Update(
