@@ -7,8 +7,8 @@ type Class {
   owner: User! @relation
   link: String! @unique
   invite: String!
-  teachers: [User]! @relation
-  students: [User]! @relation
+  teachers: [User!] @relation
+  students: [User!] @relation
 }
 
 type Stream {
