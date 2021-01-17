@@ -1,30 +1,37 @@
-// TODO: Pending removal. This is an old file!
-//    May have to remove if Fauna's client driver
-//    isn't fixed and it's unused.
+export async function query(secret, { query, variables = {} }) {
+  /**
+   * Fauna GQL query utility for browser. Wraps your GraphQL query and returns response.
+   */
+  const result = await fetch("https://graphql.fauna.com/graphql", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${secret}`,
+      "X-Schema-Preview": "partial-update-mutation",
+    },
+    body: JSON.stringify({ query, variables }),
+  }).then((response) => response.json());
 
-// A simple wrapper function for querying Fauna on the client
-// takes secret as first param
-import { Client } from "faunadb";
+  // You can handle errors here if needed
+  //    They'll be on result.errors
+  if (process.env.NODE_ENV == "development") {
+    console.log(result);
+  }
 
-export function query(secret, cb) {
-  var { query } = new Client({ secret });
-  return query(cb);
+  return result.data;
 }
 
-// import { query } from "./db";
-// import { query as q } from "faunadb";
-// var { Create, Collection } = q;
-
-// Fauna client queries for the Classes collection
-// export const createClass = (secret, { name, section, subject, room }) =>
-//   query(
-//     secret,
-//     Create(Collection("Classes"), {
-//       data: {
-//         name,
-//         section,
-//         subject,
-//         room,
-//       },
-//     })
-//   );
+export function optProps(obj) {
+  /**
+   * util for creating optional GQL props for query.
+   * Accepts an object of props and their strings.
+   * Creates props only if its str has contents.
+   * It's only suited for string types at the moment, but can be adjusted to check type
+   *   later.
+   */
+  var str = "";
+  for (const [key, value] of Object.entries(obj)) {
+    if (value) str += `\n${key}: "${value}"`;
+  }
+  return str;
+}

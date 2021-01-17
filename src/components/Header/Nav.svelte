@@ -1,4 +1,5 @@
 <script>
+  import { createEventDispatcher } from "svelte";
   import TabItem from "./TabItem.svelte";
   import NewClass from "./NewClass.svelte";
   let hamburgers = "images/align-justify.svg",
@@ -7,12 +8,18 @@
   export let role = "student";
 
   let showNewClass = false;
+  let dispatch = createEventDispatcher()
+
+  function openSideNav(){
+    console.log('send action to open menu to sidenav')
+    dispatch('opensidenav')
+  }
 </script>
 
 <nav class="global-nav flex-r">
   <div class="left-content">
     <div class="class-burger" tabindex="0">
-      <img alt="class-menu" src={hamburgers} />
+      <img alt="class-menu" src={hamburgers} on:click={() => openSideNav()} />
     </div>
     <div class="nav-title">
       <span>{className}</span>

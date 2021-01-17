@@ -18,10 +18,15 @@
         password,
       }),
     });
-    var { secret = null } = await res.json();
+    var { secret = "", instance: { "@ref": { id } } = "" } = await res.json();
     if (secret) {
-      localStorage.setItem("secret", secret);
-      $authStore = secret;
+      var authData = {
+        secret,
+        id,
+      };
+
+      localStorage.setItem("auth", JSON.stringify(authData));
+      $authStore = authData;
       await goto("/home");
     } else {
       // TODO: Client-side error handling if password/user incorrect

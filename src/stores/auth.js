@@ -8,9 +8,9 @@ export function init() {
   // Initializes secret into store if logged in.
   // Used in app's _layout
   onMount(() => {
-    let secret = localStorage.getItem("secret");
-    if (secret) {
-      authStore.set(secret);
+    let authData = JSON.parse(localStorage.getItem("auth"));
+    if (authData) {
+      authStore.set(authData);
     }
   });
 }

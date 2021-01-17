@@ -19,7 +19,7 @@ exports.handler = async ({ body }) => {
     return (
       secret && {
         statusCode: 200,
-        body: JSON.stringify({ secret }),
+        body: JSON.stringify({ secret, instance }),
       }
     );
   }

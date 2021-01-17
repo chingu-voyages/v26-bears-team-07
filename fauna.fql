@@ -28,3 +28,14 @@ Update(
     ]
   }
 )
+
+// Index for classroom read privileges use. Groups all students and teachers in a class
+CreateIndex({
+  name: "R_people_by_class",
+  source: [
+    { collection: Collection("teacher_role") },
+    { collection: Collection("student_role") },
+  ],
+  terms: [{ field: ["data", "classID"] }],
+  values: [{ field: ["data", "userID"] }],
+})
