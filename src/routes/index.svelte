@@ -1,6 +1,7 @@
 <!-- TODO: We should decide whether the main page should display information on the app
 Sort of like a landing home page. TBD -->
 <script>
+  import Card from "../components/Card.svelte";
 </script>
 
 <svelte:head>
@@ -18,6 +19,8 @@ Sort of like a landing home page. TBD -->
 <a href="/home">Home</a>
 <a href="/signin">Sign in</a>
 <a href="/signup">Sign up</a>
+
+<Card />
 
 <style>
   h1,

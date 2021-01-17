@@ -4,8 +4,6 @@
   export let rows = null;
   export let type = "text";
   export let value;
-
-  let touched = false;
 </script>
 
 <div class="form-control">
