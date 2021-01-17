@@ -2,7 +2,7 @@ import { query, optProps } from "./db";
 
 export const createClass = (
   secret,
-  { name, id, link, invite, section, subject, room }
+  { name, id, link, invite, section = "", subject = "", room = "" }
 ) =>
   query(secret, {
     query: `
