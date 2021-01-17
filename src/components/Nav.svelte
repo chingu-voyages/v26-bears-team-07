@@ -21,11 +21,11 @@
   {#if role}
     <div class="center-content">
       <ul class="nav-tabs">
-        <TabItem isActive={true}>Stream</TabItem>
-        <TabItem isActive={false}>Classwork</TabItem>
-        <TabItem isActive={false}>People</TabItem>
+        <TabItem active={true}>Stream</TabItem>
+        <TabItem active={false}>Classwork</TabItem>
+        <TabItem active={false}>People</TabItem>
         {#if role === "teacher"}
-          <TabItem isActive={false}>Grades</TabItem>
+          <TabItem active={false}>Grades</TabItem>
         {/if}
       </ul>
     </div>
@@ -98,11 +98,13 @@
 
   .plus img {
     cursor: pointer;
-    margin-right: 30px;
+    padding: 10px;
+    margin-right: 20px;
+    border-radius: 50%;
   }
 
   .plus img:hover {
-    background-color: #eee;
+    background-color: rgb(245, 245, 245);
   }
 
   .avatar {

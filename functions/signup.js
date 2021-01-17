@@ -14,12 +14,12 @@ exports.handler = async ({ body }) => {
   }
 
   if (ref) {
-    var { secret = null } = await login(name, password);
+    var { secret = "", instance = "" } = await login(name, password);
 
     return (
       secret && {
         statusCode: 200,
-        body: JSON.stringify({ secret }),
+        body: JSON.stringify({ secret, instance }),
       }
     );
   }

@@ -1,6 +1,8 @@
 <script>
   import { createEventDispatcher } from "svelte";
   import { fly, fade } from "svelte/transition";
+  import TextInput from "./TextInput.svelte";
+  import Button from "./Button.svelte";
 
   const dispatch = createEventDispatcher();
 
@@ -13,18 +15,14 @@
 <div transition:fly={{ y: 200 }} class="modal">
   <h1>New Class</h1>
   <div class="content">
-    <label for="class">Class Name: </label>
-    <input type="text" />
-    <label for="section">Section: </label>
-    <input type="text" />
-    <label for="subject">Subject: </label>
-    <input type="text" />
-    <label for="room">Room: </label>
-    <input type="text" />
+    <TextInput placeholder="Class Name (required)" />
+    <TextInput placeholder="Section" />
+    <TextInput placeholder="Subject" />
+    <TextInput placeholder="Room" />
   </div>
   <footer>
-    <button on:click={() => dispatch("cancel")}>Cancel</button>
-    <button>Create Class</button>
+    <Button on:click={() => dispatch("cancel")}>Cancel</Button>
+    <Button type="confirm">Create</Button>
   </footer>
 </div>
 
@@ -63,13 +61,9 @@
     padding: 1rem;
   }
 
-  input {
-    display: block;
-    width: 100%;
-  }
-
   footer {
-    padding: 1rem;
+    padding: 0.5rem;
+    text-align: right;
   }
 
   @media (min-width: 768px) {

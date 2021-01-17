@@ -4,7 +4,7 @@ exports.handler = async ({ body }) => {
   var { name, password } = JSON.parse(body);
 
   try {
-    var { secret = null } = await login(name, password);
+    var { secret = "", instance = "" } = await login(name, password);
   } catch (error) {
     return {
       statusCode: 400,
@@ -15,7 +15,7 @@ exports.handler = async ({ body }) => {
   return (
     secret && {
       statusCode: 200,
-      body: JSON.stringify({ secret }),
+      body: JSON.stringify({ secret, instance }),
     }
   );
 };
