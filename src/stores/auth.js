@@ -10,7 +10,7 @@ export function init() {
   onMount(() => {
     let authData = JSON.parse(localStorage.getItem("auth"));
     if (authData) {
-      authStore.set(JSON.stringify(authData));
+      authStore.set(authData);
     }
   });
 }
