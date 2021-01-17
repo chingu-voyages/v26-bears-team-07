@@ -12,6 +12,7 @@ export async function query(secret, { query, variables = {} }) {
   }).then((response) => response.json());
 
   // You can handle errors here if needed
+  //    They'll be on result.errors
 
   return result.data;
 }
@@ -26,7 +27,7 @@ export function optProps(obj) {
    */
   var str = "";
   for (const [key, value] of Object.entries(obj)) {
-    if (value) str += `\n${key}: ${value}`;
+    if (value) str += `\n${key}: "${value}"`;
   }
   return str;
 }
