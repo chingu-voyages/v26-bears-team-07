@@ -10,14 +10,15 @@
     const opener = () => {
       let el = document.getElementById("mySidenav")
       el.style.display = "block";
-      el.style.width = '18%'
+      el.style.width = '18%';
+      
     }
 
     const resetMenu = () => {
       let el = document.getElementById("mySidenav")
-      el.style.display = "none";
+      el.style.transition = 'all 0.5s';
       el.style.width = '0';
-      dispatch('sidenavclosed')
+      dispatch('sidenavclosed');
     }
 
  
@@ -44,7 +45,7 @@
     border: rgba(128, 128, 128, 0.432) 1px solid; 
     overflow-x: hidden; 
     padding-top: 60px; 
-    transition: 0.5s; 
+    transition: width 0.5s ease-in-out; 
   }
   .sidenav a {
     padding: 8px 8px 8px 32px;
@@ -66,6 +67,6 @@
     <a href={deadLink}>{entry}</a>
     {#if openMenu}
     <span style="display:none">{opener()}</span>
-  {/if}
+    {/if}
   </div>
   
