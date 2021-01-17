@@ -1,30 +1,15 @@
-// TODO: Pending removal. This is an old file!
-//    May have to remove if Fauna's client driver
-//    isn't fixed and it's unused.
+// Fauna GQL query utility for browser
+export async function query(secret, { query, variables = {} }) {
+  const result = await fetch("https://graphql.fauna.com/graphql", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${secret}`,
+    },
+    body: JSON.stringify({ query, variables }),
+  }).then((response) => response.json());
 
-// A simple wrapper function for querying Fauna on the client
-// takes secret as first param
-import { Client } from "faunadb";
+  // You can handle errors here if needed
 
-export function query(secret, cb) {
-  var { query } = new Client({ secret });
-  return query(cb);
+  return result.data;
 }
-
-// import { query } from "./db";
-// import { query as q } from "faunadb";
-// var { Create, Collection } = q;
-
-// Fauna client queries for the Classes collection
-// export const createClass = (secret, { name, section, subject, room }) =>
-//   query(
-//     secret,
-//     Create(Collection("Classes"), {
-//       data: {
-//         name,
-//         section,
-//         subject,
-//         room,
-//       },
-//     })
-//   );
