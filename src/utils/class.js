@@ -29,10 +29,10 @@ mutation CreateClass {
   createClass(
     data: {
       name: "${name}"
-      owner: { connect: ${id} }
+      owner: { connect: "${id}" }
       link: "${link}"
       invite: "${invite}"
-      teachers: { connect: ${id} }
+      teachers: { connect: "${id}" }
       ${optProps({
         section,
         subject,
@@ -47,3 +47,10 @@ mutation CreateClass {
 }
 `,
   });
+
+// TODO: teacher role creation query: Currently unable to create teacher in same query.
+// It is likely because of permissions being applied only on user, and the user is not
+// an owner of the classroom yet because it's trying to create at the same time.
+// In that case, need to use a second query to update teachers OR create the role
+// inside teacher_role
+// Remove teachers from the createClass query when this is solved
