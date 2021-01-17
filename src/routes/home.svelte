@@ -13,7 +13,7 @@
     on:submit|preventDefault={async () =>
       await createClass($authStore.secret, {
         name,
-        id: $authStore.id,
+        ownerID: $authStore.id,
         section,
         subject,
         room,

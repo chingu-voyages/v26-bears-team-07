@@ -12,7 +12,7 @@ export const createClass = (
   secret,
   {
     name,
-    id,
+    ownerID,
     // random link string if link not provided
     link = Math.random().toString(36).substring(2, 15) +
       Math.random().toString(36).substring(2, 15),
@@ -29,10 +29,10 @@ mutation CreateClass {
   createClass(
     data: {
       name: "${name}"
-      owner: { connect: "${id}" }
+      owner: { connect: "${ownerID}" }
       link: "${link}"
       invite: "${invite}"
-      teachers: { connect: "${id}" }
+      teachers: { connect: "${ownerID}" }
       ${optProps({
         section,
         subject,
