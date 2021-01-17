@@ -13,3 +13,12 @@ export async function query(secret, { query, variables = {} }) {
 
   return result.data;
 }
+
+export function optProps(obj) {
+  // util for creating optional GQL props. Create prop only if str has contents
+  var str = "";
+  for (const [key, value] of Object.entries(obj)) {
+    if (value) str += `\n${key}: ${value}`;
+  }
+  return str;
+}
