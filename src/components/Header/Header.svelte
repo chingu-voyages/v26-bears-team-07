@@ -1,6 +1,6 @@
 <script>
-    import Nav from "./Nav.svelte"
-    import SideNav from "./SideNav.svelte"
+    import Nav from "./Nav.svelte";
+    import SideNav from "./SideNav.svelte";
     let open;
 
     const openMenu = () => open = true;
