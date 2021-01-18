@@ -1,7 +1,6 @@
 <!-- TODO: We should decide whether the main page should display information on the app
 Sort of like a landing home page. TBD -->
 <script>
-  import Button from "../components/Header/Button.svelte";
 </script>
 
 <svelte:head>
