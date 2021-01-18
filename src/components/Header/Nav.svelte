@@ -8,11 +8,10 @@
   export let role = "student";
 
   let showNewClass = false;
-  let dispatch = createEventDispatcher()
+  let dispatch = createEventDispatcher();
 
   function openSideNav(){
-    console.log('send action to open menu to sidenav')
-    dispatch('opensidenav')
+    dispatch('opensidenav');
   }
 </script>
 

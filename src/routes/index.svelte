@@ -5,7 +5,7 @@ Sort of like a landing home page. TBD -->
 </script>
 
 <svelte:head>
-  <title>TODO: Title</title>
+  <title>Classroom TODO: Title</title>
 </svelte:head>
 
 <h1>Great success!</h1>

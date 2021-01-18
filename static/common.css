@@ -1,3 +1,9 @@
+/* theme fonts*/
+.roboto{
+  font-family: "Roboto Slab", sans-serif;
+}
+
+/**theme flex */
 .flex-r {
   display: flex;
   flex-direction: row;

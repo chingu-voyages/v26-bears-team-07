@@ -1,13 +1,13 @@
 import { query, optProps } from "./db";
 
 export const createClass = (
-  /**
-   * Creates a classroom. Must provide a name and owner id.
+  /** Creates a classroom. Must provide a name and owner id.
    *
    * Link and invite code can be auto-generated.
    *
-   * Warning: Classes are unique by link. While not likely a random string is the same,
-   * it should be accounted for in a production environment, and errors should be dealt with.
+   * Warning:
+   * Classes are unique by link. While not likely, a random string could generate the same
+   * link it should be accounted for in a production environment, and errors should be dealt with.
    */
   secret,
   {
@@ -53,4 +53,4 @@ mutation CreateClass {
 // an owner of the classroom yet because it's trying to create at the same time.
 // In that case, need to use a second query to update teachers OR create the role
 // inside teacher_role
-// Remove teachers from the createClass query when this is solved
+// Remove teachers field from the createClass query when this is solved

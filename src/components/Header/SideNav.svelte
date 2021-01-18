@@ -8,24 +8,24 @@
     export let openMenu;
 
     const opener = () => {
-      let el = document.getElementById("mySidenav")
+      let el = document.getElementById("mySidenav");
       el.style.display = "block";
-      el.style.width = '18%'
+      el.style.width = '18%';
     }
 
     const resetMenu = () => {
       let el = document.getElementById("mySidenav")
-      el.style.display = "none";
+      el.style.transition = 'all 0.5s';
       el.style.width = '0';
-      dispatch('sidenavclosed')
+      dispatch('sidenavclosed');
     }
 
  
 
     function handleClickOutside(){
-      let el = document.getElementById("mySidenav")
+      let el = document.getElementById("mySidenav");
       if(openMenu && el.style.width !== '0'){
-        resetMenu()
+        resetMenu();
       }   
     }
     
@@ -40,32 +40,32 @@
     z-index: 1; 
     top: 0; 
     left: 0;
-    background-color: black;
+    background-color: white;
     border: rgba(128, 128, 128, 0.432) 1px solid; 
     overflow-x: hidden; 
     padding-top: 60px; 
-    transition: 0.5s; 
+    transition: width 0.5s ease-in-out; 
   }
   .sidenav a {
-    padding: 8px 8px 8px 32px;
+    padding: 10px 10px 10px 32px;
     text-decoration: none;
     font-size: 25px;
-    color: #818181;
     display: block;
     transition: 0.3s;
+    border-top: rgba(128, 128, 128, 0.411) 1px solid;
   }
-  .sidenav a:hover {
+  /* .sidenav a:hover {
     color: #f1f1f1;
-  }
+  } */
   </style>
   
-  <div id="mySidenav" class="sidenav" use:clickOutside on:click_outside={handleClickOutside}>
+  <div id="mySidenav" class="sidenav roboto" use:clickOutside on:click_outside={handleClickOutside}>
     <a href={deadLink}>{entry}</a>
     <a href={deadLink}>{entry}</a>
     <a href={deadLink}>{entry}</a>
     <a href={deadLink}>{entry}</a>
     {#if openMenu}
     <span style="display:none">{opener()}</span>
-  {/if}
+    {/if}
   </div>
   
