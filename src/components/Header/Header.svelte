@@ -3,15 +3,8 @@
     import SideNav from "./SideNav.svelte"
     let open;
 
-    function openMenu(){
-      console.log('time to open menu')
-      open = true
-    }
-
-    function closeMenu(){
-      console.log('time to close menu')
-      open = false
-    }
+    const openMenu = () => open = true;
+    const closeMenu = () => open = false;
   </script>
   
   

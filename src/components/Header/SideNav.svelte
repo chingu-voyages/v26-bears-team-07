@@ -8,10 +8,9 @@
     export let openMenu;
 
     const opener = () => {
-      let el = document.getElementById("mySidenav")
+      let el = document.getElementById("mySidenav");
       el.style.display = "block";
       el.style.width = '18%';
-      
     }
 
     const resetMenu = () => {
@@ -24,9 +23,9 @@
  
 
     function handleClickOutside(){
-      let el = document.getElementById("mySidenav")
+      let el = document.getElementById("mySidenav");
       if(openMenu && el.style.width !== '0'){
-        resetMenu()
+        resetMenu();
       }   
     }
     
