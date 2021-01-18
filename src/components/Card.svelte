@@ -1,6 +1,4 @@
 <script>
-  import TextInput from "./TextInput.svelte";
-
   export let owner = "Timothy Leonard";
   export let text =
     "I recommend you don't fire until you're within 40,000 kilometers. Fate protects fools, little children and ships named Enterprise. A surprise party? Mr. Worf, I hate surprise parties. I would *never* do that to you.";
@@ -22,7 +20,7 @@
   </div>
   <footer>
     <div class="avatar-small" />
-    <TextInput controlType="" />
+    <div class="textarea" />
   </footer>
 </div>
 
@@ -31,7 +29,7 @@
     border: 1px solid #aaa;
     width: 90%;
     max-width: 800px;
-    margin: 0 auto;
+    margin: 1rem;
     border-radius: 5px;
   }
 
@@ -68,7 +66,7 @@
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background-color: #ccc;
+    border: 1px solid #ccc;
     margin-left: auto;
   }
 
