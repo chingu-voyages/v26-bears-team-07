@@ -53,4 +53,4 @@ mutation CreateClass {
 // an owner of the classroom yet because it's trying to create at the same time.
 // In that case, need to use a second query to update teachers OR create the role
 // inside teacher_role
-// Remove teachers from the createClass query when this is solved
+// Remove teachers field from the createClass query when this is solved
