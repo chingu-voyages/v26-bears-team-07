@@ -1,13 +1,13 @@
 import { query, optProps } from "./db";
 
 export const createClass = (
-  /**
-   * Creates a classroom. Must provide a name and owner id.
+  /** Creates a classroom. Must provide a name and owner id.
    *
    * Link and invite code can be auto-generated.
    *
-   * Warning: Classes are unique by link. While not likely a random string is the same,
-   * it should be accounted for in a production environment, and errors should be dealt with.
+   * Warning:
+   * Classes are unique by link. While not likely, a random string could generate the same
+   * link it should be accounted for in a production environment, and errors should be dealt with.
    */
   secret,
   {

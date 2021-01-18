@@ -1,7 +1,5 @@
 export async function query(secret, { query, variables = {} }) {
-  /**
-   * Fauna GQL query utility for browser. Wraps your GraphQL query and returns response.
-   */
+  /** Fauna GQL query utility for browser. Wraps your GraphQL query and returns response.*/
   const result = await fetch("https://graphql.fauna.com/graphql", {
     method: "POST",
     headers: {
@@ -22,12 +20,10 @@ export async function query(secret, { query, variables = {} }) {
 }
 
 export function optProps(obj) {
-  /**
-   * util for creating optional GQL props for query.
-   * Accepts an object of props and their strings.
-   * Creates props only if its str has contents.
-   * It's only suited for string types at the moment, but can be adjusted to check type
-   *   later.
+  /** Utility that creates optional GQL fields for a query.
+   * Accepts an object containing fields and their strings.
+   * Creates fields only if its str is non-empty.
+   * It's only suited for String types at the moment, but can be adjusted to check other types later.
    */
   var str = "";
   for (const [key, value] of Object.entries(obj)) {
