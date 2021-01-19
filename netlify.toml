@@ -4,3 +4,10 @@
   functions = "functions"
 [build.environment]
   NODE_VERSION = "14"
+
+# dynamic routes
+[[redirects]]
+  from = "/stream/*"
+  to = "/stream"
+  status = 200
+  force = true
