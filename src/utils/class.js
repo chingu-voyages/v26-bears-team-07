@@ -2,11 +2,9 @@ import { query, optProps } from "./db";
 
 /** Creates a classroom. Must provide a name and owner id.
  *
- * Link and invite code can be auto-generated.
+ * Invite code can be auto-generated and is optional.
  *
- * Warning:
- * Classes are unique by link. While not likely, a random string could generate the same
- * link it should be accounted for in a production environment, and errors should be dealt with.
+ * `_id` of the doc is used as the link to route to.
  */
 export const createClass = (
   secret,
@@ -43,9 +41,29 @@ mutation CreateClass {
 `,
   });
 
-// TODO: teacher role creation query: Currently unable to create teacher in same query.
-// It is likely because of permissions being applied only on user, and the user is not
-// an owner of the classroom yet because it's trying to create at the same time.
-// In that case, need to use a second query to update teachers OR create the role
-// inside teacher_role
-// Remove teachers field from the createClass query when this is solved
+/** Get all the classes a user ID is in. Useful for class homepage. */
+export const classesByUser = (secret, userId) =>
+  query(secret, {
+    query: `
+query ClassesByUser {
+  findUserByID(id: "${userId}") {
+    teaches {
+      data {
+        ...fields
+      }
+    }
+    attends {
+      data {
+        ...fields
+      }
+    }
+  }
+}
+
+fragment fields on Class {
+  name
+  _id
+  invite
+}
+`,
+  });
