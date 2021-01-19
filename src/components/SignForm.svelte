@@ -34,6 +34,13 @@
   }
 </script>
 
+<!-- 
+  @component
+  Sign in & up form in one.
+  Defaults to sign in.
+  @prop {boolean} `up` Pass in for signup form & functionality.
+ -->
+
 <svelte:head>
   <title>{title}</title>
 </svelte:head>
