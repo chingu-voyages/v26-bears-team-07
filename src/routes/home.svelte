@@ -48,7 +48,7 @@
 {/if}
 
 {#each classes as { name, _id, invite }}
-  <a href="#">
+  <a href="/stream?id={_id}">
     <h2>{name}</h2>
   </a>
 {/each}
