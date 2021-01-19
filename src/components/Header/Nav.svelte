@@ -72,15 +72,14 @@
     height: 100%;
   }
   .class-burger {
-    /* width: 100%; */
     height: 100%;
-    padding: 0;
+    padding: 0 10px 0 0;
     text-decoration: none;
     margin: unset;
   }
   .class-burger img {
     margin: 0 10px;
-    /* width: 2vw; */
+    width: 30px;
   }
   .center-content {
     height: 68px;
@@ -93,6 +92,7 @@
   }
   .plus img {
     cursor: pointer;
+    width: 60px;
     padding: 10px;
     margin-right: 20px;
     border-radius: 50%;
