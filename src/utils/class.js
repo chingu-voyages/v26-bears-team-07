@@ -42,11 +42,11 @@ mutation CreateClass {
   });
 
 /** Get all the classes a user ID is in. Useful for class homepage. */
-export const classesByUser = (secret, userId) =>
+export const classesByUser = (secret, userID) =>
   query(secret, {
     query: `
 query ClassesByUser {
-  findUserByID(id: "${userId}") {
+  findUserByID(id: "${userID}") {
     teaches {
       data {
         ...fields
