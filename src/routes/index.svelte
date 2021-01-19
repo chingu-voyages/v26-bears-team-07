@@ -18,6 +18,7 @@ Sort of like a landing home page. TBD -->
 <a href="/home">Home</a>
 <a href="/signin">Sign in</a>
 <a href="/signup">Sign up</a>
+<a href="/stream">Stream</a>
 
 <style>
   h1,
