@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Slab&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 
 /* theme fonts*/
 .roboto{
@@ -7,6 +8,10 @@
 
 .roboto-slab{
  font-family: 'Roboto Slab', serif;
+}
+
+.open-sans{
+  font-family: 'Open Sans', sans-serif;
 }
 
 .theme-font{

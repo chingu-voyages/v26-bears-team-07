@@ -41,10 +41,14 @@
   
   <div id="mySidenav" class="sidenav roboto" use:clickOutside on:click_outside={handleClickOutside}>
     {#each tabOptions as option, i}
-      <a href={deadLink} class="{isOdd(i) ? 'flex-r link1' : 'flex-r'}">
-        <Icon name = {option} />
-        <span class="roboto theme-font side-menu">{tabOptionsString[i]}</span>
-      </a>
+        <div  class="{isOdd(i) ? 'flex-r link1' : 'flex-r'} menu-container">
+          <div class="{i == 0 ? 'selected' : 'side-menu'}">
+            <a href={deadLink} class="flex-r">
+              <Icon name = {option} />
+              <span class="open-sans side-menu-icon">{tabOptionsString[i]}</span>
+            </a>
+          </div>
+        </div>
     {/each}
     {#if openMenu}
     <span style="display:none">{opener()}</span>
@@ -69,6 +73,10 @@
     .link1{
       border-bottom: #E0E0E0 1px solid;
     }
+
+    .menu-container{
+      padding-right: 10px;
+    }
     .sidenav a {
       padding: 10px 10px 10px 5px;
       text-decoration: none;
@@ -76,10 +84,31 @@
       display: flex;
       transition: 0.3s;
       align-items: center;
-
+      height: 50px;
     }
-
+    
     .side-menu{
-      font-weight: 700;
+      width: 100%;
+      padding: 5px;
     }
+    .side-menu-icon{
+      font-weight: 700;
+      font-size: 14px;
+      line-height: 20px;
+      color: #3c4043; 
+    }
+    .side-menu:hover{
+      background-color: #eeeeee81;
+      border-top-right-radius: 50% 150px !important;
+      border-bottom-right-radius: 50% 150px !important;
+    }
+
+    .selected {
+      width: 100%;
+      padding: 5px;
+      background-color: #E5EDFC;
+      border-top-right-radius: 50% 150px;
+      border-bottom-right-radius: 50% 150px;
+    }
+    
     </style>

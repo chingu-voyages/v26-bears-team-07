@@ -10,10 +10,11 @@
    img {
     margin: 0 10px; 
     width: 30px;
+    font-weight: bolder;
     cursor: pointer;
     padding: 5px;
     margin-right: 20px;
-    color: rgba(0, 0, 0, 0.829);
+    color: r#3c4043;
    }
 
    img:hover{
