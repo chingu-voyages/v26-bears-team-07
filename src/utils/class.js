@@ -1,4 +1,4 @@
-import { query, optProps } from "./db";
+import { query } from "./db";
 
 /** Creates a classroom. Must provide a name and owner id.
  *
@@ -10,28 +10,33 @@ export const createClass = (
   secret,
   {
     name,
-    ownerID,
+    id,
     // random invite string of length 4
     invite = Math.random().toString(36).substring(2, 6),
-    section = "",
-    subject = "",
-    room = "",
+    section = null,
+    subject = null,
+    room = null,
   }
 ) =>
   query(secret, {
     query: `
-mutation CreateClass {
+mutation CreateClass(
+  $name: String!
+  $id: ID!
+  $invite: ID!
+  $section: String
+  $subject: String
+  $room: String
+) {
   createClass(
     data: {
-      name: "${name}"
-      owner: { connect: "${ownerID}" }
-      invite: "${invite}"
-      teachers: { connect: "${ownerID}" }
-      ${optProps({
-        section,
-        subject,
-        room,
-      })}
+      name: $name
+      owner: { connect: $id }
+      invite: $invite
+      teachers: { connect: [$id] }
+      section: $section
+      subject: $subject
+      room: $room
     }
   ) {
     _id
@@ -39,6 +44,7 @@ mutation CreateClass {
   }
 }
 `,
+    variables: { name, id, invite, section, subject, room },
   });
 
 /** Get all the classes a user ID is in. Useful for class homepage. */
