@@ -1,5 +1,6 @@
 <script>
     import { createEventDispatcher } from "svelte";
+    import {fade } from "svelte/transition"
     import { clickOutside, isOdd } from "../../../src/utils/utils";
     import { classes, archive, review, settings, calendar } from "../../utils/image-constants";
     import Icon from "../Icon.svelte";
@@ -45,7 +46,9 @@
           <div class="{i == 0 ? 'selected' : 'side-menu'}">
             <a href={deadLink} class="flex-r">
               <Icon name = {option} />
-              <span class="open-sans side-menu-icon">{tabOptionsString[i]}</span>
+              <span class="open-sans side-menu-icon">
+                {tabOptionsString[i]}
+              </span>
             </a>
           </div>
         </div>
@@ -97,12 +100,14 @@
       line-height: 20px;
       color: #3c4043; 
     }
+
+
     .side-menu:hover{
       background-color: #eeeeee81;
-      border-top-right-radius: 50% 150px !important;
-      border-bottom-right-radius: 50% 150px !important;
+      border-top-right-radius: 50% 150px;
+      border-bottom-right-radius: 50% 150px;
     }
-
+    
     .selected {
       width: 100%;
       padding: 5px;
@@ -110,5 +115,6 @@
       border-top-right-radius: 50% 150px;
       border-bottom-right-radius: 50% 150px;
     }
+    
     
     </style>
