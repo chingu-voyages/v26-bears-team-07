@@ -20,6 +20,7 @@ export async function query(secret, { query, variables = {} }) {
 }
 
 /** Utility that creates optional GQL fields for a query.
+ * TODO: Currently unused. Remove if still unused on finished product
  * Accepts an object containing fields and their strings.
  * Creates fields only if its str is non-empty.
  * It's only suited for String types at the moment, but can be adjusted to check other types later.
