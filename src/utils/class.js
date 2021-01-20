@@ -47,11 +47,10 @@ mutation CreateClass(
     variables: { name, id, invite, section, subject, room },
   });
 
-/** Get all the classes a user ID is in. Useful for class homepage. */
-export const classesByUser = (secret, userID) =>
+export const classesByUserID = (secret, userID) =>
   query(secret, {
     query: `
-query ClassesByUser {
+query ClassesByUserID {
   findUserByID(id: "${userID}") {
     teaches {
       data {
@@ -70,6 +69,26 @@ fragment fields on Class {
   name
   _id
   invite
+}
+`,
+  });
+
+export const usersByClassID = (secret, classID) =>
+  query(secret, {
+    query: `
+query FindClassByID {
+  findClassByID(id: "${classID}") {
+    teachers {
+      data {
+        name
+      }
+    }
+    students {
+      data {
+        name
+      }
+    }
+  }
 }
 `,
   });

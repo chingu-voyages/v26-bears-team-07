@@ -1,7 +1,7 @@
 <script>
   import { onMount, tick } from "svelte";
   import { authStore } from "../stores/auth";
-  import { classesByUser, createClass } from "../utils/class";
+  import { classesByUserID, createClass } from "../utils/class";
   let createOpen = false;
   let name, section, subject, room;
 
@@ -9,7 +9,7 @@
   onMount(async () => {
     await tick;
     if ($authStore.secret) {
-      var res = await classesByUser($authStore.secret, $authStore.id);
+      var res = await classesByUserID($authStore.secret, $authStore.id);
       var {
         findUserByID: { teaches, attends },
       } = res;
