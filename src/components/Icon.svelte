@@ -1,5 +1,6 @@
 <script>
    export let name;
+   export let styles;
    
    function getAlt(name){
       return name.split('/')[1]
@@ -23,4 +24,4 @@
    }
 </style>
 
-<img alt={getAlt(name)} src={name} on:click />
+<img alt={getAlt(name)} src={name} on:click style={styles} />
