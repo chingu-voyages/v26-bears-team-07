@@ -27,7 +27,7 @@
   flex-direction: row;
 }
 
-.flex-c {theme-shadow
+.flex-c {
   display: flex;
   flex-direction: column;
 }
