@@ -1,5 +1,4 @@
 <script>
-  import { goto } from "@sapper/app";
   import { authStore } from "../stores/auth";
 
   export let up = false;
@@ -27,7 +26,8 @@
 
       localStorage.setItem("auth", JSON.stringify(authData));
       $authStore = authData;
-      await goto("/home");
+      // TODO: Figure out if you can use GOTO from routify instead of native browser redirect API
+      location.pathname = "/home";
     } else {
       // TODO: Client-side error handling if password/user incorrect
     }
