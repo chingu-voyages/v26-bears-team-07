@@ -28,7 +28,7 @@
 	}
 
 	a{
-		color: blue;
+		color: rgba(0, 0, 255, 0.767);
 		align-self: flex-end;
 	}
 
@@ -37,5 +37,10 @@
 	}
 	span{
 		font-size: 8pt;
+	}
+
+	::slotted{
+		font-size: 9pt;
+		margin: 2px;
 	}
 </style>

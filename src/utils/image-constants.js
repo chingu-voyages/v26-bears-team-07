@@ -7,4 +7,5 @@
  export const review = 'icons/book-open.svg';
  export const classes = 'icons/book-open.svg';
  export const invite = 'icons/invite.svg';
+ export const teacher = 'icons/announcer.png';
 

@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Slab&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 
+
 /* theme fonts*/
 .roboto{
   font-family: 'Roboto',Helvetica,Arial,sans-serif;
@@ -26,7 +27,12 @@
   flex-direction: row;
 }
 
-.flex-c {
+.flex-c {theme-shadow
   display: flex;
   flex-direction: column;
+}
+
+/* theme-shadow */
+.class-shadow{
+  box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.212)
 }

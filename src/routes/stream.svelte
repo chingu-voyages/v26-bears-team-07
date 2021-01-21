@@ -14,7 +14,8 @@
   <Badge />
   <div class="flex-r announcements">
     <div> <Tasks /></div>
-    <Announcer />
+    <div><Announcer /></div>
+    
   </div>
 </main>
 
@@ -27,5 +28,9 @@
     flex-basis: 20%;
   }
 
-  /* .announcements:nth-child(1) */
+  .announcements div:nth-child(2){
+    flex-basis: 80%;
+    margin: 0 0 1rem 2rem;
+  }
+
 </style>
