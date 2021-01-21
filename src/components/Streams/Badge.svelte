@@ -26,7 +26,8 @@
     margin: 0 0 1em 0;
     background: #396afc;
     background: -webkit-linear-gradient(to right, #2948ff, #396afc);
-    background: linear-gradient(to right, #2948ff, #396afc);
+		background: linear-gradient(to right, #2948ff, #396afc);
+		margin-bottom: 2rem;
   }
 
   h1 {
