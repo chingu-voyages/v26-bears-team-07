@@ -41,8 +41,13 @@ type Comment {
   stream: Stream!
 }
 
-# TODO: Custom queries and mutations
 
-# type Query {
-#   allUsersByClass(classId): [User]! @resolver
-# }
+"""
+ TODO: This is a custom query / mutation example
+
+ There's no need for a custom query or mutation at the moment.
+
+ type Query {
+   allUsersByClass(classId): [User]! @resolver
+ }
+"""
