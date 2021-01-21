@@ -1,6 +1,10 @@
 <!-- TODO: We should decide whether the main page should display information on the app
 Sort of like a landing home page. TBD -->
 <script>
+  // TODO: If you care about dynamic metatags, add them here. Otherwise, delete example later.
+  // import { metatags } from '@roxi/routify'
+  // metatags.title = 'My Routify app'
+  // metatags.description = 'Description coming soon...'
 </script>
 
 <svelte:head>

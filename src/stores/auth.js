@@ -1,6 +1,5 @@
 import { onMount, tick } from "svelte";
 import { get, writable } from "svelte/store";
-import { goto } from "@sapper/app";
 
 export const authStore = writable();
 
@@ -22,6 +21,7 @@ export function init() {
 export function redirect() {
   onMount(async () => {
     await tick();
-    if (!get(authStore)) goto("/login");
+    // TODO: Figure out if you can use GOTO from routify instead of native browser redirect API
+    if (!get(authStore)) location.pathname = "/signin";
   });
 }
