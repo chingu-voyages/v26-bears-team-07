@@ -6,8 +6,9 @@
   let name, section, subject, room;
 
   let classes = [];
-  onMount(async () => {
-    await tick;
+  fetchClasses();
+
+  async function fetchClasses() {
     if ($authStore.secret) {
       var res = await classesByUserID($authStore.secret, $authStore.id);
       var {
@@ -15,7 +16,7 @@
       } = res;
       classes = [...teaches.data, ...attends.data];
     }
-  });
+  }
 </script>
 
 <h1>Classroom</h1>

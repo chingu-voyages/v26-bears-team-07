@@ -1,7 +1,9 @@
 import { onMount, tick } from "svelte";
 import { get, writable } from "svelte/store";
 
-export const authStore = writable();
+export const authStore = writable(
+  JSON.parse(localStorage.getItem("auth")) || null
+);
 
 /** Initializes secret into store if logged in.
  * - Used in our global `_layout.svelte`
