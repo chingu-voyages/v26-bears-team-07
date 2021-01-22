@@ -52,6 +52,7 @@ export const classesByUserID = (secret, userID) =>
     query: `
 query ClassesByUserID {
   findUserByID(id: "${userID}") {
+    _id
     teaches {
       data {
         ...fields
@@ -76,17 +77,19 @@ fragment fields on Class {
 export const usersByClassID = (secret, classID) =>
   query(secret, {
     query: `
-query FindClassByID {
-  findClassByID(id: "${classID}") {
-    teachers {
-      data {
-        name
-      }
+    query FindClassByID {
+findClassByID(id: "${classID}") {
+  _id
+  teachers {
+    data {
+      name
+      _id
     }
-    students {
-      data {
-        name
-      }
+  }
+  students {
+    data {
+      name
+      _id
     }
   }
 }
