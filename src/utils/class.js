@@ -1,5 +1,7 @@
 import { query } from "./db";
 
+// TODO: Remove this file when finished migrating to URQL
+
 /** Creates a classroom. Must provide a name and owner id.
  *
  * Invite code can be auto-generated and is optional.
