@@ -3,6 +3,7 @@
 <script>
   import Header from "../components/Header/Header.svelte";
   import { authStore } from "../stores/auth";
+  import FadeDectorator from "./_FadeDecorator.svelte";
 </script>
 
 <!-- routify:options preload="proximity" -->
@@ -10,7 +11,7 @@
 {#if $authStore?.secret}
   <Header />
 {/if}
-<slot />
+<slot decorator={FadeDectorator} />
 
 <style>
 </style>

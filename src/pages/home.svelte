@@ -37,7 +37,7 @@
 {#if $classes.data}
   {#each (({ teaches, attends }) => [...teaches.data, ...attends.data])($classes.data.result) as { name, _id, invite }}
     <a href={$url("./stream/:classID", { classID: _id })}>
-      <h2 in:fade>{name}</h2>
+      <h2 in:fade={{ duration: 200 }}>{name}</h2>
     </a>
   {/each}
 {/if}
