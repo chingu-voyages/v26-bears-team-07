@@ -24,14 +24,3 @@ export function init() {
     }
   });
 }
-
-/** TODO: Use this later to redirect from pages that require a user to be logged in
- * Currently unused. Doesn't do any checks or conditional logic, but may implement that later.
- */
-export function redirect() {
-  onMount(async () => {
-    await tick();
-    // TODO: Figure out if you can use GOTO from routify instead of native browser redirect API
-    if (!get(authStore)) location.pathname = "/signin";
-  });
-}
