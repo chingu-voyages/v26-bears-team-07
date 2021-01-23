@@ -1,12 +1,12 @@
 <script>
   import { url } from "@roxi/routify";
-  import { classesByUserID } from "../stores/queries";
+  import { classesByUserID, useCreateClass } from "../stores/query";
   import { authStore } from "../stores/auth";
-  import { createClass } from "../utils/class";
   let createOpen = false;
   let name, section, subject, room;
-
   const classes = classesByUserID({ id: $authStore.id });
+
+  const [classStore, classCreate] = useCreateClass();
 </script>
 
 <h1>Classroom</h1>
@@ -14,14 +14,9 @@
 
 {#if createOpen}
   <form
-    on:submit|preventDefault={async () =>
-      await createClass($authStore.secret, {
-        name,
-        id: $authStore.id,
-        section,
-        subject,
-        room,
-      })}
+    on:submit|preventDefault={() => {
+      classCreate({ name, id: $authStore.id, section, subject, room });
+    }}
   >
     <h2>Create class</h2>
     <input
