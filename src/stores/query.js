@@ -84,7 +84,7 @@ export const usersByClassID = ({ classID }) =>
   queryOp(
     `
 query FindClassByID($id: ID!) {
-  result: findClassByID($id) {
+  result: findClassByID(id: $id) {
     _id
     teachers {
       data {
@@ -98,6 +98,20 @@ query FindClassByID($id: ID!) {
         _id
       }
     }
+  }
+}
+`,
+    { id: classID }
+  );
+
+export const findClass = ({ classID }) =>
+  queryOp(
+    `
+query FindClassByID($id: ID!) {
+  result: findClassByID(id: $id) {
+    _id
+    name
+    invite
   }
 }
 `,
