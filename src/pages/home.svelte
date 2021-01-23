@@ -2,6 +2,7 @@
   import { url } from "@roxi/routify";
   import { classesByUserID, useCreateClass } from "../stores/query";
   import { authStore } from "../stores/auth";
+  import { fade } from "svelte/transition";
   let createOpen = false;
   let name, section, subject, room;
   const classes = classesByUserID({ id: $authStore.id });
@@ -36,7 +37,7 @@
 {#if $classes.data}
   {#each (({ teaches, attends }) => [...teaches.data, ...attends.data])($classes.data.result) as { name, _id, invite }}
     <a href={$url("./stream/:classID", { classID: _id })}>
-      <h2>{name}</h2>
+      <h2 in:fade>{name}</h2>
     </a>
   {/each}
 {/if}
