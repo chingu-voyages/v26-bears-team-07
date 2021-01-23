@@ -1,5 +1,13 @@
 import { queryOp, useMutation } from "../utils/client";
 
+const CLASS_FIELDS = `
+fragment ClassFields on Class {
+  name
+  invite
+  _id
+}
+`;
+
 /** Creates a classroom. Must provide a name and owner id.
  * Invite code can be auto-generated and is optional.
  *
@@ -27,11 +35,10 @@ mutation CreateClass(
       room: $room
     }
   ) {
-    name
-    invite
-    _id
+    ...ClassFields
   }
 }
+${CLASS_FIELDS}
 `,
     ({
       name,
@@ -58,22 +65,17 @@ query ClassesByUserID($id: ID!) {
     _id
     teaches {
       data {
-        ...fields
+        ...ClassFields
       }
     }
     attends {
       data {
-        ...fields
+        ...ClassFields
       }
     }
   }
 }
-
-fragment fields on Class {
-  name
-  invite
-  _id
-}
+${CLASS_FIELDS}
 `,
     { id }
   );
