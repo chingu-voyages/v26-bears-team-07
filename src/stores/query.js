@@ -80,7 +80,7 @@ ${CLASS_FIELDS}
     { id }
   );
 
-export const usersByClassID = (classID) =>
+export const usersByClassID = ({ classID }) =>
   queryOp(
     `
 query FindClassByID($id: ID!) {
