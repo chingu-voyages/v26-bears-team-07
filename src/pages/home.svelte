@@ -1,6 +1,5 @@
 <script>
   import { url } from "@roxi/routify";
-
   import { operationStore, query } from "@urql/svelte";
   import { authStore } from "../stores/auth";
   import { createClass } from "../utils/class";
