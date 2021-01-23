@@ -12,15 +12,3 @@ function checkPaths(arr) {
 export const authStore = writable(
   JSON.parse(localStorage.getItem("auth")) || checkPaths(["signin", "signup"])
 );
-
-/** Initializes secret into store if logged in.
- * - Used in our global `_layout.svelte`
- */
-export function init() {
-  onMount(() => {
-    let authData = JSON.parse(localStorage.getItem("auth"));
-    if (authData) {
-      authStore.set(authData);
-    }
-  });
-}
