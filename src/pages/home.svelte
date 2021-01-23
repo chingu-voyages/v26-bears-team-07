@@ -1,22 +1,38 @@
 <script>
-  import { onMount, tick } from "svelte";
+  import { operationStore, query } from "@urql/svelte";
   import { authStore } from "../stores/auth";
-  import { classesByUserID, createClass } from "../utils/class";
+  import { createClass } from "../utils/class";
   let createOpen = false;
   let name, section, subject, room;
 
-  let classes = [];
-  fetchClasses();
-
-  async function fetchClasses() {
-    if ($authStore.secret) {
-      var res = await classesByUserID($authStore.secret, $authStore.id);
-      var {
-        findUserByID: { teaches, attends },
-      } = res;
-      classes = [...teaches.data, ...attends.data];
+  const classes = operationStore(
+    `
+query ClassesByUserID($id: ID!) {
+  result: findUserByID(id: $id) {
+    _id
+    teaches {
+      data {
+        ...fields
+      }
+    }
+    attends {
+      data {
+        ...fields
+      }
     }
   }
+}
+
+fragment fields on Class {
+  name
+  _id
+  invite
+}
+`,
+    { id: $authStore.id }
+  );
+
+  console.log(query(classes));
 </script>
 
 <h1>Classroom</h1>
@@ -48,8 +64,10 @@
   </form>
 {/if}
 
-{#each classes as { name, _id, invite }}
-  <a href="/stream?id={_id}">
-    <h2>{name}</h2>
-  </a>
-{/each}
+{#if $classes.data}
+  {#each (({ result: { teaches, attends } }) => [...teaches.data, ...attends.data])($classes.data) as { name, _id, invite }}
+    <a href="/stream?id={_id}">
+      <h2>{name}</h2>
+    </a>
+  {/each}
+{/if}
