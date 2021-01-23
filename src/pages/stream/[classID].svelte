@@ -4,7 +4,7 @@
   import Announcer from "../../components/Streams/Announcer.svelte";
   import Tasks from "../../components/Streams/Tasks.svelte";
 
-  console.log($params.showID);
+  console.log($params.classID);
 </script>
 
 <main>
