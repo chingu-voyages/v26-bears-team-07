@@ -24,16 +24,3 @@ export function firstLetterToCap(letter) {
 export function isOdd(val) {
   return val & 1;
 }
-
-/** Returns a randomized human unreadable string.
- * TODO: Currently unused. Remove if still unused on finished product
- */
-export function randID() {
-  // You can customize and reduce the length of the random string by changing the second arg of substring
-  // or removing the duplicate call. See createClass func's invite field.
-  var random =
-    Math.random().toString(36).substring(2, 15) +
-    Math.random().toString(36).substring(2, 15);
-
-  return random;
-}
