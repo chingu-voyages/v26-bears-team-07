@@ -47,10 +47,17 @@
 
 <form on:submit|preventDefault={handleSubmit}>
   <h1>{title}</h1>
-  <input type="text" placeholder="Username" bind:value={name} required />
+  <input
+    type="text"
+    placeholder="Username"
+    autocomplete="username"
+    bind:value={name}
+    required
+  />
   <input
     type="password"
     placeholder="Password"
+    autocomplete="current-password"
     bind:value={password}
     required
   />
