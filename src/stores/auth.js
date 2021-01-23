@@ -1,8 +1,13 @@
 import { onMount, tick } from "svelte";
 import { get, writable } from "svelte/store";
 
+function checkPaths(arr) {
+  if (!arr.filter((v) => v == location.pathname).length)
+    location.pathname = "/signin";
+}
+
 export const authStore = writable(
-  JSON.parse(localStorage.getItem("auth")) || null
+  JSON.parse(localStorage.getItem("auth")) || checkPaths(["/signin", "/signup"])
 );
 
 /** Initializes secret into store if logged in.

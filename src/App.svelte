@@ -4,7 +4,7 @@
   import initClient from "./utils/client";
   import { authStore } from "./stores/auth";
 
-  initClient($authStore.secret);
+  $authStore?.secret && initClient($authStore.secret);
 </script>
 
 <Router {routes} />
