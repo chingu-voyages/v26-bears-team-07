@@ -33,7 +33,7 @@ fragment fields on Class {
 `,
     { id: $authStore.id }
   );
-  console.log(query(classes));
+  query(classes);
 </script>
 
 <h1>Classroom</h1>
