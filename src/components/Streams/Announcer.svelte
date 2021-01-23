@@ -1,12 +1,22 @@
 <script>
+  import { createEventDispatcher } from "svelte";
   import { teacher } from "../../utils/image-constants";
+
   export let announcerImage = undefined;
+
+  let dispatch = createEventDispatcher();
+
+  function addAnnouncement(){
+   dispatch('add_announcement');
+  };
 </script>
 
 <main class="roboto class-shadow">
   <div class="announcer flex-r">
     <img class="user" src={announcerImage || teacher} alt="announcer" />
-    <a class="open-sans" href="/stream">Announce something to your class</a>
+    <a class="open-sans" href="/stream" on:click={addAnnouncement}>
+      Announce something to your class
+    </a>
   </div>
 </main>
 
@@ -28,8 +38,8 @@
     color: gray;
   }
 
-  a:hover{
-    color:rgba(0, 132, 255, 0.74);
+  a:hover {
+    color: rgba(0, 132, 255, 0.74);
   }
 
   .user {
