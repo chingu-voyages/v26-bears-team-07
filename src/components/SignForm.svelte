@@ -1,5 +1,6 @@
 <script>
   import { authStore } from "../stores/auth";
+  import { focus } from "@roxi/routify";
 
   export let up = false;
   let name = "",
@@ -51,6 +52,7 @@
     type="text"
     placeholder="Username"
     autocomplete="username"
+    use:focus
     bind:value={name}
     required
   />
