@@ -23,7 +23,9 @@
 
 <style>
   main {
-    padding: 3em 13em;
+    margin: 3rem auto;
+    width: 90%;
+    max-width: 1000px;
   }
 
   .announcements div:nth-child(1) {
