@@ -65,6 +65,7 @@
     <input
       type="password"
       placeholder="Confirm"
+      autocomplete="new-password"
       bind:value={confirm}
       required
     />
