@@ -6,7 +6,7 @@
   let name, section, subject, room;
   const classes = classesByUserID({ id: $authStore.id });
 
-  const [classStore, classCreate] = useCreateClass();
+  const [_, classCreate] = useCreateClass();
 </script>
 
 <h1>Classroom</h1>
