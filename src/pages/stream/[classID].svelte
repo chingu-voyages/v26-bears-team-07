@@ -3,12 +3,18 @@
   import Badge from "../../components/Streams/Badge.svelte";
   import Announcer from "../../components/Streams/Announcer.svelte";
   import Tasks from "../../components/Streams/Tasks.svelte";
+  import { findClass } from "../../stores/query";
 
-  console.log($params.classID);
+  let classData = findClass({ classID: $params.classID });
+  let inviteCode, className;
+
+  $: if ($classData.data) {
+    ({ invite: inviteCode, name: className } = $classData.data.result);
+  }
 </script>
 
 <main>
-  <Badge />
+  <Badge {inviteCode} {className} />
   <div class="flex-r announcements">
     <div><Tasks /></div>
     <div><Announcer /></div>
