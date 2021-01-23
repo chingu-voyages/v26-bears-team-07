@@ -1,4 +1,6 @@
 <script>
+  import { url } from "@roxi/routify";
+
   import { operationStore, query } from "@urql/svelte";
   import { authStore } from "../stores/auth";
   import { createClass } from "../utils/class";
@@ -31,7 +33,6 @@ fragment fields on Class {
 `,
     { id: $authStore.id }
   );
-
   console.log(query(classes));
 </script>
 
@@ -66,7 +67,7 @@ fragment fields on Class {
 
 {#if $classes.data}
   {#each (({ result: { teaches, attends } }) => [...teaches.data, ...attends.data])($classes.data) as { name, _id, invite }}
-    <a href="/stream?id={_id}">
+    <a href={$url("./stream/:classID", { classID: _id })}>
       <h2>{name}</h2>
     </a>
   {/each}
