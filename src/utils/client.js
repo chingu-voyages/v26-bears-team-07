@@ -43,8 +43,8 @@ export const queryOp = (gqlQuery, variables) =>
  * ```js
  * ({ name = "no name entered", id }) => ({ name, id })
  * ```
- * @returns {Array} A tuple with a store and an update function. Final tuple should only be retrieved by calling in a
- * component.
+ * @returns {Array} A tuple with the mutation function and its store. Final tuple should only be retrieved by calling
+ * in a component.
  * Usage:
  * ```js
  * const [noteStore, noteCreate] = useCreateNote();
@@ -61,5 +61,5 @@ export function useMutation(gqlMutation, cbVarsObj) {
     return mutationOp(cbVarsObj(variables));
   }
 
-  return [mutationStore, setMutation];
+  return [setMutation, mutationStore];
 }
