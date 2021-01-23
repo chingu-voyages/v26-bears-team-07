@@ -1,38 +1,12 @@
 <script>
   import { url } from "@roxi/routify";
-  import { operationStore, query } from "@urql/svelte";
+  import { classesByUserID } from "../stores/queries";
   import { authStore } from "../stores/auth";
   import { createClass } from "../utils/class";
   let createOpen = false;
   let name, section, subject, room;
 
-  const classes = operationStore(
-    `
-query ClassesByUserID($id: ID!) {
-  result: findUserByID(id: $id) {
-    _id
-    teaches {
-      data {
-        ...fields
-      }
-    }
-    attends {
-      data {
-        ...fields
-      }
-    }
-  }
-}
-
-fragment fields on Class {
-  name
-  _id
-  invite
-}
-`,
-    { id: $authStore.id }
-  );
-  query(classes);
+  const classes = classesByUserID({ id: $authStore.id });
 </script>
 
 <h1>Classroom</h1>
