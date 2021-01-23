@@ -28,6 +28,7 @@ mutation CreateClass(
     }
   ) {
     _id
+    name
     invite
   }
 }
