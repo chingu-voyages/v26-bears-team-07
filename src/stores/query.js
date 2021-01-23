@@ -27,9 +27,9 @@ mutation CreateClass(
       room: $room
     }
   ) {
-    _id
     name
     invite
+    _id
   }
 }
 `,
@@ -71,8 +71,8 @@ query ClassesByUserID($id: ID!) {
 
 fragment fields on Class {
   name
-  _id
   invite
+  _id
 }
 `,
     { id }
