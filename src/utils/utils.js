@@ -24,3 +24,10 @@ export function firstLetterToCap(letter) {
 export function isOdd(val) {
   return val & 1;
 }
+
+/**Wait for x milliseconds */
+export function sleep(ms) {
+  return new Promise((fulfil) => {
+    setTimeout(fulfil, ms);
+  });
+}
