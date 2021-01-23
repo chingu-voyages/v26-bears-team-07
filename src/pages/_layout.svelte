@@ -2,10 +2,14 @@
   Similar to layout in Gatsby, present on all pages -->
 <script>
   import Header from "../components/Header/Header.svelte";
+  import { authStore } from "../stores/auth";
 </script>
 
 <!-- routify:options preload="proximity" -->
-<Header />
+<!-- render header only if logged in -->
+{#if $authStore?.secret}
+  <Header />
+{/if}
 <slot />
 
 <style>
