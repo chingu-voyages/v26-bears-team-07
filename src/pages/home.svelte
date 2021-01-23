@@ -34,7 +34,7 @@
 {/if}
 
 {#if $classes.data}
-  {#each (({ result: { teaches, attends } }) => [...teaches.data, ...attends.data])($classes.data) as { name, _id, invite }}
+  {#each (({ teaches, attends }) => [...teaches.data, ...attends.data])($classes.data.result) as { name, _id, invite }}
     <a href={$url("./stream/:classID", { classID: _id })}>
       <h2>{name}</h2>
     </a>
