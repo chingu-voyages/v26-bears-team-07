@@ -1,21 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Slab&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
-
-
 /* theme fonts*/
-.roboto{
-  font-family: 'Roboto',Helvetica,Arial,sans-serif;
+.roboto {
+  font-family: "Inter", "Roboto", Helvetica, Arial, sans-serif;
 }
 
-.roboto-slab{
- font-family: 'Roboto Slab', serif;
+.roboto-slab {
+  font-family: "Roboto Slab", serif;
 }
 
-.open-sans{
-  font-family: 'Open Sans', sans-serif;
+.open-sans {
+  font-family: "Open Sans", sans-serif;
 }
 
-.theme-font{
+.theme-font {
   font-size: 0.8125rem;
   font-weight: 400;
   line-height: 1.25rem;
@@ -33,6 +29,6 @@
 }
 
 /* theme-shadow */
-.class-shadow{
-  box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.212)
+.class-shadow {
+  box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.212);
 }

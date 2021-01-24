@@ -33,15 +33,23 @@
 
 <style>
   main {
-    padding: 3em 13em;
+    margin: 3rem auto;
+    width: 90%;
+    max-width: 1000px;
   }
 
   .announcements div:nth-child(1) {
-    flex-basis: 20%;
+    width: 210px;
+    margin: 0 1rem 0 0;
   }
 
   .announcements div:nth-child(2) {
-    flex-basis: 80%;
-    margin: 0 0 1rem 2rem;
+    flex-grow: 1;
+  }
+
+  @media (max-width: 780px) {
+    .announcements div:nth-child(1) {
+      display: none;
+    }
   }
 </style>

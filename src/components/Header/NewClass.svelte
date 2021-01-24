@@ -3,28 +3,46 @@
   import { fly, fade } from "svelte/transition";
   import TextInput from "./TextInput.svelte";
   import Button from "./Button.svelte";
+  import { useCreateClass } from "../../stores/query";
+  import { authStore } from "../../stores/auth";
+  import { redirect } from "@roxi/routify";
+
+  const [createClass, res] = useCreateClass();
 
   const dispatch = createEventDispatcher();
+
+  let name, section, subject, room;
 
   function closeModal() {
     dispatch("cancel");
   }
+
+  // on successful creation, navigate to class
+  $: if ($res.data) {
+    closeModal();
+    $redirect(`/stream/${$res.data.result["_id"]}`);
+  }
 </script>
 
 <div transition:fade class="modal-backdrop" on:click={closeModal} />
-<div transition:fly={{ y: 200 }} class="modal">
+<form
+  transition:fly={{ y: 200 }}
+  class="modal"
+  on:submit|preventDefault={() =>
+    createClass({ name, id: $authStore.id, section, subject, room })}
+>
   <h1>New Class</h1>
   <div class="content">
-    <TextInput placeholder="Class Name (required)" />
-    <TextInput placeholder="Section" />
-    <TextInput placeholder="Subject" />
-    <TextInput placeholder="Room" />
+    <TextInput placeholder="Class Name (required)" required bind:value={name} />
+    <TextInput placeholder="Section" bind:value={section} />
+    <TextInput placeholder="Subject" bind:value={subject} />
+    <TextInput placeholder="Room" bind:value={room} />
   </div>
   <footer>
+    <Button type="submit">Create</Button>
     <Button on:click={() => dispatch("cancel")}>Cancel</Button>
-    <Button type="confirm">Create</Button>
   </footer>
-</div>
+</form>
 
 <style>
   .modal-backdrop {
@@ -47,7 +65,7 @@
     border-radius: 5px;
     z-index: 100;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
-    overflow: scroll;
+    overflow: auto;
   }
 
   h1 {
@@ -64,6 +82,9 @@
   footer {
     padding: 0.5rem;
     text-align: right;
+    /* Reverse order of buttons, form submit enter action always uses first button */
+    display: flex;
+    flex-flow: row-reverse;
   }
 
   @media (min-width: 768px) {

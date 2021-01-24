@@ -2,15 +2,15 @@
   export let controlType = null;
   export let placeholder;
   export let rows = null;
-  export let type = "text";
   export let value;
+  export let required = null;
 </script>
 
 <div class="form-control">
   {#if controlType === "textarea"}
     <textarea {rows} bind:value />
   {:else}
-    <input {type} {placeholder} />
+    <input type="text" {placeholder} {required} bind:value />
   {/if}
 </div>
 

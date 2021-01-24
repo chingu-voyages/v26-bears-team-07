@@ -1,17 +1,20 @@
 <script>
   import { invite } from "../../utils/image-constants";
+  import { fade } from "svelte/transition";
 
   export let inviteCode = "";
   export let className = "";
 </script>
 
 <div class="box flex-c">
-  <h1 class="open-sans">{className}</h1>
-  <div class="flex-r row-2">
-    <span class="roboto">Class Code</span>
-    <span class="roboto">{inviteCode}</span>
-    <img src={invite} alt="invite" />
-  </div>
+  {#if inviteCode}
+    <h1 in:fade class="open-sans">{className}</h1>
+    <div in:fade class="flex-r row-2">
+      <span class="roboto">Class Code</span>
+      <span class="roboto">{inviteCode}</span>
+      <img src={invite} alt="invite" />
+    </div>
+  {/if}
 </div>
 
 <style>
