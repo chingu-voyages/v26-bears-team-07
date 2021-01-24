@@ -2,14 +2,9 @@
   export let type = "";
   export let size = "";
   export let disabled = false;
-
-  let plus = "images/plus.svg";
 </script>
 
-<button class="{type} {size}" on:click {disabled}
-  >{#if size === "large"}<span><img alt="plus sign" src={plus} /></span
-    >{/if}<slot /></button
->
+<button class="{type} {size}" on:click {disabled}><slot /></button>
 
 <style>
   button {
@@ -67,9 +62,5 @@
 
   .confirm-filled.confirm-filled.large:hover {
     box-shadow: 0px 2px 2px 2px rgba(25, 103, 210, 0.3);
-  }
-
-  img {
-    margin-right: 1rem;
   }
 </style>
