@@ -6,7 +6,7 @@ A Google Classroom clone with the purpose of streamlining the process surroundin
 
 ## Tech
 
-Frontend: Svelte + Sapper
+Frontend: Svelte + Routify
 
 Database: FaunaDB
 
