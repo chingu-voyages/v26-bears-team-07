@@ -10,7 +10,7 @@
   } from "../../utils/image-constants";
   import Icon from "../Icon.svelte";
 
-  export let openMenu;
+  export let open = false;
 
   let deadLink = "https/dead";
   let tabOptions = [
@@ -22,37 +22,19 @@
   ];
   let dispatch = createEventDispatcher();
 
-  const opener = () => {
-    let el = document.getElementById("mySidenav");
-    el.style.display = "block";
-    el.style.width = "267px";
-  };
-
-  const resetMenu = () => {
-    let el = document.getElementById("mySidenav");
-    el.style.transition = "all 0.5s";
-    el.style.width = "0px";
-    dispatch("sidenavclosed");
-  };
-
-  function handleClickOutside() {
-    let el = document.getElementById("mySidenav");
-    if (openMenu && el.style.width !== "0%") {
-      resetMenu();
-    }
-  }
+  const handleClose = () => dispatch("sidenavclosed");
 </script>
 
 <div
-  id="mySidenav"
+  class:open
   class="sidenav roboto"
   use:clickOutside
-  on:click_outside={handleClickOutside}
+  on:click_outside={handleClose}
 >
   {#each tabOptions as { icon, name, link }, i}
     <div class="{isOdd(i) ? 'flex-r link1' : 'flex-r'} menu-container">
       <div class={i == 0 ? "selected" : "side-menu"}>
-        <a href={link} on:click={() => resetMenu()} class="flex-r">
+        <a href={link} on:click={handleClose} class="flex-r">
           <Icon name={icon} />
           <span class="open-sans side-menu-icon">
             {name}
@@ -61,9 +43,6 @@
       </div>
     </div>
   {/each}
-  {#if openMenu}
-    <span style="display:none">{opener()}</span>
-  {/if}
 </div>
 
 <style>
@@ -82,6 +61,10 @@
   }
   .link1 {
     border-bottom: #e0e0e0 1px solid;
+  }
+  .open {
+    display: block;
+    width: 267px;
   }
 
   .menu-container {
