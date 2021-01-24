@@ -5,6 +5,7 @@ Sort of like a landing home page. TBD -->
   // import { metatags } from '@roxi/routify'
   // metatags.title = 'My Routify app'
   // metatags.description = 'Description coming soon...'
+  import { authStore } from "../stores/auth";
 </script>
 
 <svelte:head>
@@ -19,10 +20,15 @@ Sort of like a landing home page. TBD -->
   >
 </p>
 
-<a href="/home">Home</a>
-<a href="/signin">Sign in</a>
-<a href="/signup">Sign up</a>
-<a href="/stream">Stream</a>
+<a href="/signin" target="_self">Sign in</a>
+<a href="/signup" target="_self">Sign up</a>
+
+{#if $authStore?.secret}
+  <hr />
+  <h2>Gated content</h2>
+  <a href="/home">Home</a>
+  <a href="/stream">Stream</a>
+{/if}
 
 <style>
   h1,

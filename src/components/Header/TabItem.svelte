@@ -1,9 +1,10 @@
 <script>
   export let active = false;
+  export let href = "/";
 </script>
 
 <li class="tab-item">
-  <a href="/" on:click class:active><slot /></a>
+  <a {href} on:click class:active><slot /></a>
 </li>
 
 <style>

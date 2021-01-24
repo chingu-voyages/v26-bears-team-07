@@ -27,6 +27,7 @@
     "@rollup/plugin-commonjs": "^15.0.0",
     "@rollup/plugin-node-resolve": "^10.0.0",
     "@roxi/routify": "^2.8.5",
+    "@urql/devtools": "^2.0.2",
     "@urql/svelte": "^1.1.4",
     "cross-env": "^7.0.2",
     "dotenv": "^8.2.0",

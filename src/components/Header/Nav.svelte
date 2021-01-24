@@ -3,12 +3,13 @@
   import TabItem from "./TabItem.svelte";
   import NewClass from "./NewClass.svelte";
   import { hamburger, plus } from "../../utils/image-constants";
+  import { isActive, params } from "@roxi/routify";
   export let className = "AppName";
   export let role = "student";
   let showNewClass = false;
   let dispatch = createEventDispatcher();
-  function openSideNav(){
-    dispatch('opensidenav');
+  function openSideNav() {
+    dispatch("opensidenav");
   }
 </script>
 
@@ -24,11 +25,23 @@
   {#if role}
     <div class="center-content">
       <ul class="nav-tabs">
-        <TabItem active={true}>Stream</TabItem>
-        <TabItem active={false}>Classwork</TabItem>
-        <TabItem active={false}>People</TabItem>
+        <TabItem active={$isActive("/stream")} href="/stream/{$params.classID}"
+          >Stream</TabItem
+        >
+        <TabItem
+          active={$isActive("/classwork")}
+          href="/classwork/{$params.classID}"
+        >Classwork</TabItem
+        >
+        <TabItem active={$isActive("/people")} href="/people/{$params.classID}"
+          >People</TabItem
+        >
         {#if role === "teacher"}
-          <TabItem active={false}>Grades</TabItem>
+          <TabItem
+            active={$isActive("/people")}
+            href="/people/{$params.classID}"
+          >Grades</TabItem
+          >
         {/if}
       </ul>
     </div>

@@ -1,22 +1,12 @@
 <script>
-  import { onMount, tick } from "svelte";
+  import { url } from "@roxi/routify";
+  import { classesByUserID, useCreateClass } from "../stores/query";
   import { authStore } from "../stores/auth";
-  import { classesByUserID, createClass } from "../utils/class";
   let createOpen = false;
   let name, section, subject, room;
+  const classes = classesByUserID({ id: $authStore.id });
 
-  let classes = [];
-  fetchClasses();
-
-  async function fetchClasses() {
-    if ($authStore.secret) {
-      var res = await classesByUserID($authStore.secret, $authStore.id);
-      var {
-        findUserByID: { teaches, attends },
-      } = res;
-      classes = [...teaches.data, ...attends.data];
-    }
-  }
+  const [classCreate] = useCreateClass();
 </script>
 
 <h1>Classroom</h1>
@@ -24,14 +14,9 @@
 
 {#if createOpen}
   <form
-    on:submit|preventDefault={async () =>
-      await createClass($authStore.secret, {
-        name,
-        id: $authStore.id,
-        section,
-        subject,
-        room,
-      })}
+    on:submit|preventDefault={() => {
+      classCreate({ name, id: $authStore.id, section, subject, room });
+    }}
   >
     <h2>Create class</h2>
     <input
@@ -48,8 +33,10 @@
   </form>
 {/if}
 
-{#each classes as { name, _id, invite }}
-  <a href="/stream?id={_id}">
-    <h2>{name}</h2>
-  </a>
-{/each}
+{#if $classes.data}
+  {#each (({ teaches, attends }) => [...teaches.data, ...attends.data])($classes.data.result) as { name, _id, invite }}
+    <a href={$url("./stream/:classID", { classID: _id })}>
+      <h2>{name}</h2>
+    </a>
+  {/each}
+{/if}

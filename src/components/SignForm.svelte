@@ -1,5 +1,6 @@
 <script>
   import { authStore } from "../stores/auth";
+  import { focus } from "@roxi/routify";
 
   export let up = false;
   let name = "",
@@ -47,10 +48,18 @@
 
 <form on:submit|preventDefault={handleSubmit}>
   <h1>{title}</h1>
-  <input type="text" placeholder="Username" bind:value={name} required />
+  <input
+    type="text"
+    placeholder="Username"
+    autocomplete="username"
+    use:focus
+    bind:value={name}
+    required
+  />
   <input
     type="password"
     placeholder="Password"
+    autocomplete="current-password"
     bind:value={password}
     required
   />
@@ -58,6 +67,7 @@
     <input
       type="password"
       placeholder="Confirm"
+      autocomplete="new-password"
       bind:value={confirm}
       required
     />

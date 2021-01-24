@@ -1,17 +1,16 @@
 <script>
-  import Icon from "../Icon.svelte";
   import { invite } from "../../utils/image-constants";
 
-  export let inviteCode = "XYZA";
-  export let className = "Test";
+  export let inviteCode = "";
+  export let className = "";
 </script>
 
 <div class="box flex-c">
   <h1 class="open-sans">{className}</h1>
   <div class="flex-r row-2">
     <span class="roboto">Class Code</span>
-		<span class="roboto">{inviteCode}</span>
-		<img src={invite} alt="invite" />
+    <span class="roboto">{inviteCode}</span>
+    <img src={invite} alt="invite" />
   </div>
 </div>
 
@@ -26,8 +25,8 @@
     margin: 0 0 1em 0;
     background: #396afc;
     background: -webkit-linear-gradient(to right, #2948ff, #396afc);
-		background: linear-gradient(to right, #2948ff, #396afc);
-		margin-bottom: 2rem;
+    background: linear-gradient(to right, #2948ff, #396afc);
+    margin-bottom: 2rem;
   }
 
   h1 {
@@ -47,7 +46,6 @@
   }
 
   img {
-		margin-bottom: 2px;
-	}
-
+    margin-bottom: 2px;
+  }
 </style>
