@@ -4,13 +4,14 @@
   export let rows = null;
   export let type = "text";
   export let value;
+  export let required = false;
 </script>
 
 <div class="form-control">
   {#if controlType === "textarea"}
     <textarea {rows} bind:value />
   {:else}
-    <input {type} {placeholder} />
+    <input {type} {placeholder} {required} />
   {/if}
 </div>
 

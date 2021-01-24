@@ -15,7 +15,7 @@
 <div transition:fly={{ y: 200 }} class="modal">
   <h1>New Class</h1>
   <div class="content">
-    <TextInput placeholder="Class Name (required)" />
+    <TextInput placeholder="Class Name (required)" required />
     <TextInput placeholder="Section" />
     <TextInput placeholder="Subject" />
     <TextInput placeholder="Room" />
