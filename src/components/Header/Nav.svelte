@@ -15,7 +15,7 @@
 
 <nav class="global-nav flex-r">
   <div class="left-content">
-    <button class="class-burger" tabindex="0" on:click={() => openSideNav()}>
+    <button class="class-burger" tabindex="0" on:click={openSideNav}>
       <img alt="class-menu" src={hamburger} />
     </button>
     <div class="nav-title">
