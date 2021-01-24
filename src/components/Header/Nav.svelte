@@ -22,7 +22,7 @@
       <span>{className}</span>
     </div>
   </div>
-  {#if role}
+  {#if role && $params.classID}
     <div class="center-content">
       <ul class="nav-tabs">
         <TabItem active={$isActive("/stream")} href="/stream/{$params.classID}"
@@ -38,8 +38,8 @@
         >
         {#if role === "teacher"}
           <TabItem
-            active={$isActive("/people")}
-            href="/people/{$params.classID}"
+            active={$isActive("/grades")}
+            href="/grades/{$params.classID}"
           >Grades</TabItem
           >
         {/if}
