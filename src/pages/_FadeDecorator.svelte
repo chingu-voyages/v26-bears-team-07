@@ -1,5 +1,7 @@
 <!-- _FadeDecorator.svelte -->
 <script>
+  import { afterPageLoad } from "@roxi/routify";
+
   import { beforeUrlChange } from "@roxi/routify";
   import { fade } from "svelte/transition";
   import { sleep } from "../utils/utils";
@@ -9,6 +11,9 @@
     isReady = false;
     await sleep(150);
     return true;
+  });
+  $afterPageLoad(() => {
+    isReady = true;
   });
 </script>
 
