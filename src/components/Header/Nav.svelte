@@ -15,9 +15,9 @@
 
 <nav class="global-nav flex-r">
   <div class="left-content">
-    <div class="class-burger" tabindex="0">
-      <img alt="class-menu" src={hamburger} on:click={() => openSideNav()} />
-    </div>
+    <button class="class-burger" tabindex="0" on:click={() => openSideNav()}>
+      <img alt="class-menu" src={hamburger} />
+    </button>
     <div class="nav-title">
       <span>{className}</span>
     </div>
@@ -86,12 +86,15 @@
   }
   .class-burger {
     height: 100%;
-    padding: 0 10px 0 0;
+    padding: 5px;
     text-decoration: none;
-    margin: unset;
+    margin: 5px 15px 5px 5px;
+    border: none;
+    display: grid;
+    place-items: center;
   }
   .class-burger img {
-    margin: 0 10px;
+    margin: 0;
     width: 30px;
   }
   .center-content {
