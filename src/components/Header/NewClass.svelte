@@ -7,7 +7,7 @@
   import { authStore } from "../../stores/auth";
   import { redirect } from "@roxi/routify";
 
-  const [classCreate, res] = useCreateClass();
+  const [createClass, res] = useCreateClass();
 
   const dispatch = createEventDispatcher();
 
@@ -29,7 +29,7 @@
   transition:fly={{ y: 200 }}
   class="modal"
   on:submit|preventDefault={() =>
-    classCreate({ name, id: $authStore.id, section, subject, room })}
+    createClass({ name, id: $authStore.id, section, subject, room })}
 >
   <h1>New Class</h1>
   <div class="content">
