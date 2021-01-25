@@ -8,8 +8,11 @@
     confirm = "";
   let title = !up ? "Sign in" : "Create your Account";
 
-  async function handleSubmit() {
-    if (up && password != confirm) return; // TODO: Error handling if confirm isn't same as password
+  async function handleSubmit({ currentTarget }) {
+    if (up && password != confirm) {
+      currentTarget.checkValidity();
+      return;
+    }
 
     var res = await fetch(`/.netlify/functions/${!up ? "signin" : "signup"}`, {
       method: "POST",
@@ -48,6 +51,7 @@
 
 <form on:submit|preventDefault={handleSubmit}>
   <h1>{title}</h1>
+  <label for="username" />
   <input
     type="text"
     placeholder="Username"
@@ -56,6 +60,7 @@
     bind:value={name}
     required
   />
+  <label for="password" />
   <input
     type="password"
     placeholder="Password"
@@ -64,7 +69,12 @@
     required
   />
   {#if up}
+    <label for="confirm" />
     <input
+      on:change={({ currentTarget }) =>
+        currentTarget.setCustomValidity(
+          confirm == password ? "" : "Passwords do not match"
+        )}
       type="password"
       placeholder="Confirm"
       autocomplete="new-password"
