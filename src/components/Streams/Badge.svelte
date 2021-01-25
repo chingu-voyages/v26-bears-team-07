@@ -1,5 +1,4 @@
 <script>
-  import Icon from "../Icon.svelte";
   import { invite } from "../../utils/image-constants";
   import { fade } from "svelte/transition";
 
@@ -21,7 +20,7 @@
 <style>
   .box {
     color: white;
-    width: 100%;
+    flex-basis: 100%;
     height: 150px;
     border: unset;
     border-radius: 7px;

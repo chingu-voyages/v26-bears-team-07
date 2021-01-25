@@ -2,14 +2,21 @@
   import { params } from "@roxi/routify";
   import Badge from "../../components/Streams/Badge.svelte";
   import Announcer from "../../components/Streams/Announcer.svelte";
+  import Announce from "../../components/Streams/Announce.svelte";
   import Tasks from "../../components/Streams/Tasks.svelte";
   import { findClass } from "../../stores/query";
 
   let classData = findClass({ classID: $params.classID });
-  let inviteCode, className;
+  let inviteCode, className
+  let addAnnouncement = false;
 
   $: if ($classData.data) {
     ({ invite: inviteCode, name: className } = $classData.data.result);
+  }
+
+  const createAnnouncement = () => addAnnouncement = true;
+  const closeAddAnouncementWindow = () => {
+    addAnnouncement = false;
   }
 </script>
 
@@ -17,7 +24,13 @@
   <Badge {inviteCode} {className} />
   <div class="flex-r announcements">
     <div><Tasks /></div>
-    <div><Announcer /></div>
+    <div>
+      {#if !addAnnouncement}
+        <Announcer on:add_announcement={() => createAnnouncement()} />
+      {:else}
+         <Announce on:closeAddAnouncement={() => closeAddAnouncementWindow()} />
+      {/if}
+    </div>
   </div>
 </main>
 
