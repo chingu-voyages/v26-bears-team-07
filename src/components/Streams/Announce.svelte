@@ -3,19 +3,18 @@
   import Select from "../Streams/Appselect/Select.svelte";
   import Disabled from "../Streams/Appselect/Disabled.svelte";
   // import { bubble } from "svelte/internal";
-  import { attach } from '../../utils/image-constants';
+  import { attach } from "../../utils/image-constants";
 
   let selected;
   let options = "All Students";
   let dispatch = createEventDispatcher();
 
-  function closeAnnoucement(){
-    console.log('to close announcement');
-    dispatch('closeAddAnouncement')
+  function closeAnnoucement() {
+    dispatch("closeAddAnouncement");
   }
 </script>
 
-<main class="flex-c class-shadow">
+<form class="flex-c class-shadow" method="POST" action="/stream" id="form1">
   <h3 class="open-sans">For</h3>
   <div class="flex-r buttons">
     <div><Disabled /></div>
@@ -28,19 +27,20 @@
     </div>
   </div>
   <div class="flex-r form-footer">
-    <button class="flex-r attach-button" >
-      <!-- <img src={attach} alt="attach-docs" class="attachment" /> -->
+    <button class="flex-r attach-button">
       <span>Add</span>
     </button>
     <div class="flex-r posts open-sans">
-      <button type="reset" value="reset" on:click={closeAnnoucement}>Cancel</button>
-      <button disabled>Post</button>
+      <button type="reset" value="reset" on:click={closeAnnoucement}
+        >Cancel</button
+      >
+      <button>Post</button>
     </div>
   </div>
-</main>
+</form>
 
 <style>
-  main {
+  form {
     padding: 30px;
     border-radius: 5px;
   }
@@ -95,7 +95,7 @@
     font-size: 14px;
   }
 
-  .form-footer{
+  .form-footer {
     justify-content: space-between;
     text-align: center;
     margin-top: 10px;
@@ -106,29 +106,28 @@
     height: 15px;
   } */
 
-  .attach-button{
-    
+  .attach-button {
     /* padding: 5px; */
     border-radius: 4px;
     text-align: center;
-    color: #1B68D2;
+    color: #1b68d2;
   }
 
-  .posts *{
+  .posts * {
     margin: 2px;
     border-radius: 4px;
-    color:rgba(0, 0, 0, 0.432);
+    color: rgba(0, 0, 0, 0.432);
     font-weight: bold;
     font-size: 15px;
     border: unset;
     padding: 7px 20px;
   }
 
-  .posts button:nth-child(2){
+  .posts button:nth-child(2) {
     background-color: rgba(169, 169, 169, 0.164);
   }
 
-  .posts button:nth-child(1):hover{
+  .posts button:nth-child(1):hover {
     background-color: rgba(169, 169, 169, 0.164);
   }
 </style>

@@ -4,14 +4,14 @@
   export let className;
 </script>
 
-<main>
+<form>
   <button class="selected flex-c" disabled>
     <div class="flex-r case">
       <span>{className || "Test"}</span>
       <img src={arrow_down} alt="selected" />
     </div>
   </button>
-</main>
+</form>
 
 <style>
   .selected {

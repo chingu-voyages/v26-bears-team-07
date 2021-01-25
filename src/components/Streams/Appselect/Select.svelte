@@ -2,21 +2,29 @@
   import { teacher, unmark, arrow_down } from "../../../utils/image-constants";
 
   let options = ["All students"];
-  let defaults = 'All Students';
+  let defaults = "All Students";
   let value = defaults;
-  let visibleState = 'hidden'
+  let visibleState = "hidden";
 </script>
 
-<main>
-    <button class="selected flex-c" {value} default={options[0]} on:click={() => visibleState = 'visible'}>
-    <div class="flex-r case"> 
+<form>
+  <button
+    class="selected flex-c"
+    {value}
+    default={options[0]}
+    type="submit"
+    form="form1"
+    on:click={() => (visibleState = "visible")}>
+    <div class="flex-r case">
       <span>{value || defaults}</span>
       <img src={arrow_down} alt="selected" />
     </div>
   </button>
   <div class="flex-c options-container" style="visibility: {visibleState}">
     {#each options as option}
-      <button on:click={(e) => value = e.target.children[2].innerText}>
+      <button
+        on:click={(e) => (value = e.target.children[2].innerText)}
+        type="button">
         <div class="flex-r button-content">
           <img src={unmark} alt="unmark" />
           <img src={teacher} alt="users" />
@@ -25,11 +33,10 @@
       </button>
     {/each}
   </div>
-</main>
-
+</form>
 
 <style>
-  .selected{
+  .selected {
     padding: 10px;
     background-color: rgba(128, 128, 128, 0.055);
     border: unset;
@@ -37,7 +44,7 @@
     min-width: 150px;
   }
 
-  .case{
+  .case {
     text-align: center;
     justify-content: space-between;
     width: 100%;
@@ -47,18 +54,18 @@
     margin: 4px;
   }
 
-  .selected img{
+  .selected img {
     width: 25px;
     height: 25px;
     filter: opacity(65%);
   }
 
-  .selected:hover{
+  .selected:hover {
     background-color: rgba(169, 169, 169, 0.384);
   }
 
   .options-container {
-    width:250px;
+    width: 250px;
   }
 
   .options-container button {

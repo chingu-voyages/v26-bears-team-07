@@ -16,7 +16,6 @@
 
   const createAnnouncement = () => addAnnouncement = true;
   const closeAddAnouncementWindow = () => {
-    console.log('closings')
     addAnnouncement = false;
   }
 </script>

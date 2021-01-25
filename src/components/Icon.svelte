@@ -1,13 +1,13 @@
 <script>
   export let name;
-  export let styles;
+  // export let styles;
 
   function getAlt(name) {
     return name.split("/")[1];
   }
 </script>
 
-<img alt={getAlt(name)} src={name} on:click style={styles} />
+<img alt={getAlt(name)} src={name} on:click/>
 
 <style>
   img {
