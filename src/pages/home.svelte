@@ -9,15 +9,32 @@
 
 {#if $classes.data}
   <ol>
-    {#each (({ teaches, attends }) => [...teaches.data, ...attends.data])($classes.data.result) as { name, _id, invite }}
+    {#each (({ teaches, attends }) => [...teaches.data, ...attends.data])($classes.data.result) as { name, _id, invite, isOpen }}
       <li in:fade={{ duration: 200 }}>
         <div
-          class="top"
+          class="top-box"
           on:click|self={() => $goto("./stream/:classID", { classID: _id })}
         >
-          <a href={$url("./stream/:classID", { classID: _id })}>
-            {name}
-          </a>
+          <div class="top">
+            <a href={$url("./stream/:classID", { classID: _id })}>
+              {name}
+            </a>
+            <button class="btn-opts" on:click={() => (isOpen = !isOpen)}>
+              <!-- prettier-ignore -->
+              <svg focusable="false" width="24" height="24" viewBox="0 0 24 24"><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"></path></svg>
+              {#if isOpen}
+                <div transition:fade={{ duration: 150 }} class="btn-opts-menu">
+                  <div>
+                    <button>Move</button>
+                    <button>Copy invite link</button>
+                    <button>Edit</button>
+                    <button>Copy</button>
+                    <button>Archive</button>
+                  </div>
+                </div>
+              {/if}
+            </button>
+          </div>
         </div>
       </li>
     {/each}
@@ -46,17 +63,69 @@
     box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.302),
       0 2px 6px 2px rgba(60, 64, 67, 0.149);
   }
-  .top {
+  .top-box {
     cursor: pointer;
     padding: 1rem 1rem 0.75rem;
     width: 100%;
     height: 6rem;
     background: linear-gradient(90deg, #004da5 0%, #3e99ef 100%);
   }
+  .top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
   a {
     color: white;
   }
   a:hover {
     text-decoration: underline;
+  }
+  .btn-opts {
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    height: 2.5rem;
+    width: 2.5rem;
+    display: grid;
+    place-items: center;
+  }
+  .btn-opts:hover {
+    background-color: rgba(232, 234, 237, 0.039);
+  }
+  .btn-opts:focus {
+    outline: none;
+  }
+  .btn-opts-menu {
+    position: absolute;
+  }
+  .btn-opts-menu div {
+    position: absolute;
+    border-radius: 0.3rem;
+    top: 2.2rem;
+    right: -1.5rem;
+    height: fit-content;
+    width: fit-content;
+    background-color: white;
+    padding: 0.5rem 0;
+    box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2),
+      0 1px 1px 0 rgba(0, 0, 0, 0.141), 0 1px 3px 0 rgba(0, 0, 0, 0.122);
+  }
+  .btn-opts-menu button {
+    font-size: 0.9rem;
+    border: none;
+    white-space: nowrap;
+    text-align: left;
+    width: 100%;
+    padding: 0.3rem 1rem;
+  }
+  .btn-opts-menu button:focus {
+    outline: none;
+  }
+
+  svg,
+  path {
+    color: white;
+    fill: white;
   }
 </style>
