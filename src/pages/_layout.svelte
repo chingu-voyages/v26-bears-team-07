@@ -13,7 +13,5 @@
 {/if}
 <slot decorator={FadeDectorator} />
 
-<style>
-</style>
 
 

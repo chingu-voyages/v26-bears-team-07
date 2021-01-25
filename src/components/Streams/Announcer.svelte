@@ -14,9 +14,9 @@
 <main class="roboto class-shadow">
   <div class="announcer flex-r">
     <img class="user" src={announcerImage || teacher} alt="announcer" />
-    <a class="open-sans" href="/stream" on:click={addAnnouncement}>
+    <span class="open-sans" on:click={addAnnouncement}>
       Announce something to your class
-    </a>
+    </span>
   </div>
 </main>
 
@@ -33,12 +33,13 @@
   img {
     margin-right: 5px;
   }
-  a {
+  span {
     font-size: 12px;
     color: gray;
+    cursor: default;
   }
 
-  a:hover {
+  span:hover {
     color: rgba(0, 132, 255, 0.74);
   }
 
