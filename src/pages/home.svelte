@@ -3,13 +3,14 @@
   import { classesByUserID } from "../stores/query";
   import { authStore } from "../stores/auth";
   import { fade } from "svelte/transition";
+  import { clickOutside } from "../utils/utils";
 
   const classes = classesByUserID({ id: $authStore.id });
 </script>
 
 {#if $classes.data}
   <ol>
-    {#each (({ teaches, attends }) => [...teaches.data, ...attends.data])($classes.data.result) as { name, _id, invite, isOpen }}
+    {#each (({ teaches, attends }) => [...teaches.data, ...attends.data])($classes.data.result) as { name, _id, invite, isOpen, transitioning }}
       <li in:fade={{ duration: 200 }}>
         <a class="top-box" href={$url("./stream/:classID", { classID: _id })}>
           <div class="top">
@@ -18,11 +19,19 @@
             </a>
             <button
               class="btn-opts"
-              on:click|preventDefault={() => (isOpen = !isOpen)}>
+              on:click|preventDefault={() =>
+                !transitioning && (isOpen = !isOpen)}>
               <!-- prettier-ignore -->
               <svg focusable="false" width="24" height="24" viewBox="0 0 24 24"><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"></path></svg>
               {#if isOpen}
-                <div transition:fade={{ duration: 150 }} class="btn-opts-menu">
+                <div
+                  use:clickOutside
+                  on:click_outside={() => (isOpen = false)}
+                  on:outrostart={() => (transitioning = true)}
+                  on:outroend={() => (transitioning = false)}
+                  transition:fade={{ duration: 150 }}
+                  class="btn-opts-menu"
+                >
                   <div>
                     <button>Move</button>
                     <button>Copy invite link</button>
@@ -121,6 +130,9 @@
   }
   .btn-opts-menu button:focus {
     outline: none;
+  }
+  .btn-opts-menu button:hover {
+    background-color: #eee;
   }
 
   svg,
