@@ -8,11 +8,8 @@
     confirm = "";
   let title = !up ? "Sign in" : "Create your Account";
 
-  async function handleSubmit({ currentTarget }) {
-    if (up && password != confirm) {
-      currentTarget.checkValidity();
-      return;
-    }
+  async function handleSubmit() {
+    if (up && password != confirm) return;
 
     var res = await fetch(`/.netlify/functions/${!up ? "signin" : "signup"}`, {
       method: "POST",
