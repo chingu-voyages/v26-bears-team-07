@@ -27,15 +27,20 @@
 <style>
   ol {
     padding-top: 2rem;
-    width: 21rem;
     list-style: none;
+    display: flex;
+    flex-wrap: wrap;
   }
   li {
     border: 0.0625rem solid #dadce0;
     overflow: hidden;
     border-radius: 0.5rem;
+    min-width: 18rem;
     width: 100%;
+    max-width: 21rem;
     height: 18.375rem;
+    margin-bottom: 1.5rem;
+    margin-right: 1.5rem;
   }
   li:hover {
     box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.302),
