@@ -1,12 +1,9 @@
 <script>
   import { createEventDispatcher } from "svelte";
-  import Select from "../Streams/Appselect/Select.svelte";
-  import Disabled from "../Streams/Appselect/Disabled.svelte";
-  // import { bubble } from "svelte/internal";
-  import { attach } from "../../utils/image-constants";
 
-  let selected;
-  let options = "All Students";
+  //append students list from database
+  let options = ["All students"];
+  let className;
   let dispatch = createEventDispatcher();
 
   function closeAnnoucement() {
@@ -14,17 +11,24 @@
   }
 </script>
 
-<form class="flex-c class-shadow" method="POST" action="/stream" id="form1">
+<form class="flex-c class-shadow" method="POST" action="/stream">
   <h3 class="open-sans">For</h3>
   <div class="flex-r buttons">
-    <div><Disabled /></div>
-    <div><Select /></div>
+    <div>
+      <select name="test" id="test" class="class-options" disabled>
+        <option value={className || "Test"}>{className || "Test"}</option>
+      </select>
+    </div>
+    <div>
+      <select name="students" id="students" class="students-options">
+        {#each options as option}
+          <option value={option}>{option}</option>
+        {/each}
+      </select>
+    </div>
   </div>
   <div class="textbox">
     <textarea />
-    <div class="false-text-area" contenteditable>
-      <span class="roboto headline">Announce something to your class</span>
-    </div>
   </div>
   <div class="flex-r form-footer">
     <button class="flex-r attach-button">
@@ -34,7 +38,7 @@
       <button type="reset" value="reset" on:click={closeAnnoucement}
         >Cancel</button
       >
-      <button>Post</button>
+      <button type="submit">Post</button>
     </div>
   </div>
 </form>
@@ -50,6 +54,29 @@
     filter: opacity(70%);
   }
 
+  .class-options {
+    padding: 10px 22px;
+    border: unset;
+    border-radius: 3px;
+  }
+
+  .students-options {
+    padding: 10px 22px;
+    border: unset;
+    color: rgba(0, 0, 0, 0.678);
+    border-radius: 3px;
+  }
+
+  .students-options:focus,
+  .class-options:focus {
+    outline: none;
+  }
+
+  .students-options:hover,
+  .class-options:hover {
+    background-color: rgba(169, 169, 169, 0.164);
+  }
+
   .buttons {
     margin-bottom: 7px;
   }
@@ -63,36 +90,22 @@
   }
 
   textarea {
-    display: none;
     border: unset;
-    background-color: rgba(128, 128, 128, 0.055);
-    border-bottom: solid 1pt rgba(0, 0, 0, 0.63);
-  }
-
-  textarea:hover {
-    background-color: rgba(169, 169, 169, 0.384);
-  }
-
-  .false-text-area {
     border-bottom: solid 1pt rgba(0, 0, 0, 0.63);
     background-color: rgba(128, 128, 128, 0.055);
     min-height: 150px;
     padding: 15px;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
+    min-width: 100%;
   }
 
-  .false-text-area:hover {
-    background-color: rgba(169, 169, 169, 0.164);
+  textarea:hover {
+    background-color: rgba(169, 169, 169, 0.384);
   }
 
-  .false-text-area:focus {
+  textarea:focus {
     outline: none;
-  }
-
-  .headline {
-    /* color: #1867D3; */
-    font-size: 14px;
   }
 
   .form-footer {
@@ -101,13 +114,7 @@
     margin-top: 10px;
   }
 
-  /* .attachment{
-    width: 20px;
-    height: 15px;
-  } */
-
   .attach-button {
-    /* padding: 5px; */
     border-radius: 4px;
     text-align: center;
     color: #1b68d2;
