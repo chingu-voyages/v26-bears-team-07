@@ -11,15 +11,14 @@
   <ol>
     {#each (({ teaches, attends }) => [...teaches.data, ...attends.data])($classes.data.result) as { name, _id, invite, isOpen }}
       <li in:fade={{ duration: 200 }}>
-        <div
-          class="top-box"
-          on:click|self={() => $goto("./stream/:classID", { classID: _id })}
-        >
+        <a class="top-box" href={$url("./stream/:classID", { classID: _id })}>
           <div class="top">
             <a href={$url("./stream/:classID", { classID: _id })}>
               {name}
             </a>
-            <button class="btn-opts" on:click={() => (isOpen = !isOpen)}>
+            <button
+              class="btn-opts"
+              on:click|preventDefault={() => (isOpen = !isOpen)}>
               <!-- prettier-ignore -->
               <svg focusable="false" width="24" height="24" viewBox="0 0 24 24"><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"></path></svg>
               {#if isOpen}
@@ -35,7 +34,7 @@
               {/if}
             </button>
           </div>
-        </div>
+        </a>
       </li>
     {/each}
   </ol>
@@ -69,6 +68,7 @@
     width: 100%;
     height: 6rem;
     background: linear-gradient(90deg, #004da5 0%, #3e99ef 100%);
+    display: block;
   }
   .top {
     display: flex;
