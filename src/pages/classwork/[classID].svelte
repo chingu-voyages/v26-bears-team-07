@@ -68,10 +68,6 @@
   select {
     display: none;
     width: 100%;
-    padding: 0.75rem;
-    margin: 0 0 1rem 0;
-    border: 1px solid #dedede;
-    border-radius: 5px;
   }
 
   ul {

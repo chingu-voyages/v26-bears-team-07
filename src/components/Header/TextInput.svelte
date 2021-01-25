@@ -4,11 +4,20 @@
   export let rows = null;
   export let value;
   export let required = null;
+  export let minRows = 1;
+  export let maxRows;
+
+  $: minHeight = `${1 + minRows * 1.2}em`;
+  $: maxHeight = maxRows ? `${1 + maxRows * 1.2}em` : `auto`;
 </script>
 
 <div class="form-control">
   {#if controlType === "textarea"}
-    <textarea {rows} bind:value />
+    <pre
+      aria-hidden="true"
+      style="min-height: {minHeight}; max-height: {maxHeight}">{value + '\n'}</pre>
+
+    <textarea bind:value />
   {:else}
     <input type="text" {placeholder} {required} bind:value />
   {/if}
@@ -37,5 +46,23 @@
     padding: 0.5rem 0;
     width: 100%;
     margin: 0.25rem 0;
+    position: relative;
+  }
+  pre,
+  textarea {
+    font-family: inherit;
+    padding: 0.5em;
+    box-sizing: border-box;
+    border: 1px solid #eee;
+    line-height: 1.2;
+    overflow: hidden;
+  }
+
+  textarea {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    resize: none;
   }
 </style>

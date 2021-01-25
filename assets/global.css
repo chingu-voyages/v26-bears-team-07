@@ -46,6 +46,13 @@ input {
   padding: 13px 15px;
 }
 
+select {
+  padding: 0.75rem;
+  margin: 0 0 1rem 0;
+  border: 1px solid #dedede;
+  border-radius: 5px;
+}
+
 @media (min-width: 400px) {
   body {
     font-size: 16px;
