@@ -1,5 +1,5 @@
 <script>
-  import { goto, url } from "@roxi/routify";
+  import { url } from "@roxi/routify";
   import { classesByUserID } from "../stores/query";
   import { authStore } from "../stores/auth";
   import { fade } from "svelte/transition";
@@ -34,7 +34,14 @@
                 >
                   <div>
                     <button>Move</button>
-                    <button>Copy invite link</button>
+                    <button
+                      on:click={() => {
+                        navigator.clipboard.writeText(
+                          `${location.origin}/invite/${_id}?code=${invite}`
+                        );
+                        alert("Link copied!");
+                      }}>Copy invite link</button
+                    >
                     <button>Edit</button>
                     <button>Copy</button>
                     <button>Archive</button>
