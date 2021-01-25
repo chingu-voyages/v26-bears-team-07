@@ -66,6 +66,9 @@
     }
   },
   "spank": {
+    "ssrOptions": {
+      "inlineDynamicImports": true
+    },
     "blacklist": [
       "/example/modal/basic/4"
     ]
