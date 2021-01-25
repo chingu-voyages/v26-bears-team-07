@@ -27,7 +27,6 @@ Sort of like a landing home page. TBD -->
   <hr />
   <h2>Gated content</h2>
   <a href="/home">Home</a>
-  <a href="/stream">Stream</a>
 {/if}
 
 <style>
