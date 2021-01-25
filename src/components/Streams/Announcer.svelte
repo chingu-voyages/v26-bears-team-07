@@ -14,7 +14,10 @@
 <main class="roboto class-shadow">
   <div class="announcer flex-r">
     <img class="user" src={announcerImage || teacher} alt="announcer" />
-    <span class="open-sans" on:click={addAnnouncement}>
+    <!-- <span class="open-sans" on:click={addAnnouncement}>
+      Announce something to your class
+    </span> -->
+    <span class="open-sans">
       Announce something to your class
     </span>
   </div>
