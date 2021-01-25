@@ -8,13 +8,17 @@
 
   let classData = findClass({ classID: $params.classID });
   let inviteCode, className
-  let addAnnouncement = true;
+  let addAnnouncement = false;
 
   $: if ($classData.data) {
     ({ invite: inviteCode, name: className } = $classData.data.result);
   }
 
-  const createAnnouncement = () => addAnnouncement = false;
+  const createAnnouncement = () => addAnnouncement = true;
+  const closeAddAnouncementWindow = () => {
+    console.log('closings')
+    addAnnouncement = false;
+  }
 </script>
 
 <main>
@@ -22,10 +26,10 @@
   <div class="flex-r announcements">
     <div><Tasks /></div>
     <div>
-      {#if addAnnouncement}
+      {#if !addAnnouncement}
         <Announcer on:add_announcement={() => createAnnouncement()} />
       {:else}
-         <Announce />
+         <Announce on:closeAddAnouncement={() => closeAddAnouncementWindow()} />
       {/if}
     </div>
   </div>

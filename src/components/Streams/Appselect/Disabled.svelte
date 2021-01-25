@@ -1,5 +1,5 @@
 <script>
-  import { teacher, unmark, arrow_down } from "../../../utils/image-constants";
+  import {  arrow_down } from "../../../utils/image-constants";
 
   export let className;
 </script>
@@ -35,10 +35,11 @@
   .selected img {
     width: 25px;
     height: 25px;
+    filter: opacity(25%);
   }
 
   .selected:hover {
-    background-color: rgba(169, 169, 169, 0.384);
+    background-color: rgba(169, 169, 169, 0.164);
   }
 
   span {

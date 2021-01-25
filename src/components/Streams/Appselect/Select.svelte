@@ -50,6 +50,7 @@
   .selected img{
     width: 25px;
     height: 25px;
+    filter: opacity(65%);
   }
 
   .selected:hover{
@@ -85,7 +86,7 @@
   }
 
   .button-content:hover {
-    background-color: rgba(169, 169, 169, 0.151);
+    background-color: rgba(169, 169, 169, 0.164);
   }
 
   span {

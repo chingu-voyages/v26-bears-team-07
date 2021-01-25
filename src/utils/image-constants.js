@@ -12,5 +12,7 @@
  export const mark = '/icons/mark.png';
  export const unmark = '/icons/unmark.png';
  export const arrow_down = '/icons/arrow-down.png';
+ export const attach = '/icons/attach.png';
+ export const down = '/icons/down.png';
 
 
