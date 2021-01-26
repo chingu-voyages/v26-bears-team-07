@@ -39,7 +39,7 @@
                     class="btn-opts-menu"
                   >
                     <div>
-                      <button>Move</button>
+                      <!-- <button>Move</button> -->
                       <button
                         on:click={() => {
                           navigator.clipboard.writeText(
@@ -48,9 +48,9 @@
                           alert("Link copied!");
                         }}>Copy invite link</button
                       >
-                      <button>Edit</button>
-                      <button>Copy</button>
-                      <button>Archive</button>
+                      <!-- <button>Edit</button> -->
+                      <!-- <button>Copy</button> -->
+                      <!-- <button>Archive</button> -->
                     </div>
                   </div>
                 {/if}
