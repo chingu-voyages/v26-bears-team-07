@@ -5,6 +5,7 @@
   import { hamburger, plus } from "../../utils/image-constants";
   import { isActive, params } from "@roxi/routify";
   import UserMenu from "./UserMenu.svelte";
+  import ClassLogo from "./ClassLogo.svelte";
   export let className = "AppName";
   export let role = "student";
   let showNewClass = false;
@@ -21,7 +22,11 @@
       <img alt="class-menu" src={hamburger} />
     </button>
     <div class="nav-title">
-      <span>{className}</span>
+      {#if $params.classID}
+        <ClassLogo />
+      {:else}
+        <span>{className}</span>
+      {/if}
     </div>
   </div>
   {#if role && $params.classID && !$isActive("./invite")}
