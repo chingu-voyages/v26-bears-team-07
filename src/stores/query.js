@@ -154,7 +154,8 @@ query findStreams($classID: ID!) {
     { classID }
   );
 
-export const createStream = useMutation(`
+export const createStream = () =>
+  useMutation(`
 mutation CreateStream($userID: ID!, $classID: ID!, $message: String!) {
   result: createStream(
     data: {
@@ -173,7 +174,8 @@ mutation CreateStream($userID: ID!, $classID: ID!, $message: String!) {
 }
 `);
 
-export const createComment = useMutation(`
+export const createComment = () =>
+  useMutation(`
 mutation CreateComment($userID: ID!, $streamID: ID!, $message: String!) {
   result: createComment(
     data: {
