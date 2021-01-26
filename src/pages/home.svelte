@@ -43,7 +43,7 @@
                       <button
                         on:click={() => {
                           navigator.clipboard.writeText(
-                            `${location.origin}/invite/${_id}?code=${invite}`
+                            `${location.origin}/invite/${_id}?cjc=${invite}`
                           );
                           alert("Link copied!");
                         }}>Copy invite link</button

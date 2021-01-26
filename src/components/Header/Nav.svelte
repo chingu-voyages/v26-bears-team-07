@@ -22,7 +22,7 @@
       <span>{className}</span>
     </div>
   </div>
-  {#if role && $params.classID}
+  {#if role && $params.classID && !$isActive("./invite")}
     <div class="center-content">
       <ul class="nav-tabs">
         <TabItem active={$isActive("/stream")} href="/stream/{$params.classID}"
