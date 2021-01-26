@@ -9,7 +9,7 @@ Sort of like a landing home page. TBD -->
 </script>
 
 <svelte:head>
-  <title>Classroom TODO: Title</title>
+  <title>Bear Class</title>
 </svelte:head>
 
 <h1>Great success!</h1>
