@@ -38,7 +38,7 @@ export const queryOp = (gqlQuery, variables) =>
 /** Creates a mutation hook for a component to consume.
  * @param {string} gqlMutation - A template literal with your GraphQL mutation.
  * @param {function} cbVarsObj A callback that should destructure & restructure the object with variables passed in by
- * the component. It can set defaults/fallbacks and shape its returned variables object.
+ * the component. It can set defaults/fallbacks and shape its returned variables object. If none specified, will pass var obj supplied unmodified.
  * Example:
  * ```js
  * ({ name = "no name entered", id }) => ({ name, id })
@@ -50,7 +50,7 @@ export const queryOp = (gqlQuery, variables) =>
  * const [noteStore, noteCreate] = useCreateNote();
  * ```
  */
-export function useMutation(gqlMutation, cbVarsObj) {
+export function useMutation(gqlMutation, cbVarsObj = (variables) => variables) {
   const mutationStore = operationStore(gqlMutation);
   const mutationOp = mutation(mutationStore);
   /** When executed, runs the GQL mutation with provided variables.
