@@ -1,6 +1,6 @@
 <script>
   import { params, url } from "@roxi/routify";
-  import { fade } from "svelte/transition";
+  import { blur } from "svelte/transition";
   import { findClass } from "../../stores/query";
 
   const classStore = findClass({ classID: $params.classID });
@@ -15,7 +15,7 @@ Though, performance shouldn't really matter in this case.
   <a
     class="logo"
     href={$url(`/stream/${$params.classID}`)}
-    in:fade={{ duration: 100 }}>{$classStore?.data?.result?.name}</a
+    in:blur={{ amount: 20 }}>{$classStore?.data?.result?.name}</a
   >
 {/if}
 
