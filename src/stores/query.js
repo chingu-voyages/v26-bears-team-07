@@ -131,3 +131,69 @@ export const useJoinClass = () =>
     }
   }
   ${CLASS_FIELDS}`);
+
+export const findStreams = ({ classID }) =>
+  queryOp(
+    `
+query findStreams($classID: ID!) {
+  result: findClassByID(id: $classID) {
+    streams {
+      message
+      author {
+        name
+      }
+      comments {
+        author {
+          name
+        }
+      }
+    }
+  }
+}  
+`,
+    { classID }
+  );
+
+export const createStream = () =>
+  useMutation(`
+mutation CreateStream($userID: ID!, $classID: ID!, $message: String!) {
+  result: createStream(
+    data: {
+      author: { connect: $userID }
+      class: { connect: $classID }
+      message: $message
+    }
+  ) {
+    _id
+    message
+    author {
+      name
+      _id
+    }
+  }
+}
+`);
+
+export const createComment = () =>
+  useMutation(`
+mutation CreateComment($userID: ID!, $streamID: ID!, $message: String!) {
+  result: createComment(
+    data: {
+      author: { connect: $userID }
+      stream: { connect: $streamID }
+      message: $message
+    }
+  ) {
+    _id
+    message
+    stream {
+      _id
+      message
+    }
+    author {
+      name
+      _id
+    }
+  }
+}
+`);
