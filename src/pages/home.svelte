@@ -6,53 +6,62 @@
   import { clickOutside } from "../utils/utils";
 
   const classes = classesByUserID({ id: $authStore.id });
+  $: allClasses = $classes.data
+    ? (({ teaches, attends }) => [...teaches.data, ...attends.data])(
+        $classes.data.result
+      )
+    : [];
 </script>
 
 {#if $classes.data}
   <ol>
-    {#each (({ teaches, attends }) => [...teaches.data, ...attends.data])($classes.data.result) as { name, _id, invite, isOpen, transitioning }}
-      <li in:fade={{ duration: 200 }}>
-        <a class="top-box" href={$url("./stream/:classID", { classID: _id })}>
-          <div class="top">
-            <a href={$url("./stream/:classID", { classID: _id })}>
-              {name}
-            </a>
-            <button
-              class="btn-opts"
-              on:click|preventDefault={() =>
-                !transitioning && (isOpen = !isOpen)}>
-              <!-- prettier-ignore -->
-              <svg focusable="false" width="24" height="24" viewBox="0 0 24 24"><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"></path></svg>
-              {#if isOpen}
-                <div
-                  use:clickOutside
-                  on:click_outside={() => (isOpen = false)}
-                  on:outrostart={() => (transitioning = true)}
-                  on:outroend={() => (transitioning = false)}
-                  transition:fade={{ duration: 150 }}
-                  class="btn-opts-menu"
-                >
-                  <div>
-                    <button>Move</button>
-                    <button
-                      on:click={() => {
-                        navigator.clipboard.writeText(
-                          `${location.origin}/invite/${_id}?code=${invite}`
-                        );
-                        alert("Link copied!");
-                      }}>Copy invite link</button
-                    >
-                    <button>Edit</button>
-                    <button>Copy</button>
-                    <button>Archive</button>
+    {#if allClasses.length}
+      {#each allClasses as { name, _id, invite, isOpen, transitioning }}
+        <li in:fade={{ duration: 200 }}>
+          <a class="top-box" href={$url("./stream/:classID", { classID: _id })}>
+            <div class="top">
+              <a href={$url("./stream/:classID", { classID: _id })}>
+                {name}
+              </a>
+              <button
+                class="btn-opts"
+                on:click|preventDefault={() =>
+                  !transitioning && (isOpen = !isOpen)}>
+                <!-- prettier-ignore -->
+                <svg focusable="false" width="24" height="24" viewBox="0 0 24 24"><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"></path></svg>
+                {#if isOpen}
+                  <div
+                    use:clickOutside
+                    on:click_outside={() => (isOpen = false)}
+                    on:outrostart={() => (transitioning = true)}
+                    on:outroend={() => (transitioning = false)}
+                    transition:fade={{ duration: 150 }}
+                    class="btn-opts-menu"
+                  >
+                    <div>
+                      <button>Move</button>
+                      <button
+                        on:click={() => {
+                          navigator.clipboard.writeText(
+                            `${location.origin}/invite/${_id}?code=${invite}`
+                          );
+                          alert("Link copied!");
+                        }}>Copy invite link</button
+                      >
+                      <button>Edit</button>
+                      <button>Copy</button>
+                      <button>Archive</button>
+                    </div>
                   </div>
-                </div>
-              {/if}
-            </button>
-          </div>
-        </a>
-      </li>
-    {/each}
+                {/if}
+              </button>
+            </div>
+          </a>
+        </li>
+      {/each}
+    {:else}
+      <h2>No classes yet!</h2>
+    {/if}
   </ol>
 {/if}
 
