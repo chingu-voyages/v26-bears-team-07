@@ -83,9 +83,9 @@ ${CLASS_FIELDS}
 export const usersByClassID = ({ classID }) =>
   queryOp(
     `
-query FindClassByID($id: ID!) {
+query FindUsersByClassID($id: ID!) {
   result: findClassByID(id: $id) {
-    _id
+    ...ClassFields
     teachers {
       data {
         name
@@ -100,6 +100,7 @@ query FindClassByID($id: ID!) {
     }
   }
 }
+${CLASS_FIELDS}
 `,
     { id: classID }
   );
@@ -109,11 +110,24 @@ export const findClass = ({ classID }) =>
     `
 query FindClassByID($id: ID!) {
   result: findClassByID(id: $id) {
-    _id
-    name
-    invite
+    ...ClassFields
   }
 }
+${CLASS_FIELDS}
 `,
     { id: classID }
   );
+
+/** Joins a class provided a classID and userID
+ * warn: Seems difficult to secure on the client side with privileges. In a prod env, likely easier to handle logic via serverless func.
+ */
+export const useJoinClass = () =>
+  useMutation(`mutation JoinClass($userID: ID!, $classID: ID!) {
+    result: partialUpdateClass(
+      id: $classID
+      data: { students: { connect: [$userID] } }
+    ) {
+      ...ClassFields
+    }
+  }
+  ${CLASS_FIELDS}`);
