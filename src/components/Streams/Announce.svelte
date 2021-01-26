@@ -58,6 +58,7 @@
     padding: 10px 22px;
     border: unset;
     border-radius: 3px;
+    margin-right: 7px;
   }
 
   .students-options {
@@ -81,9 +82,6 @@
     margin-bottom: 7px;
   }
 
-  .buttons * {
-    margin: 4px;
-  }
 
   .textbox {
     top: -9;

@@ -14,5 +14,6 @@
  export const arrow_down = '/icons/arrow-down.png';
  export const attach = '/icons/attach.png';
  export const down = '/icons/down.png';
+ export const chevron = '/icons/chevron-right.png';
 
 
