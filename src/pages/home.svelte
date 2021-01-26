@@ -78,7 +78,7 @@
     border-radius: 0.5rem;
     min-width: 18rem;
     width: 100%;
-    max-width: 21rem;
+    max-width: 20rem;
     height: 18.375rem;
     margin-bottom: 1.5rem;
     margin-right: 1.5rem;
