@@ -4,6 +4,7 @@
   import NewClass from "./NewClass.svelte";
   import { hamburger, plus } from "../../utils/image-constants";
   import { isActive, params } from "@roxi/routify";
+  import UserMenu from "./UserMenu.svelte";
   export let className = "AppName";
   export let role = "student";
   let showNewClass = false;
@@ -11,6 +12,7 @@
   function openSideNav() {
     dispatch("opensidenav");
   }
+  let userMenuOpen = false;
 </script>
 
 <nav class="global-nav flex-r">
@@ -50,9 +52,12 @@
     <li class="plus" on:click={() => (showNewClass = true)}>
       <img alt="add-class" src={plus} />
     </li>
-    <li class="user"><span class="avatar" /></li>
+    <li class="user" on:click={() => (userMenuOpen = !userMenuOpen)}>
+      <span class="avatar" />
+    </li>
   </ul>
 </nav>
+<UserMenu open={userMenuOpen} />
 
 {#if showNewClass}
   <NewClass on:cancel={() => (showNewClass = false)} />
