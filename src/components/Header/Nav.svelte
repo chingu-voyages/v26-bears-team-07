@@ -57,7 +57,7 @@
     </li>
   </ul>
 </nav>
-<UserMenu open={userMenuOpen} />
+<UserMenu open={userMenuOpen} on:click_outside={() => (userMenuOpen = false)} />
 
 {#if showNewClass}
   <NewClass on:cancel={() => (showNewClass = false)} />

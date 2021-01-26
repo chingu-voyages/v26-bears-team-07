@@ -1,12 +1,18 @@
 <script>
   import { fade } from "svelte/transition";
   import { authStore } from "../../stores/auth";
+  import { clickOutside } from "../../utils/utils";
 
   export let open;
 </script>
 
 {#if open}
-  <div class="menu" transition:fade={{ duration: 100 }}>
+  <div
+    class="menu"
+    transition:fade={{ duration: 100 }}
+    use:clickOutside
+    on:click_outside
+  >
     <div>
       <button
         on:click={() => {
