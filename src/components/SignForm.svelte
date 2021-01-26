@@ -92,6 +92,11 @@
 </form>
 
 <style>
+  form{
+    padding: 40px;
+    box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.212);
+  }
+
   h1 {
     text-align: center;
   }
