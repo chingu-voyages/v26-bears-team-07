@@ -1,0 +1,41 @@
+// These queries are in FQL which can be executed via Fauna shell, CLI, or VSCode extension.
+// Serves as reference for commands ran outside of those defined in the codebase
+// for example it might be useful for mocking a schema as FQL does not require 
+// defined schemas like GQL
+
+// Note that all its impacts are shown concisely in the Fauna dashboard and a lot of these
+//   operations can be achieved right from its UI
+
+// Let the user read data about itself
+// Must have role User created via dashboard or shell
+Update(
+  Role("User"),
+  {
+    privileges: [
+      {
+        resource: Collection("Users"),
+        actions: {
+          read: Query(
+            Lambda("ref",
+              Equals(
+                Identity(),
+                Var("ref")
+              )
+            )
+          )
+        }
+      }
+    ]
+  }
+)
+
+// Index for classroom read privileges use. Groups all students and teachers in a class
+CreateIndex({
+  name: "R_people_by_class",
+  source: [
+    { collection: Collection("teacher_role") },
+    { collection: Collection("student_role") },
+  ],
+  terms: [{ field: ["data", "classID"] }],
+  values: [{ field: ["data", "userID"] }],
+})

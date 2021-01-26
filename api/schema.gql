@@ -1,0 +1,50 @@
+"""
+The User actually only has the `name` field. This concept is relevant when crafting privileges.
+Internally, Fauna is creating extra indexes and collections to establish the many-to-many relations here. From a
+querying perspective, this is irrelevant unless you need to write FQL. Generally, look to do it via the GraphQL API.
+"""
+type User {
+  name: String! @unique
+  owns: [Class]! @relation(name: "owner_role")
+  teaches: [Class]! @relation(name: "teacher_role")
+  attends: [Class]! @relation(name: "student_role")
+}
+
+"""
+Every doc in FQL has a unique `_id` field that isn't visible in the schema.
+For Class, we use it as the link for routing purposes.
+"""
+type Class {
+  name: String!
+  invite: ID!
+  owner: User! @relation(name: "owner_role")
+  teachers: [User!]! @relation(name: "teacher_role")
+  students: [User]! @relation(name: "student_role")
+  section: String
+  subject: String
+  room: String
+}
+
+"""
+Streams are basically another name for announcements.
+There can be multiple comments attached to a stream.
+"""
+type Stream {
+  message: String!
+  author: User!
+  class: Class!
+}
+
+type Comment {
+  message: String!
+  author: User!
+  stream: Stream!
+}
+
+#  TODO: This is a custom query / mutation example
+
+#  There's no need for a custom query or mutation at the moment.
+
+#  type Query {
+#    allUsersByClass(classId): [User]! @resolver
+#  }
