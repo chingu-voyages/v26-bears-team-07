@@ -131,3 +131,25 @@ export const useJoinClass = () =>
     }
   }
   ${CLASS_FIELDS}`);
+
+export const findStreams = ({ classID }) =>
+  queryOp(
+    `
+query findStreams($classID: ID!) {
+  findClassByID(id: $classID) {
+    streams {
+      message
+      author {
+        name
+      }
+      comments {
+        author {
+          name
+        }
+      }
+    }
+  }
+}  
+`,
+    { classID }
+  );

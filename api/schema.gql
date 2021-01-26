@@ -23,6 +23,7 @@ type Class {
   section: String
   subject: String
   room: String
+  streams: [Stream]!
 }
 
 """
@@ -33,6 +34,7 @@ type Stream {
   message: String!
   author: User!
   class: Class!
+  comments: [Comment]!
 }
 
 type Comment {
