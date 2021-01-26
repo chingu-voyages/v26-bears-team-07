@@ -19,11 +19,11 @@ type Class {
   invite: ID!
   owner: User! @relation(name: "owner_role")
   teachers: [User!]! @relation(name: "teacher_role")
-  students: [User]! @relation(name: "student_role")
+  students: [User] @relation(name: "student_role")
   section: String
   subject: String
   room: String
-  streams: [Stream]!
+  streams: [Stream]
 }
 
 """
@@ -34,7 +34,7 @@ type Stream {
   message: String!
   author: User!
   class: Class!
-  comments: [Comment]!
+  comments: [Comment]
 }
 
 type Comment {
