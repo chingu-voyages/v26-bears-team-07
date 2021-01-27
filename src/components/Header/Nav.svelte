@@ -6,7 +6,7 @@
   import { isActive, params } from "@roxi/routify";
   import UserMenu from "./UserMenu.svelte";
   import ClassLogo from "./ClassLogo.svelte";
-  export let className = "AppName";
+  export let className = "Bear Class";
   export let role = "student";
   let showNewClass = false;
   let dispatch = createEventDispatcher();
