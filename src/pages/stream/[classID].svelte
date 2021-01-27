@@ -55,6 +55,7 @@
       </Announcement>
       <!-- remove this block  -->
       <!-- this is the end of a default announcement view for preview only -->
+      <!-- announcement name, array of comments, data created -->
       {#each announcementsArray as { name, comments, dateCreated }}
         <Announcement {dateCreated}>
           <p slot="classwork" class="open-sans slot-head">{name}</p>
