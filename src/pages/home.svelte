@@ -16,7 +16,7 @@
 {#if $classes.data}
   <ol>
     {#if allClasses.length}
-      {#each allClasses as { name, _id, invite, isOpen, transitioning }}
+      {#each allClasses as { name, _id, invite, isOpen }}
         <li in:fade={{ duration: 200 }}>
           <a class="top-box" href={$url("./stream/:classID", { classID: _id })}>
             <div class="top">
@@ -25,16 +25,13 @@
               </a>
               <button
                 class="btn-opts"
-                on:click|preventDefault={() =>
-                  !transitioning && (isOpen = !isOpen)}>
+                on:click|preventDefault={() => (isOpen = !isOpen)}>
                 <!-- prettier-ignore -->
                 <svg focusable="false" width="24" height="24" viewBox="0 0 24 24"><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"></path></svg>
                 {#if isOpen}
                   <div
                     use:clickOutside
-                    on:click_outside={() => (isOpen = false)}
-                    on:outrostart={() => (transitioning = true)}
-                    on:outroend={() => (transitioning = false)}
+                    on:click_outside={() => setTimeout(() => (isOpen = false))}
                     transition:fade={{ duration: 150 }}
                     class="btn-opts-menu"
                   >

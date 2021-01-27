@@ -1,12 +1,11 @@
 <script>
-  import { createEventDispatcher, tick } from "svelte";
+  import { createEventDispatcher } from "svelte";
   import TabItem from "./TabItem.svelte";
   import NewClass from "./NewClass.svelte";
   import { hamburger, plus } from "../../utils/image-constants";
   import { isActive, params } from "@roxi/routify";
   import UserMenu from "./UserMenu.svelte";
   import ClassLogo from "./ClassLogo.svelte";
-  import { sleep } from "../../utils/utils";
   export let className = "AppName";
   export let role = "student";
   let showNewClass = false;
