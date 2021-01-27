@@ -23,7 +23,7 @@ type Class {
   section: String
   subject: String
   room: String
-  streams: [Stream]
+  streams: [Stream] @relation
 }
 
 """
@@ -34,7 +34,7 @@ type Stream {
   message: String!
   author: User!
   class: Class!
-  comments: [Comment]
+  comments: [Comment] @relation
 }
 
 type Comment {
