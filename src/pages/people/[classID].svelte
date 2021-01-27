@@ -1,5 +1,6 @@
 <script>
   import { params } from "@roxi/routify";
+  import { slide } from "svelte/transition";
   import { usersByClassID } from "../../stores/query";
   import { add_user, teacher } from "../../utils/image-constants";
 
@@ -23,7 +24,10 @@
       </div>
     </div>
     {#each teachers as { name }}
-      <p class="flex-r"><img src={teacher} alt="students-avatar" /> {name}</p>
+      <p class="flex-r" transition:slide>
+        <img src={teacher} alt="students-avatar" />
+        {name}
+      </p>
     {/each}
   </section>
 
@@ -36,7 +40,7 @@
       </div>
     </div>
     {#each students as { name }}
-      <p>{name}</p>
+      <p transition:slide>{name}</p>
     {/each}
   </section>
 </main>
