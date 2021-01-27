@@ -112,6 +112,7 @@
     width: 100%;
     padding-right: 35px;
     z-index: 5;
+    border-radius: 2rem;
   }
 
   .input-wrapper input:focus {
