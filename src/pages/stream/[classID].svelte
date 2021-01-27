@@ -15,7 +15,20 @@
 
   // get data from DB
   let streamData = findStreams({ classID: $params.classID });
-  $: console.log($streamData);
+  $: if ($streamData.data) {
+    let streams = $streamData.data.result.streams.data;
+    announcementsArray = streams.map(
+      ({
+        message,
+        author: { name: username },
+        comments: { data: comments },
+      }) => ({
+        message,
+        username,
+        comments,
+      })
+    );
+  }
 
   $: if ($classData.data) {
     ({ invite: inviteCode, name: className } = $classData.data.result);
@@ -56,9 +69,9 @@
       <!-- remove this block  -->
       <!-- this is the end of a default announcement view for preview only -->
       <!-- announcement name, array of comments, data created -->
-      {#each announcementsArray as { name, comments, dateCreated }}
-        <Announcement {dateCreated}>
-          <p slot="classwork" class="open-sans slot-head">{name}</p>
+      {#each announcementsArray as { username, dateCreated, message, comments }}
+        <Announcement {dateCreated} {username}>
+          <p slot="classwork" class="open-sans slot-head">{message}</p>
           <div slot="comments" class="comments roboto">
             {#each comments as comment}
               <p>{comment}</p>
