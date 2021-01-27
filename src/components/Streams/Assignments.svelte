@@ -1,5 +1,4 @@
 <script>
-  import { createEventDispatcher } from "svelte";
   import { notes, menu_down } from "../../utils/image-constants";
 
   export let instructor;
@@ -11,7 +10,6 @@
 
 <main class="roboto class-shadow flex-r">
   <section class="work-tag flex-r">
-    <!-- <img class="user" src={teacher} alt="announcer" /> -->
     <div class="flex-c image-wrapper">
       <span />
       <img src={notes} class="user" alt="students" />
