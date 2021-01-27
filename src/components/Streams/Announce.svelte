@@ -1,17 +1,29 @@
 <script>
+  import { params } from "@roxi/routify";
   import { createEventDispatcher } from "svelte";
+  import { authStore } from "../../stores/auth";
+  import { createStream } from "../../stores/query";
 
   //append students list from database
   let options = ["All students"];
   let className;
   let dispatch = createEventDispatcher();
+  let message;
+
+  const [announce] = createStream(); // can get second return val if need to check msg send fetching state
 
   function closeAnnoucement() {
     dispatch("closeAddAnouncement");
   }
 </script>
 
-<form class="flex-c class-shadow" method="POST" action="/stream">
+<form
+  class="flex-c class-shadow"
+  on:submit|preventDefault={() => {
+    announce({ userID: $authStore.id, classID: $params.classID, message });
+    closeAnnoucement();
+  }}
+>
   <h3 class="open-sans">For</h3>
   <div class="flex-r buttons">
     <div>
@@ -28,7 +40,7 @@
     </div>
   </div>
   <div class="textbox">
-    <textarea />
+    <textarea bind:value={message} />
   </div>
   <div class="flex-r form-footer">
     <button class="flex-r attach-button">
@@ -81,7 +93,6 @@
   .buttons {
     margin-bottom: 7px;
   }
-
 
   .textbox {
     top: -9;
