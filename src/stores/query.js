@@ -138,18 +138,22 @@ export const findStreams = ({ classID }) =>
 query findStreams($classID: ID!) {
   result: findClassByID(id: $classID) {
     streams {
-      message
-      author {
-        name
-      }
-      comments {
+      data {
+        message
         author {
           name
+        }
+        comments {
+          data {
+            author {
+              name
+            }
+          }
         }
       }
     }
   }
-}  
+}
 `,
     { classID }
   );
