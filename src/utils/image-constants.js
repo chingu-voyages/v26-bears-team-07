@@ -17,4 +17,5 @@
  export const chevron = '/icons/chevron-right.png';
  export const add_user = '/icons/add-user.png';
  export const menu_down = '/icons/menu-down.png';  
+ export const notes = '/icons/notes.png';
 

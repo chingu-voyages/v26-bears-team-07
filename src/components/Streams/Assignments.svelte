@@ -1,6 +1,6 @@
 <script>
   import { createEventDispatcher } from "svelte";
-  import { teacher, menu_down } from "../../utils/image-constants";
+  import { notes, menu_down } from "../../utils/image-constants";
 
   export let instructor;
   export let title;
@@ -11,7 +11,11 @@
 
 <main class="roboto class-shadow flex-r">
   <section class="work-tag flex-r">
-    <img class="user" src={teacher} alt="announcer" />
+    <!-- <img class="user" src={teacher} alt="announcer" /> -->
+    <div class="flex-c image-wrapper">
+      <span />
+      <img src={notes} class="user" alt="students" />
+    </div>
     <div class="work-details flex-c">
       <span
         >{instructor || "Test teacher"} posted a new assignment: {title ||
@@ -60,5 +64,32 @@
 
   .edit img {
     width: 25px;
+  }
+
+  .image-wrapper {
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border: unset;
+    margin-right: 13px;
+  }
+
+  .image-wrapper span {
+    right: 4px;
+    top: 1px;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: #4285f4;
+    border-radius: 50%;
+    border: unset;
+    z-index: 2;
+  }
+
+  .image-wrapper img {
+    z-index: 3;
+    width: 29px;
   }
 </style>
