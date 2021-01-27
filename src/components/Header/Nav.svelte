@@ -1,11 +1,12 @@
 <script>
-  import { createEventDispatcher } from "svelte";
+  import { createEventDispatcher, tick } from "svelte";
   import TabItem from "./TabItem.svelte";
   import NewClass from "./NewClass.svelte";
   import { hamburger, plus } from "../../utils/image-constants";
   import { isActive, params } from "@roxi/routify";
   import UserMenu from "./UserMenu.svelte";
   import ClassLogo from "./ClassLogo.svelte";
+  import { sleep } from "../../utils/utils";
   export let className = "AppName";
   export let role = "student";
   let showNewClass = false;
@@ -62,7 +63,10 @@
     </li>
   </ul>
 </nav>
-<UserMenu open={userMenuOpen} on:click_outside={() => (userMenuOpen = false)} />
+<UserMenu
+  open={userMenuOpen}
+  on:click_outside={() => setTimeout(() => (userMenuOpen = false))}
+/>
 
 {#if showNewClass}
   <NewClass on:cancel={() => (showNewClass = false)} />
