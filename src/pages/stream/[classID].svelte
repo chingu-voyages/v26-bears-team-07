@@ -6,12 +6,14 @@
   import Announcement from "../../components/Streams/Announcement.svelte";
   import Tasks from "../../components/Streams/Tasks.svelte";
   import { findClass, findStreams } from "../../stores/query";
+  import Assignments from "../../components/Streams/Assignments.svelte";
 
   let classData = findClass({ classID: $params.classID });
   let inviteCode, className;
   let addAnnouncement = false;
   /**All assignments from database*/
   let announcementsArray = [];
+  let assignmentsArray = [];
 
   // get data from DB
   let streamData = findStreams({ classID: $params.classID });
@@ -54,6 +56,15 @@
           />
         {/if}
       </div>
+       <!-- this is a default assignment view for preview only -->
+      <!-- remove this block  -->
+      <Assignments />
+      {#each assignmentsArray as assignment}
+        <Assignments {...assignment} />
+      {/each}
+      <!-- remove this block  -->
+      <!-- this is the end of a default announcement view for preview only -->
+      <!-- announcement name, array of comments, data created -->
       <!-- this is a default announcement view for preview only -->
       <!-- remove this block  -->
       <Announcement>

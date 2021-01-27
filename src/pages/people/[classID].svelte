@@ -5,6 +5,7 @@
   import { add_user, teacher } from "../../utils/image-constants";
   import Modal from "../../components/Reusable/Modal.svelte";
   import People from "../../components/Invites/People.svelte";
+ 
 
   let classData = usersByClassID({ classID: $params.classID });
   let showModal;
