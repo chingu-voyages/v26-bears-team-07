@@ -1,48 +1,75 @@
 <script>
+  import { createEventDispatcher } from "svelte";
+  import { fly } from "svelte/transition";
+  import { plus } from "../utils/image-constants";
   import Button from "./Header/Button.svelte";
   import TextInput from "./Header/TextInput.svelte";
+
+  let title = "";
+  let text = "";
+  let points = "";
+  let due = "";
+  let className = "";
+  let topic = "";
+
+  const dispatch = createEventDispatcher();
+
+  const submit = () => {};
 </script>
 
-<div class="shadow">
+<div transition:fly={{ y: -500 }} class="shadow">
   <header>
-    <div class="exit" on:click>Exit</div>
-    <h3>Assignment</h3>
+    <div class="left-content">
+      <div class="exit" on:click={() => dispatch("exit")}>
+        <img alt="add-class" src={plus} />
+      </div>
+      <h3>Assignment</h3>
+    </div>
+    <Button on:click={submit} type="confirm-filled">Assign</Button>
   </header>
   <div class="container">
     <main>
       <div class="top">
         <label for="assignment">For</label>
-        <select name="class" id="">
-          <option value="">this class</option>
-        </select>
-        <select name="students" id="">
-          <option value="all">All students</option>
-        </select>
+        <div class="top-select">
+          <select name="class" id="">
+            <option value="">this class</option>
+          </select>
+          <select name="students" id="">
+            <option value="all">All students</option>
+          </select>
+        </div>
       </div>
-      <TextInput placeholder="Title" />
-      <TextInput controlType="textarea" minRows={4} maxRows={40} />
+      <TextInput bind:value={title} placeholder="Title" />
+      <TextInput
+        bind:value={text}
+        controlType="textarea"
+        minRows={4}
+        maxRows={40}
+        placeholder="Instructions (optional)"
+      />
     </main>
     <aside>
       <div class="top">
         <label for="assignment">For</label>
-        <select name="class" id="">
-          <option value="">this class</option>
-        </select>
-        <select name="students" id="">
-          <option value="all">All students</option>
-        </select>
+        <div class="top-select">
+          <select bind:value={className} name="class" id="">
+            <option value="">this class</option>
+          </select>
+          <select name="students" id="">
+            <option value="all">All students</option>
+          </select>
+        </div>
       </div>
       <div class="form">
         <label for="points">Points</label>
-        <input type="number" />
+        <input bind:value={points} type="number" />
         <label for="due">Due</label>
-        <input type="date" />
+        <input bind:value={due} type="date" />
         <label for="topic" />
-        <select name="topic">
+        <select bind:value={topic} name="topic">
           <option value="none">No topic</option>
         </select>
-        <label for="rubric">Rubric</label>
-        <Button>Rubric</Button>
       </div>
     </aside>
   </div>
@@ -51,7 +78,20 @@
 <style>
   header {
     display: flex;
+    border-bottom: 1px solid #cdcdcd;
+    padding: 1rem;
+    justify-content: space-between;
   }
+
+  img {
+    transform: rotate(45deg);
+  }
+
+  .left-content {
+    display: flex;
+    align-items: center;
+  }
+
   .shadow {
     position: fixed;
     top: 0;
@@ -65,17 +105,26 @@
   .container {
     display: flex;
     flex-wrap: wrap;
-    padding: 1rem;
-  }
-
-  main {
-    flex-basis: 100%;
+    height: 100%;
   }
 
   aside {
     display: flex;
     flex-direction: column;
+    padding: 1rem;
     flex-basis: 100%;
+    border-top: 1px solid #cdcdcd;
+  }
+
+  main {
+    padding: 1rem;
+    flex-grow: 1;
+    height: 100px;
+  }
+
+  label {
+    margin: 0.5rem 0;
+    width: 100%;
   }
 
   .form {
@@ -85,26 +134,37 @@
   .exit {
     width: fit-content;
     cursor: pointer;
-    color: white;
-    background: red;
   }
 
   aside .top {
     display: none;
   }
 
-  @media (min-width: 640px) {
+  @media (min-width: 800px) {
     aside {
       flex-basis: 150px;
+      border: none;
     }
     main {
-      flex-basis: 75%;
+      border-right: 1px solid #cdcdcd;
+      height: 100%;
     }
     aside .top {
-      display: inherit;
+      display: flex;
+      flex-direction: column;
     }
+    .top-select {
+      display: flex;
+    }
+
     main .top {
       display: none;
+    }
+  }
+
+  @media (min-width: 800px) {
+    aside {
+      flex-basis: 250px;
     }
   }
 </style>

@@ -8,7 +8,10 @@
 </script>
 
 {#if showForm}
-  <NewAssignment on:click={() => (showForm = false)} />
+  <NewAssignment
+    on:submit={() => console.log("submit")}
+    on:exit={() => (showForm = false)}
+  />
 {/if}
 
 <div class="container">
