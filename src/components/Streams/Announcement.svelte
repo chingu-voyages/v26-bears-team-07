@@ -1,8 +1,8 @@
 <script>
   import { teacher, chevron } from "../../utils/image-constants";
 
-  export let username;
-  export let dateCreated;  // date is in format Jan 15
+  export let username = "Testuser";
+  export let dateCreated = "Jan 25"; // date is in format Jan 15
 </script>
 
 <main class="flex-c">
@@ -10,8 +10,8 @@
     <div class="top flex-r">
       <img src={teacher} alt="user" id="user" />
       <div class="flex-c date-tag">
-        <span class="open-sans">{username || "Testuser"}</span>
-        <span class="roboto">{dateCreated ||  "Jan 25"}</span>
+        <span class="open-sans">{username}</span>
+        <span class="roboto">{dateCreated}</span>
       </div>
     </div>
     <slot name="classwork" />
@@ -24,7 +24,12 @@
       <button class="flex-c" type="submit">
         <img src={chevron} alt="enter-comment" id="chevron" />
       </button>
-      <input id="comment-box" name="comment" type="text" placeholder="Add class comment" />
+      <input
+        id="comment-box"
+        name="comment"
+        type="text"
+        placeholder="Add class comment"
+      />
     </div>
   </form>
   <slot name="comments" />
@@ -86,7 +91,7 @@
     flex-grow: 1;
   }
 
-  .input-wrapper button{
+  .input-wrapper button {
     right: 4px;
     top: 1px;
     position: absolute;
