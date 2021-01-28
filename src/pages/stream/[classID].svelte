@@ -70,7 +70,7 @@
       <!-- announcement name, array of comments, data created -->
       <!-- this is a default announcement view for preview only -->
       <!-- remove this block  -->
-      <Announcement>
+      <!-- <Announcement>
         <p slot="classwork" class="open-sans slot-head">
           This is test announcement
         </p>
@@ -79,7 +79,7 @@
           <p>this is test comment 2</p>
           <p>this is test comment 3</p>
         </div>
-      </Announcement>
+      </Announcement> -->
       <!-- remove this block  -->
       <!-- this is the end of a default announcement view for preview only -->
       <!-- announcement name, array of comments, data created -->

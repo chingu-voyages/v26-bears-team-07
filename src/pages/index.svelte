@@ -6,50 +6,96 @@ Sort of like a landing home page. TBD -->
   // metatags.title = 'My Routify app'
   // metatags.description = 'Description coming soon...'
   import { authStore } from "../stores/auth";
+  import { classroom } from "../utils/image-constants";
 </script>
 
 <svelte:head>
   <title>Bear Class</title>
 </svelte:head>
 
-<h1>Great success!</h1>
+<main class="flex-r">
+  <section class="white">
+    <div class="white-wrapper flex-c">
+      <img src={classroom} alt="classroom" />
+    </div>
+  </section>
+  <section class="blue flex-c">
+    <div>
+      <a href="/signin" target="_self">Sign in</a>
+      <a href="/signup" target="_self">Sign up</a>
+    </div>
+  </section>
 
-<p>
-  <strong
-    >Try editing this file (src/routes/index.svelte) to test live reloading.</strong
-  >
-</p>
-
-<a href="/signin" target="_self">Sign in</a>
-<a href="/signup" target="_self">Sign up</a>
-
-{#if $authStore?.secret}
-  <hr />
-  <h2>Gated content</h2>
-  <a href="/home">Home</a>
-{/if}
+  {#if $authStore?.secret}
+    <hr />
+    <h2>Gated content</h2>
+    <a href="/home">Home</a>
+  {/if}
+</main>
 
 <style>
-  h1,
-  p {
-    text-align: center;
-    margin: 0 auto;
+  main {
+    width: 100%;
+    height: 100vh;
   }
 
-  h1 {
-    font-size: 2.8em;
-    text-transform: uppercase;
-    font-weight: 700;
-    margin: 0 0 0.5em 0;
+  .white {
+    flex-basis: 50%;
+    flex-shrink: 1;
+  }
+  .blue {
+    background-color: #335cfd;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
   }
 
-  p {
-    margin: 1em auto;
+  .blue a {
+    border: white solid 1px;
+    padding: 20px;
+    font-weight: normal;
+    transition: font-weight ease-in-out;
   }
 
-  @media (min-width: 480px) {
-    h1 {
-      font-size: 4em;
+  .blue a:hover {
+    font-weight: bolder;
+  }
+
+  .blue a:nth-child(1) {
+    background-color: white;
+    color: #335cfd;
+  }
+
+  .blue a:nth-child(2) {
+    color: white;
+  }
+  .white-wrapper {
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    border: unset;
+  }
+
+  .white-wrapper img {
+    z-index: 3;
+    width: 100%;
+    flex-shrink: 1;
+    opacity: 0.7;
+  }
+
+  @media (max-width: 320px) {
+    main {
+      position: relative;
+    }
+
+    .white {
+      position: absolute;
+    }
+
+    .blue {
+      z-index: 3;
+      background-color: #335bfdab;
     }
   }
 </style>

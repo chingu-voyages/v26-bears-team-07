@@ -5,7 +5,7 @@
 
   export let username = "Testuser";
   export let dateCreated = "Jan 25"; // date is in format Jan 15
-  export let _id;
+  export let _id = undefined;
 
   let message;
   const [createComment] = useCreateComment();

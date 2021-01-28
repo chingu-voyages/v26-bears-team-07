@@ -1,11 +1,11 @@
 <script>
   import { notes, menu_down } from "../../utils/image-constants";
 
-  export let instructor;
-  export let title;
-  export let timeCreated;
+  export let instructor = undefined;
+  export let title = undefined;
+  export let timeCreated = undefined;
   export let timeEdited = undefined;
-  export let edited;
+  export let edited = undefined;
 </script>
 
 <main class="roboto class-shadow flex-r">
