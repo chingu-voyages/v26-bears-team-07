@@ -24,7 +24,7 @@
   <section class="body" />
   <section class="bottom">
     {#if inviteMode === "Teacher"}
-      <span id="message" class="roboto">{message}</span>
+      <span class="message roboto">{message}</span>
     {/if}
     <div class="flex-r">
       <button type="reset" on:click={() => dispatch("closeModal")}
@@ -107,7 +107,7 @@
     background-color: rgba(169, 169, 169, 0.164);
   }
 
-  #message {
+  .message {
     font-size: 13px;
     filter: opacity(50%);
   }
