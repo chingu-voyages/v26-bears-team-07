@@ -92,9 +92,10 @@
 </form>
 
 <style>
-  form{
+  form {
     padding: 40px;
     box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.212);
+    border-radius: 0.5rem;
   }
 
   h1 {
