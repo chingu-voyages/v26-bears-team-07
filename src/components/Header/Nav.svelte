@@ -22,7 +22,9 @@
       <img alt="class-menu" src={hamburger} />
     </button>
     <div class="nav-title">
-      {#if $params.classID}
+      {#if $isActive("/invite")}
+        <span>Join your class</span>
+      {:else if $params?.classID}
         <ClassLogo />
       {:else}
         <span>{className}</span>
@@ -139,6 +141,9 @@
     display: inline-block;
     margin: 10px 15px;
     overflow: hidden;
+  }
+  .nav-title {
+    font-size: 1.4rem;
   }
   @media (max-width: 800px) {
     .center-content {
