@@ -5,36 +5,47 @@
   import { add_user, teacher } from "../../utils/image-constants";
   import Modal from "../../components/Reusable/Modal.svelte";
   import People from "../../components/Invites/People.svelte";
- 
 
   let classData = usersByClassID({ classID: $params.classID });
   let showModal;
   let actioned;
 
+  let invite;
   let teachers = [];
   let students = [];
   $: if ($classData?.data) {
-    teachers = $classData.data.result.teachers.data;
-    students = $classData.data.result.students.data;
+    ({
+      invite,
+      teachers: { data: teachers },
+      students: { data: students },
+    } = $classData.data.result);
   }
 
-  function toggeleModal(mode){
+  function toggeleModal(mode) {
     actioned = mode;
-    showModal = true; 
+    showModal = true;
   }
 </script>
 
-
 {#if showModal}
   <Modal>
-    <People inviteMode={actioned}  on:closeModal={() => showModal = false}/>
+    <People
+      inviteMode={actioned}
+      inviteLink={invite
+        ? `${location.origin}/invite/${$params.classID}?cjc=${invite}`
+        : null}
+      on:closeModal={() => (showModal = false)}
+    />
   </Modal>
 {/if}
 <main>
   <section>
     <div class="flex-r header">
       <h2>Teachers</h2>
-      <div class="flex-c image-wrapper" on:click={() => toggeleModal('Teacher')}>
+      <div
+        class="flex-c image-wrapper"
+        on:click={() => toggeleModal("Teacher")}
+      >
         <span />
         <img src={add_user} alt="students" />
       </div>
@@ -50,7 +61,10 @@
   <section>
     <div class="flex-r header">
       <h2>Students</h2>
-      <div class="flex-c image-wrapper" on:click={() => toggeleModal('Student')} >
+      <div
+        class="flex-c image-wrapper"
+        on:click={() => toggeleModal("Student")}
+      >
         <span />
         <img src={add_user} alt="instructors" />
       </div>
