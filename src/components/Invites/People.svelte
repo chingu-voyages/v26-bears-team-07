@@ -1,5 +1,6 @@
 <script>
   import { createEventDispatcher } from "svelte";
+  import fadeScale from "../../utils/fadeScale";
   export let inviteMode;
   export let inviteLink = undefined;
 
@@ -9,7 +10,7 @@
   $: header = inviteMode + "s";
 </script>
 
-<form>
+<form transition:fadeScale>
   <section class="top">
     <h2>Invite {header}</h2>
     {#if inviteMode === "Student"}
