@@ -6,7 +6,7 @@ Sort of like a landing home page. TBD -->
   // metatags.title = 'My Routify app'
   // metatags.description = 'Description coming soon...'
   import { authStore } from "../stores/auth";
-  import { classroom } from "../utils/image-constants";
+  import { classroom, classroom_blue } from "../utils/image-constants";
 </script>
 
 <svelte:head>
@@ -16,13 +16,22 @@ Sort of like a landing home page. TBD -->
 <main class="flex-r">
   <section class="white">
     <div class="white-wrapper flex-c">
-      <img src={classroom} alt="classroom" />
+      <img src={classroom_blue} alt="classroom" />
     </div>
   </section>
   <section class="blue flex-c">
-    <div>
-      <a href="/signin" target="_self">Sign in</a>
-      <a href="/signup" target="_self">Sign up</a>
+    <div class="blue-top flex-r">
+      <a href="/signin" target="_self" class="link">Sign in</a>
+      <a href="/signup" target="_self" class="link">Sign up</a>
+    </div>
+    <div id="footer">
+      <p>
+        ©2021 <a href="https://chingu.io" target="_blank">chingu</a>
+        <a
+          href="https://github.com/chingu-voyages/v26-bears-team-07"
+          target="_blank">Bears-Team-07</a
+        >
+      </p>
     </div>
   </section>
 
@@ -50,29 +59,30 @@ Sort of like a landing home page. TBD -->
     flex-grow: 1;
   }
 
-  .blue a {
+  .blue .link:nth-child(1),
+  .blue .link:nth-child(2) {
     border: white solid 1px;
     padding: 20px;
     font-weight: normal;
     transition: font-weight ease-in-out;
   }
 
-  .blue a:hover {
+  .blue .link:hover {
     font-weight: bolder;
   }
 
-  .blue a:nth-child(1) {
+  .blue .link:nth-child(1) {
     background-color: white;
     color: #335cfd;
+    margin-right: 5px;
   }
 
-  .blue a:nth-child(2) {
+  .blue .link:nth-child(2) {
     color: white;
   }
   .white-wrapper {
     position: relative;
-    justify-content: center;
-    align-items: center;
+    justify-content: space-between;
     height: 100vh;
     border: unset;
   }
@@ -82,6 +92,20 @@ Sort of like a landing home page. TBD -->
     width: 100%;
     flex-shrink: 1;
     opacity: 0.7;
+  }
+
+  .blue-top {
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+  }
+  #footer {
+    color: white;
+    font-size: 12px;
+  }
+
+  #footer a {
+    text-decoration: underline;
   }
 
   @media (max-width: 320px) {

@@ -19,3 +19,4 @@
  export const menu_down = '/icons/menu-down.png';  
  export const notes = '/icons/notes.png';
  export const classroom = '/images/class.svg';
+ export const classroom_blue = '/images/classblue.svg';
