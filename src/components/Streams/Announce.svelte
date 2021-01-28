@@ -27,12 +27,12 @@
   <h3 class="open-sans">For</h3>
   <div class="flex-r buttons">
     <div>
-      <select name="test" id="test" class="class-options" disabled>
+      <select name="test" class="class-options" disabled>
         <option value={className || "Test"}>{className || "Test"}</option>
       </select>
     </div>
     <div>
-      <select name="students" id="students" class="students-options">
+      <select name="students" class="students-options">
         {#each options as option}
           <option value={option}>{option}</option>
         {/each}

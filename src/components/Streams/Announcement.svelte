@@ -14,7 +14,7 @@
 <main class="flex-c">
   <section class="flex-c">
     <div class="top flex-r">
-      <img src={teacher} alt="user" id="user" />
+      <img src={teacher} alt="user" class="user" />
       <div class="flex-c date-tag">
         <span class="open-sans">{username}</span>
         <span class="roboto">{dateCreated}</span>
@@ -29,7 +29,7 @@
     }}
   >
     <div>
-      <img src={teacher} alt="user-comment" id="user-comment" />
+      <img src={teacher} alt="user-comment" class="user-comment" />
     </div>
     <div class="input-wrapper">
       <button class="flex-c" type="submit">
@@ -59,7 +59,7 @@
     padding: 10px;
   }
 
-  #user {
+  .user {
     width: 45px;
     margin-right: 10px;
   }
@@ -94,7 +94,7 @@
     margin-right: 10px;
   }
 
-  #user-comment {
+  .user-comment {
     width: 40px;
   }
 
