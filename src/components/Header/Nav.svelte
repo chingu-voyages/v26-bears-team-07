@@ -58,7 +58,9 @@
       <img alt="add-class" src={plus} />
     </li>
     <li class="user" on:click={() => (userMenuOpen = !userMenuOpen)}>
-      <span class="avatar" />
+      <span class="avatar"
+        ><img src="https://placekitten.com/50/50" alt="kitten avatar" /></span
+      >
     </li>
   </ul>
 </nav>
@@ -136,6 +138,7 @@
     border-radius: 50%;
     display: inline-block;
     margin: 10px 15px;
+    overflow: hidden;
   }
   @media (max-width: 800px) {
     .center-content {
