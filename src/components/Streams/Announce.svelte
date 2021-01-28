@@ -2,7 +2,7 @@
   import { params } from "@roxi/routify";
   import { createEventDispatcher } from "svelte";
   import { authStore } from "../../stores/auth";
-  import { createStream } from "../../stores/query";
+  import { useCreateStream } from "../../stores/query";
 
   //append students list from database
   let options = ["All students"];
@@ -10,7 +10,7 @@
   let dispatch = createEventDispatcher();
   let message;
 
-  const [announce] = createStream(); // can get second return val if need to check msg send fetching state
+  const [announce] = useCreateStream(); // can get second return val if need to check msg send fetching state
 
   function closeAnnoucement() {
     dispatch("closeAddAnouncement");
