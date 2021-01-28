@@ -24,10 +24,12 @@
         message,
         author: { name: username },
         comments: { data: comments },
+        _id,
       }) => ({
         message,
         username,
-        comments,
+        comments: comments.map((e) => e.message),
+        _id,
       })
     );
   }
@@ -56,7 +58,7 @@
           />
         {/if}
       </div>
-       <!-- this is a default assignment view for preview only -->
+      <!-- this is a default assignment view for preview only -->
       <!-- remove this block  -->
       <Assignments />
       {#each assignmentsArray as assignment}
@@ -80,8 +82,8 @@
       <!-- remove this block  -->
       <!-- this is the end of a default announcement view for preview only -->
       <!-- announcement name, array of comments, data created -->
-      {#each announcementsArray as { username, dateCreated, message, comments }}
-        <Announcement {dateCreated} {username}>
+      {#each announcementsArray as { username, dateCreated, message, comments, _id }}
+        <Announcement {dateCreated} {username} {_id}>
           <p slot="classwork" class="open-sans slot-head">{message}</p>
           <div slot="comments" class="comments roboto">
             {#each comments as comment}

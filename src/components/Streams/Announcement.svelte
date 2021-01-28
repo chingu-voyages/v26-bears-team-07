@@ -1,8 +1,14 @@
 <script>
+  import { authStore } from "../../stores/auth";
+  import { useCreateComment } from "../../stores/query";
   import { teacher, chevron } from "../../utils/image-constants";
 
   export let username = "Testuser";
   export let dateCreated = "Jan 25"; // date is in format Jan 15
+  export let _id;
+
+  let message;
+  const [createComment] = useCreateComment();
 </script>
 
 <main class="flex-c">
@@ -16,7 +22,12 @@
     </div>
     <slot name="classwork" />
   </section>
-  <form class="bottom flex-r" action="/stream" method="POST">
+  <form
+    class="bottom flex-r"
+    on:submit|preventDefault={() => {
+      createComment({ userID: $authStore.id, streamID: _id, message });
+    }}
+  >
     <div>
       <img src={teacher} alt="user-comment" id="user-comment" />
     </div>
@@ -25,6 +36,7 @@
         <img src={chevron} alt="enter-comment" id="chevron" />
       </button>
       <input
+        bind:value={message}
         id="comment-box"
         name="comment"
         type="text"
