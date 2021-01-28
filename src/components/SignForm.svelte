@@ -8,9 +8,7 @@
     confirm = "";
   let title = !up ? "Sign in" : "Create your Account";
 
-  if ($authStore) {
-    location.pathname = "/home";
-  }
+  if ($authStore) location.pathname = "/home";
 
   async function handleSubmit() {
     if (up && password != confirm) return;

@@ -28,7 +28,10 @@
       }) => ({
         message,
         username,
-        comments: comments.map((e) => e.message),
+        comments: comments.map(({ message, author: { name } }) => ({
+          name,
+          message,
+        })),
         _id,
       })
     );
@@ -84,8 +87,9 @@
         <Announcement {dateCreated} {username} {_id}>
           <p slot="classwork" class="open-sans slot-head">{message}</p>
           <div slot="comments" class="comments roboto">
-            {#each comments as comment}
-              <p>{comment}</p>
+            {#each comments as { name: username, message }}
+              <p>{username}</p>
+              <p>{message}</p>
             {/each}
           </div>
         </Announcement>
