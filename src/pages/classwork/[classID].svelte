@@ -2,6 +2,7 @@
   import Button from "../../components/Header/Button.svelte";
   import { params } from "@roxi/routify";
   import NewAssignment from "../../components/NewAssignment.svelte";
+  import AssignmentCard from "../../components/AssignmentCard.svelte";
 
   console.log($params.classID);
   let showForm = false;
@@ -37,22 +38,7 @@
       >Create</Button
     >
     <div class="content">
-      <div class="assignment">
-        <div class="icon" />
-        Assignment 1
-      </div>
-      <div class="assignment">
-        <div class="icon" />
-        Assignment 2
-      </div>
-      <div class="assignment">
-        <div class="icon" />
-        Assignment 3
-      </div>
-      <div class="assignment">
-        <div class="icon" />
-        Assignment 4
-      </div>
+      <AssignmentCard />
     </div>
   </main>
 </div>
@@ -84,26 +70,6 @@
 
   .content {
     padding: 1rem 0;
-  }
-
-  .assignment {
-    height: 3.75rem;
-    display: flex;
-    align-items: center;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-
-  .icon {
-    width: 36px;
-    height: 36px;
-    background-color: #ccc;
-    margin: 0 1rem;
-    border-radius: 50%;
-  }
-
-  .assignment:hover {
-    box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.212);
   }
 
   @media (max-width: 960px) {

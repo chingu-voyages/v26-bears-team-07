@@ -4,9 +4,8 @@
   </section>
 </main>
 
-
 <style>
-  .modal-container{
+  .modal-container {
     position: fixed;
     z-index: 7;
     left: 0;
