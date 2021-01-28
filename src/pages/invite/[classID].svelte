@@ -4,6 +4,10 @@
   import { authStore } from "../../stores/auth";
   import { usersByClassID, useJoinClass } from "../../stores/query";
 
+  // redirect to login with params if not logged in
+  if (!$authStore?.id)
+    location.href = `${location.origin}/signin?classID=${$params?.classID}&cjc=${$params?.cjc}`;
+
   const { classID, cjc } = $params;
   let classData = usersByClassID({ classID: classID });
 

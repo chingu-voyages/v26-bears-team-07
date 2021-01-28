@@ -1,6 +1,6 @@
 <script>
   import { authStore } from "../stores/auth";
-  import { focus } from "@roxi/routify";
+  import { focus, params } from "@roxi/routify";
 
   export let up = false;
   let name = "",
@@ -31,8 +31,10 @@
 
       localStorage.setItem("auth", JSON.stringify(authData));
       $authStore = authData;
-      // TODO: Figure out if you can use GOTO from routify instead of native browser redirect API
-      location.pathname = "/home";
+
+      if ($params?.cjc)
+        location.href = `${location.origin}/invite/${$params.classID}?cjc=${$params.cjc}`;
+      else location.pathname = "/home";
     } else {
       // TODO: Client-side error handling if password/user incorrect
     }
@@ -84,8 +86,18 @@
     />
   {/if}
   <div class="btn-group">
-    <a href={!up ? "/signup" : "/signin"}
-      >{!up ? "Create account" : "Sign in instead"}</a
+    <a
+      href={!up
+        ? `/signup${
+            $params?.cjc
+              ? `?classID=${$params?.classID}&cjc=${$params.cjc}`
+              : ""
+          }`
+        : `/signin${
+            $params?.cjc
+              ? `?classID=${$params?.classID}&cjc=${$params.cjc}`
+              : ""
+          }`}>{!up ? "Create account" : "Sign in instead"}</a
     >
     <button>{!up ? "Sign In" : "Sign Up"}</button>
   </div>
