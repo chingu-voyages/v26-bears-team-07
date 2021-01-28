@@ -32,10 +32,10 @@
       <div class="top">
         <label for="assignment">For</label>
         <div class="top-select">
-          <select name="class" id="">
+          <select name="class">
             <option value="">this class</option>
           </select>
-          <select name="students" id="">
+          <select name="students">
             <option value="all">All students</option>
           </select>
         </div>
@@ -53,10 +53,10 @@
       <div class="top">
         <label for="assignment">For</label>
         <div class="top-select">
-          <select bind:value={className} name="class" id="">
+          <select bind:value={className} name="class">
             <option value="">this class</option>
           </select>
-          <select name="students" id="">
+          <select name="students">
             <option value="all">All students</option>
           </select>
         </div>
