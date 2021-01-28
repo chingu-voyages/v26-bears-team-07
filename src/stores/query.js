@@ -205,3 +205,18 @@ mutation CreateComment($userID: ID!, $streamID: ID!, $message: String!) {
   }
 }
 `);
+
+export const useAddTeacher = () =>
+  useMutation(`
+mutation AddTeacher($classID: ID!, $userID: ID!) {
+  partialUpdateClass(
+    id: $classID
+    data: {
+      teachers: { connect: [$userID] }
+      students: { disconnect: [$userID] }
+    }
+  ) {
+    _id
+  }
+}
+`);
