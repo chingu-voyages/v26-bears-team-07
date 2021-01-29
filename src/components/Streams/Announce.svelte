@@ -3,6 +3,7 @@
   import { createEventDispatcher } from "svelte";
   import { authStore } from "../../stores/auth";
   import { useCreateStream, usersByClassID } from "../../stores/query";
+  import StudentSelect from "./StudentSelect.svelte";
 
   let className;
   let dispatch = createEventDispatcher();
@@ -15,10 +16,9 @@
   }
 
   //append students list from database
-  let options = [{ name: "All Students" }];
   const users = usersByClassID({ classID: $params.classID });
-  $: if ($users.data)
-    options = [{ name: "All Students" }, ...$users.data.result.students.data];
+  let options = [];
+  $: if ($users.data) options = [...$users.data.result.students.data];
 </script>
 
 <form
@@ -36,11 +36,7 @@
       </select>
     </div>
     <div>
-      <select name="students" class="students-options">
-        {#each options as { name, _id }}
-          <option value={name}>{name}</option>
-        {/each}
-      </select>
+      <StudentSelect optionsData={options} />
     </div>
   </div>
   <div class="textbox">
@@ -77,19 +73,11 @@
     margin-right: 7px;
   }
 
-  .students-options {
-    padding: 10px 22px;
-    border: unset;
-    color: rgba(0, 0, 0, 0.678);
-    border-radius: 3px;
-  }
-
-  .students-options:focus,
   .class-options:focus {
     outline: none;
+    background-color: rgba(169, 169, 169, 0.164);
   }
 
-  .students-options:hover,
   .class-options:hover {
     background-color: rgba(169, 169, 169, 0.164);
   }
