@@ -25,14 +25,17 @@
         author: { name: username },
         comments: { data: comments },
         _id,
+        _ts,
       }) => ({
         message,
         username,
-        comments: comments.map(({ message, author: { name } }) => ({
+        comments: comments.map(({ message, author: { name }, _ts }) => ({
           name,
           message,
+          _ts,
         })),
         _id,
+        _ts,
       })
     );
   }
@@ -83,11 +86,15 @@
       <!-- remove this block  -->
       <!-- this is the end of a default announcement view for preview only -->
       <!-- announcement name, array of comments, data created -->
-      {#each announcementsArray as { username, dateCreated, message, comments, _id }}
-        <Announcement {dateCreated} {username} {_id}>
+      {#each announcementsArray as { username, _ts, message, comments, _id }}
+        <Announcement
+          dateCreated={new Date(_ts / 1000).toDateString().slice(4, 10)}
+          {username}
+          {_id}
+        >
           <p slot="classwork" class="open-sans slot-head">{message}</p>
           <div slot="comments" class="comments roboto">
-            {#each comments as { name: username, message }}
+            {#each comments as { name: username, message, _ts }}
               <p>{username}</p>
               <p>{message}</p>
             {/each}
