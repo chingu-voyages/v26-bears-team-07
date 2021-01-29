@@ -145,6 +145,7 @@ query findStreams($classID: ID!) {
           _id
           name
         }
+        _ts
         comments {
           data {
             _id
@@ -152,6 +153,7 @@ query findStreams($classID: ID!) {
               name
             }
             message
+            _ts
           }
         }
       }
@@ -174,6 +176,7 @@ mutation CreateStream($userID: ID!, $classID: ID!, $message: String!) {
   ) {
     _id
     message
+    _ts
     author {
       name
       _id
@@ -194,6 +197,7 @@ mutation CreateComment($userID: ID!, $streamID: ID!, $message: String!) {
   ) {
     _id
     message
+    _ts
     stream {
       _id
       message
