@@ -6,6 +6,7 @@
  -->
 <script>
   import { fly, fade } from "svelte/transition";
+  import { clickOutside } from "../../utils/utils";
 
   export let disabled = false;
   export let optionsData = [];
@@ -30,7 +31,6 @@
     tickAll(false);
   }
 
-  const handleOpen = () => (open = !open);
   function tickAll(bool = true) {
     tickAllStudents = bool;
   }
@@ -42,6 +42,11 @@
     allOptionIDs = options.map(({ _id }) => _id);
     selected = [...allOptionIDs];
   }
+  function handleOpen() {
+    open = !open;
+    skipCount = 0;
+  }
+  let skipCount = 0;
 </script>
 
 <select
@@ -65,6 +70,14 @@
     class="box"
     in:fly={{ y: -80, duration: 300 }}
     out:fade={{ duration: 200 }}
+    use:clickOutside
+    on:click_outside={() => {
+      // skip one because bug where event happens even though it just opened
+      if (skipCount > 0) {
+        open = false;
+      }
+      skipCount++;
+    }}
   >
     <ul class="menu">
       <li>
