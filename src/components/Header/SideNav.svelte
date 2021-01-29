@@ -15,7 +15,7 @@
   let deadLink = "https/dead";
   let tabOptions = [
     { icon: classes, name: "Classes", link: "/home" },
-    { icon: calendar, name: "Calendar", link: deadLink },
+    { icon: calendar, name: "Calendar", link: "/calendar" },
     { icon: review, name: "To review", link: deadLink },
     { icon: archive, name: "Archived classes", link: "/home" },
     { icon: settings, name: "Settings", link: deadLink },

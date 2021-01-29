@@ -72,5 +72,8 @@
     "blacklist": [
       "/example/modal/basic/4"
     ]
+  },
+  "dependencies": {
+    "dayjs": "^1.10.4"
   }
 }
