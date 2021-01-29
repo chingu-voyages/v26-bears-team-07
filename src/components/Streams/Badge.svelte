@@ -49,12 +49,12 @@
     align-items: center;
   }
   .row-2 span:first-child {
-    font-size: 15px;
+    font-size: 0.8rem;
     font-weight: 600;
     margin: 7px;
   }
   .row-2 span:nth-child(2) {
-    font-size: 10px;
+    font-size: 0.8rem;
     margin-right: 5px;
   }
 
