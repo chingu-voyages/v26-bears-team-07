@@ -30,7 +30,9 @@
         Posted {timeCreated || "10:08PM"}
         {#if due} (Due {due}) {/if}
       </span>
-      <img class="user" src={menu_down} alt="menu" />
+      <span class="menu">
+        <img class="user" src={menu_down} alt="menu" />
+      </span>
     </section>
   </main>
   {#if showDetail}
@@ -160,6 +162,11 @@
     display: none;
   }
 
+  .menu {
+    display: none;
+    border-radius: 50%;
+  }
+
   .wide-text {
     border-bottom: 1px solid #cdcdcd;
     padding: 1rem 1rem;
@@ -209,6 +216,14 @@
 
   .assignment-card:hover {
     box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.212);
+  }
+
+  main:hover .menu {
+    display: inherit;
+  }
+
+  .menu:hover {
+    background-color: #eee;
   }
 
   @media (min-width: 640px) {
