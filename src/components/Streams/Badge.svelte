@@ -1,6 +1,7 @@
 <script>
   import { invite } from "../../utils/image-constants";
   import { fade } from "svelte/transition";
+  import { params } from "@roxi/routify";
 
   export let inviteCode = "";
   export let className = "";
@@ -12,7 +13,16 @@
     <div in:fade class="flex-r row-2">
       <span class="roboto">Class Code</span>
       <span class="roboto">{inviteCode}</span>
-      <img src={invite} alt="invite" />
+      <img
+        src={invite}
+        alt="invite"
+        on:click={() => {
+          navigator.clipboard.writeText(
+            `${location.origin}/invite/${$params.classID}?cjc=${inviteCode}`
+          );
+          alert("Link copied!");
+        }}
+      />
     </div>
   {/if}
 </div>
@@ -50,5 +60,6 @@
 
   img {
     margin-bottom: 2px;
+    cursor: pointer;
   }
 </style>
