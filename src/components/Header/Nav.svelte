@@ -39,8 +39,7 @@
         >
         <TabItem
           active={$isActive("/classwork")}
-          href="/classwork/{$params.classID}"
-        >Classwork</TabItem
+          href="/classwork/{$params.classID}">Classwork</TabItem
         >
         <TabItem active={$isActive("/people")} href="/people/{$params.classID}"
           >People</TabItem
@@ -48,8 +47,7 @@
         {#if role === "teacher"}
           <TabItem
             active={$isActive("/grades")}
-            href="/grades/{$params.classID}"
-          >Grades</TabItem
+            href="/grades/{$params.classID}">Grades</TabItem
           >
         {/if}
       </ul>
@@ -60,8 +58,8 @@
       <img alt="add-class" src={plus} />
     </li>
     <li class="user" on:click={() => (userMenuOpen = !userMenuOpen)}>
-      <span class="avatar"
-        ><img src="https://placekitten.com/50/50" alt="kitten avatar" /></span
+      <button class="avatar"
+        ><img src="https://placekitten.com/50/50" alt="kitten avatar" /></button
       >
     </li>
   </ul>
