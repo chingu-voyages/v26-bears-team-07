@@ -40,7 +40,7 @@
         id="comment-box"
         name="comment"
         type="text"
-        placeholder="Add class comment"
+        placeholder="Add class comment..."
       />
     </div>
   </form>
