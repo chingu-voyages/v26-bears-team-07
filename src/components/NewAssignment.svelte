@@ -11,6 +11,7 @@
   let due = "";
   let className = "";
   let topic = "";
+  let type = "essay";
 
   const dispatch = createEventDispatcher();
 
@@ -41,6 +42,11 @@
         </div>
       </div>
       <TextInput bind:value={title} placeholder="Title" />
+      <select bind:value={type} name="type" class="type">
+        <option value="essay">Essay</option>
+        <option value="short">Short Answer</option>
+        <option value="multiple">Multiple Choice</option>
+      </select>
       <TextInput
         bind:value={text}
         controlType="textarea"
@@ -48,6 +54,11 @@
         maxRows={40}
         placeholder="Instructions (optional)"
       />
+      {#if type === "multiple"}
+        <ul>
+          <li><TextInput /></li>
+        </ul>
+      {/if}
     </main>
     <aside>
       <div class="top">
@@ -119,11 +130,15 @@
   main {
     padding: 1rem;
     flex-grow: 1;
-    height: 100px;
+    height: 50%;
   }
 
   label {
     margin: 0.5rem 0;
+    width: 100%;
+  }
+
+  .type {
     width: 100%;
   }
 

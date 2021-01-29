@@ -4,10 +4,15 @@
   import NewAssignment from "../../components/NewAssignment.svelte";
   import AssignmentCard from "../../components/AssignmentCard.svelte";
 
+  // TODO: fetch class data
   console.log($params.classID);
   let showForm = false;
 </script>
 
+<!-- TODO: set up topics ordering -->
+<!-- TODO: allow draging for reordering -->
+
+<!-- TODO: only include for teachers -->
 {#if showForm}
   <NewAssignment
     on:submit={() => console.log("submit")}
@@ -34,6 +39,7 @@
       <option value="topic 4">topic 4</option>
       <option value="topic 5">topic 5</option>
     </select>
+    <!-- TODO: only show for teachers -->
     <Button on:click={() => (showForm = true)} type="confirm-filled"
       >Create</Button
     >

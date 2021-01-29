@@ -1,6 +1,6 @@
 <script>
   import { fade } from "svelte/transition";
-  import { notes, menu_down } from "../utils/image-constants";
+  import { notes, menu_down, plus } from "../utils/image-constants";
   import Button from "./Header/Button.svelte";
   import Modal from "./Reusable/Modal.svelte";
 
@@ -22,6 +22,7 @@
         <img src={notes} class="user" alt="students" />
       </div>
       <div class="work-details flex-c">
+        <!-- TODO: limit title length -->
         <span>{title}</span>
       </div>
     </section>
@@ -52,6 +53,7 @@
         {/if}
       </section>
       <section class="wide-footer">
+        <!-- TODO: link to assignment route -->
         <Button type="confirm">View Assignment</Button>
       </section>
     </div>
@@ -59,11 +61,7 @@
 </div>
 
 {#if showDetail}
-  <div
-    transition:fade
-    on:click={() => (showDetail = false)}
-    class="modal-container"
-  >
+  <div transition:fade class="modal-container">
     <Modal>
       <div class="detail-modal">
         <section class="work-tag flex-r">
@@ -74,6 +72,9 @@
           <div class="work-details flex-c">
             <span>{title}</span>
           </div>
+          <span on:click={() => (showDetail = false)} class="modal-exit">
+            <img src={plus} alt="exit" />
+          </span>
         </section>
         <section class="modal-text">
           <span>
@@ -83,6 +84,7 @@
           <p>{text}</p>
         </section>
         <section class="modal-footer">
+          <!-- TODO: link to assignment route -->
           <Button type="confirm">View Assignment</Button>
         </section>
       </div>
@@ -195,9 +197,25 @@
     border-bottom: 1px solid #cdcdcd;
   }
 
+  .modal-exit {
+    margin-left: auto;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  .modal-exit img {
+    transform: rotate(45deg);
+    margin: auto;
+  }
+
   .modal-text {
     border-bottom: 1px solid #cdcdcd;
+    padding: 1rem;
     height: 72%;
+  }
+
+  .modal-text span {
+    font-size: 10px;
   }
 
   .modal-footer {
@@ -223,6 +241,10 @@
   }
 
   .menu:hover {
+    background-color: #eee;
+  }
+
+  .modal-exit:hover {
     background-color: #eee;
   }
 
