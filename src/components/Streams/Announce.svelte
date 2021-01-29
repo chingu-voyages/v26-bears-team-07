@@ -2,10 +2,8 @@
   import { params } from "@roxi/routify";
   import { createEventDispatcher } from "svelte";
   import { authStore } from "../../stores/auth";
-  import { useCreateStream } from "../../stores/query";
+  import { useCreateStream, usersByClassID } from "../../stores/query";
 
-  //append students list from database
-  let options = ["All students"];
   let className;
   let dispatch = createEventDispatcher();
   let message;
@@ -15,6 +13,12 @@
   function closeAnnoucement() {
     dispatch("closeAddAnouncement");
   }
+
+  //append students list from database
+  let options = [{ name: "All Students" }];
+  const users = usersByClassID({ classID: $params.classID });
+  $: if ($users.data)
+    options = [{ name: "All Students" }, ...$users.data.result.students.data];
 </script>
 
 <form
@@ -33,8 +37,8 @@
     </div>
     <div>
       <select name="students" class="students-options">
-        {#each options as option}
-          <option value={option}>{option}</option>
+        {#each options as { name, _id }}
+          <option value={name}>{name}</option>
         {/each}
       </select>
     </div>

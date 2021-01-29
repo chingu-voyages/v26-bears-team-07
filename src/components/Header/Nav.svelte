@@ -18,7 +18,12 @@
 
 <nav class="global-nav flex-r">
   <div class="left-content">
-    <button class="class-burger" tabindex="0" on:click={openSideNav}>
+    <button
+      class="class-burger"
+      aria-label="Main Menu"
+      tabindex="0"
+      on:click={openSideNav}
+    >
       <img alt="class-menu" src={hamburger} />
     </button>
     <div class="nav-title">
@@ -39,8 +44,7 @@
         >
         <TabItem
           active={$isActive("/classwork")}
-          href="/classwork/{$params.classID}"
-        >Classwork</TabItem
+          href="/classwork/{$params.classID}">Classwork</TabItem
         >
         <TabItem active={$isActive("/people")} href="/people/{$params.classID}"
           >People</TabItem
@@ -48,8 +52,7 @@
         {#if role === "teacher"}
           <TabItem
             active={$isActive("/grades")}
-            href="/grades/{$params.classID}"
-          >Grades</TabItem
+            href="/grades/{$params.classID}">Grades</TabItem
           >
         {/if}
       </ul>
@@ -60,8 +63,8 @@
       <img alt="add-class" src={plus} />
     </li>
     <li class="user" on:click={() => (userMenuOpen = !userMenuOpen)}>
-      <span class="avatar"
-        ><img src="https://placekitten.com/50/50" alt="kitten avatar" /></span
+      <button class="avatar"
+        ><img src="https://placekitten.com/50/50" alt="kitten avatar" /></button
       >
     </li>
   </ul>
@@ -105,14 +108,22 @@
     height: 100%;
     padding: 5px;
     text-decoration: none;
-    margin: 5px 15px 5px 5px;
+    margin: 8px 10px 5px 10px;
+    padding: 10px;
     border: none;
     display: grid;
     place-items: center;
+    border-radius: 50%;
+  }
+  .class-burger:focus {
+    background-color: rgba(82, 86, 90, 0.039);
+  }
+  .class-burger:hover {
+    background-color: rgba(95, 99, 104, 0.039);
   }
   .class-burger img {
     margin: 0;
-    width: 30px;
+    width: 24px;
   }
   .center-content {
     height: 68px;
@@ -144,6 +155,7 @@
   }
   .nav-title {
     font-size: 1.4rem;
+    line-height: 1;
   }
   @media (max-width: 800px) {
     .center-content {
