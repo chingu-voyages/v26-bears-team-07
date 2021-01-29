@@ -10,8 +10,8 @@
   let weeks;
   let today;
   let assignmentArray = [
-    { timeCreated: "10:08PM", title: "Data works", dateCreated: "30" },
-    { timeCreated: "11:08PM", title: "Data works 2", dateCreated: "30" },
+    { timeCreated: "10:08PM", title: "Data works", dateCreated: "Fri 29 January 2021" },
+    { timeCreated: "11:08PM", title: "Data works 2", dateCreated: "Fri 29 January 2021" },
   ];
   let classes = ["AllClasses"];
 
@@ -79,7 +79,7 @@
     {#each presentWeek as day, i}
       <div class={i != 6 ? "border-edge flex-c bottom" : "flex-c bottom"}>
         {#each assignmentArray as { timeCreated, title, dateCreated }}
-          {#if dateCreated == day[1]}
+          {#if dateCreated === day.join(" ")}
             <span class="inserted">{timeCreated}{title}</span>
           {/if}
         {/each}
