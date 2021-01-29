@@ -1,3 +1,5 @@
+import dayjs from "dayjs";
+
 /** Dispatch event on click outside of node */
 export function clickOutside(node) {
   const handleClick = (event) => {
@@ -30,4 +32,13 @@ export function sleep(ms) {
   return new Promise((fulfil) => {
     setTimeout(fulfil, ms);
   });
+}
+
+/** */
+export function formatWeekDisplay(presentWeek) {
+  let weeks =
+    dayjs(presentWeek[0].join(" ")).format("MMMM D") +
+    " - " +
+    dayjs(presentWeek[6].join(" ")).format("MMMM,D YYYY");
+  return weeks;
 }
