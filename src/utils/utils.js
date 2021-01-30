@@ -44,14 +44,18 @@ export function formatWeekDisplay(presentWeek) {
 }
 
 /**Calculate present week with dayjs */
-export function  getPresenWeek(thisWeek, command){
-  let action = command;
-  return thisWeek.map((day, i) =>
+export function generatePresentWeek(operation, format, thisWeek) {
+  if (operation === "add") {
+    return thisWeek.map(day =>
+      dayjs(day.join(" ")).add(7, "days").format(format).split(" ")
+    );
+  }
+  if (operation === "subtract") {
+    return thisWeek.map(day =>
       dayjs(day.join(" "))
-        .action(7, "days")
-        .format("ddd D MMMM YYYY")
+        .subtract(7, "days")
+        .format(format)
         .split(" ")
     );
+  }
 }
-
-
