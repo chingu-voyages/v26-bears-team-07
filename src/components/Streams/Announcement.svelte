@@ -40,6 +40,7 @@
         id="comment-box"
         name="comment"
         type="text"
+        autocomplete="off"
         placeholder="Add class comment..."
       />
     </div>
