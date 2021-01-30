@@ -17,14 +17,11 @@
 
   onMount(() => {
     startOfWeek = dayjs().startOf("week");
-    endOfWeek = dayjs().endOf("week");
-    weeks =
-      startOfWeek.format("MMMM D") + " - " + endOfWeek.format("MMMM,D YYYY");
     today = dayjs().format("ddd D MMMM YYYY");
     presentWeek = new Array(7)
       .fill(startOfWeek)
       .map((day, i) => day.add(i, "day").format("ddd D MMMM YYYY").split(" "));
-    console.log(presentWeek);
+    weeks = formatWeekDisplay(presentWeek); 
   });
 
   const generateNextWeek = (present) => {
@@ -138,7 +135,7 @@
     background-color: rgba(0, 0, 0, 0.048);
   }
   #weekrange img {
-    width: 30px;
+    width: 25px;
     cursor: pointer;
   }
   #classworks {
@@ -149,7 +146,6 @@
   }
 
   div {
-    font-size: 19px;
     text-align: center;
   }
 
@@ -165,7 +161,7 @@
   }
 
   .month {
-    font-size: 34px;
+    font-size: 30px;
     line-height: 40px;
   }
 
@@ -184,5 +180,9 @@
     font-size: 12px;
     line-height: 20px;
     border-radius: 3px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 </style>

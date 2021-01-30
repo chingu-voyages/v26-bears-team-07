@@ -6,7 +6,7 @@ Sort of like a landing home page. TBD -->
   // metatags.title = 'My Routify app'
   // metatags.description = 'Description coming soon...'
   import { authStore } from "../stores/auth";
-  import { classroom, classroom_blue } from "../utils/image-constants";
+  import {  classroom_blue } from "../utils/image-constants";
 </script>
 
 <svelte:head>
@@ -36,8 +36,8 @@ Sort of like a landing home page. TBD -->
   </section>
 
   {#if $authStore?.secret}
-    <hr />
-    <h2>Gated content</h2>
+    <!-- <hr />
+    <h2>Gated content</h2> -->
     <a href="/home">Home</a>
   {/if}
 </main>

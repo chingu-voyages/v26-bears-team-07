@@ -42,3 +42,16 @@ export function formatWeekDisplay(presentWeek) {
     dayjs(presentWeek[6].join(" ")).format("MMMM,D YYYY");
   return weeks;
 }
+
+/**Calculate present week with dayjs */
+export function  getPresenWeek(thisWeek, command){
+  let action = command;
+  return thisWeek.map((day, i) =>
+      dayjs(day.join(" "))
+        .action(7, "days")
+        .format("ddd D MMMM YYYY")
+        .split(" ")
+    );
+}
+
+
