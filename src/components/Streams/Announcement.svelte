@@ -1,7 +1,7 @@
 <script>
   import { authStore } from "../../stores/auth";
   import { useCreateComment } from "../../stores/query";
-  import { teacher, chevron } from "../../utils/image-constants";
+  import { teacher } from "../../utils/image-constants";
 
   export let username = "Testuser";
   export let dateCreated = "Jan 25"; // date is in format Jan 15
@@ -33,11 +33,12 @@
     </div>
     <div class="input-wrapper">
       <button class="flex-c" type="submit">
-        <img src={chevron} alt="enter-comment" id="chevron" />
+        <!-- prettier-ignore -->
+        <svg class="send" focusable="false" width="24" height="24" viewBox="0 0 24 24"><path d="M2 3v18l20-9L2 3zm2 11l9-2-9-2V6.09L17.13 12 4 17.91V14z"></path></svg>
       </button>
       <input
         bind:value={message}
-        id="comment-box"
+        class="comment-box"
         name="comment"
         type="text"
         autocomplete="off"
@@ -89,6 +90,8 @@
 
   .bottom {
     padding: 15px 25px 15px 10px;
+    display: flex;
+    place-items: center;
   }
 
   .bottom div:nth-child(1) {
@@ -106,29 +109,39 @@
 
   .input-wrapper button {
     right: 4px;
-    top: 1px;
+    top: 0px;
     position: absolute;
     height: 100%;
     justify-content: center;
     align-items: center;
     border: unset;
+    padding: 0;
   }
 
-  #chevron {
-    color: rgba(128, 128, 128, 0.39);
+  .send {
+    color: hsl(210, 6%, 63%);
     margin: 2px;
     width: 30px;
-    filter: opacity(50%);
+    filter: opacity(35%);
   }
 
   .input-wrapper input {
     width: 100%;
-    padding-right: 35px;
+    padding: 0.4rem;
+    padding-left: 1rem;
+    font-size: 0.8rem;
     z-index: 5;
     border-radius: 2rem;
   }
 
   .input-wrapper input:focus {
     outline: none;
+    margin-left: -1.5px;
+    border: 2.5px solid #5784f6a4;
+    transition: all linear 0.2s;
+  }
+  
+  .input-wrapper input::placeholder {
+    opacity: 0.5;
   }
 </style>
