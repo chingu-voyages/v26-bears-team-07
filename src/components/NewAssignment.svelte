@@ -26,6 +26,8 @@
   const submit = () => {
     createAssignment({
       /*
+      TODO: Read this comment and add in the variables object.
+
       expected args, view in query.js
       $title: String!
       $text: String!
