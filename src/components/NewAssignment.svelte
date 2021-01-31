@@ -1,6 +1,9 @@
 <script>
+  import { params } from "@roxi/routify";
   import { createEventDispatcher } from "svelte";
   import { fly } from "svelte/transition";
+  import { authStore } from "../stores/auth";
+  import { useCreateAssignment, usersByClassID } from "../stores/query";
   import { plus } from "../utils/image-constants";
   import Button from "./Header/Button.svelte";
   import TextInput from "./Header/TextInput.svelte";
@@ -15,7 +18,44 @@
 
   const dispatch = createEventDispatcher();
 
-  const submit = () => {};
+  const [createAssignment] = useCreateAssignment();
+  //append students list from database
+  const users = usersByClassID({ classID: $params.classID });
+  let allStudents = [];
+  $: if ($users.data) allStudents = [...$users.data.result.students.data];
+  const submit = () => {
+    createAssignment({
+      /*
+      expected args, view in query.js
+      $title: String!
+      $text: String!
+      $points: Int!
+      $due: Date! 
+      $type: AssignmentType!
+      $created: Time!
+      $assignees: [ID]!
+      $creator: ID!
+
+      example variables usage in createAssignment:
+      {
+        title: "5th Essay",
+        text: "It's an essay",
+        points: 5
+        due: "2021-04-25" // string with format yyyy-MM-dd
+        type: "ESSAY" // other valid enumerations available in schema
+        created: "2021-03-25T02:38:41.359Z" // string with format yyyy-MM-ddTHH:mm:ss.SSSZ
+        assignees: ["8218917489"] // an array of IDs. Can be an empty array. Check
+                                  above  declared allStudents arr for student selection and IDs
+        creator: $authStore.id
+      }
+      
+      Dates are in accordance to ISO8601.
+      For date conversion API, refer to Day.js library docs. Package is already added.
+      Ask in Discord for further questions, like if you want to check when the mutation completed
+        or need the new created assignment's data returned.
+      */
+    });
+  };
 </script>
 
 <div transition:fly={{ y: -500 }} class="shadow">
