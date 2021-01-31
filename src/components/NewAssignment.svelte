@@ -22,6 +22,7 @@
   //append students list from database
   const users = usersByClassID({ classID: $params.classID });
   let allStudents = [];
+  $: console.log(allStudents);
   $: if ($users.data) allStudents = [...$users.data.result.students.data];
   const submit = () => {
     createAssignment({
