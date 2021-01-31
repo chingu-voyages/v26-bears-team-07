@@ -30,7 +30,7 @@ Sort of like a landing home page. TBD -->
         <a
           href="https://github.com/chingu-voyages/v26-bears-team-07"
           target="_blank">Bears-Team-07</a
-        >
+        > Voyage 26
       </p>
     </div>
   </section>

@@ -2,7 +2,7 @@
   import dayjs from "dayjs";
   import { onMount } from "svelte";
   import { left, right } from "../utils/image-constants";
-  import  { formatWeekDisplay } from "../utils/utils"
+  import { formatWeekDisplay, generatePresentWeek } from "../utils/utils";
 
   let presentWeek = [];
   let startOfWeek;
@@ -10,8 +10,16 @@
   let weeks;
   let today;
   let assignmentArray = [
-    { timeCreated: "10:08PM", title: "Data works", dateCreated: "Fri 29 January 2021" },
-    { timeCreated: "11:08PM", title: "Data works 2", dateCreated: "Fri 29 January 2021" },
+    {
+      timeCreated: "10:08PM",
+      title: "Data works",
+      dateCreated: "Fri 29 January 2021",
+    },
+    {
+      timeCreated: "11:08PM",
+      title: "Data works 2",
+      dateCreated: "Fri 29 January 2021",
+    },
   ];
   let classes = ["AllClasses"];
 
@@ -21,23 +29,16 @@
     presentWeek = new Array(7)
       .fill(startOfWeek)
       .map((day, i) => day.add(i, "day").format("ddd D MMMM YYYY").split(" "));
-    weeks = formatWeekDisplay(presentWeek); 
+    weeks = formatWeekDisplay(presentWeek);
   });
 
   const generateNextWeek = (present) => {
-    presentWeek = present.map((day, i) =>
-      dayjs(day.join(" ")).add(7, "days").format("ddd D MMMM YYYY").split(" ")
-    );
+    presentWeek = generatePresentWeek("add", "ddd D MMMM YYYY", present);
     weeks = formatWeekDisplay(presentWeek);
   };
 
   const generatePreviousWeek = (present) => {
-    presentWeek = present.map((day, i) =>
-      dayjs(day.join(" "))
-        .subtract(7, "days")
-        .format("ddd D MMMM YYYY")
-        .split(" ")
-    );
+    presentWeek = generatePresentWeek("subtract", "ddd D MMMM YYYY", present);
     weeks = formatWeekDisplay(presentWeek);
   };
 </script>
