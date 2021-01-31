@@ -256,3 +256,43 @@ export const useCreateAssignment = () =>
       }
     }
   `);
+
+export const assignmentsByClassID = ({ classID }) =>
+  queryOp(
+    gql`
+      query AssignmentsByClassID($id: ID!) {
+        findClassByID(id: $id) {
+          _id
+          assignments {
+            data {
+              _id
+              title
+              text
+              type
+              due
+              points
+              creator {
+                _id
+                name
+              }
+              created
+              assignees {
+                data {
+                  _id
+                  name
+                }
+              }
+              comments {
+                data {
+                  _id
+                  message
+                }
+              }
+              _ts
+            }
+          }
+        }
+      }
+    `,
+    { id: classID }
+  );
