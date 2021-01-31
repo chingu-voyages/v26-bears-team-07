@@ -30,6 +30,7 @@
     "@urql/devtools": "^2.0.2",
     "@urql/svelte": "^1.1.4",
     "cross-env": "^7.0.2",
+    "dayjs": "^1.10.4",
     "dotenv": "^8.2.0",
     "faunadb": "^4.0.0",
     "fs-extra": "^9.0.1",
@@ -72,8 +73,5 @@
     "blacklist": [
       "/example/modal/basic/4"
     ]
-  },
-  "dependencies": {
-    "dayjs": "^1.10.4"
   }
 }
