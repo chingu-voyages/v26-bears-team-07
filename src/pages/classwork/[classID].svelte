@@ -3,8 +3,15 @@
   import { params } from "@roxi/routify";
   import NewAssignment from "../../components/NewAssignment.svelte";
   import AssignmentCard from "../../components/AssignmentCard.svelte";
+  import { assignmentsByClassID } from "../../stores/query";
 
   // TODO: fetch class data
+  const assignmentsQuery = assignmentsByClassID({ classID: $params.classID });
+  let assignments = [];
+  $: if ($assignmentsQuery.data)
+    assignments = [...$assignmentsQuery.data.result.assignments.data];
+  $: console.log(assignments);
+
   console.log($params.classID);
   let showForm = false;
 </script>
