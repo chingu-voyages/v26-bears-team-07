@@ -138,7 +138,7 @@ export const useJoinClass = () =>
 export const findStreams = ({ classID }) =>
   queryOp(
     gql`
-      query findStreams($classID: ID!) {
+      query FindStreams($classID: ID!) {
         result: findClassByID(id: $classID) {
           streams {
             data {
