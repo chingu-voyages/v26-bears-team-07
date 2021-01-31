@@ -261,7 +261,7 @@ export const assignmentsByClassID = ({ classID }) =>
   queryOp(
     gql`
       query AssignmentsByClassID($id: ID!) {
-        findClassByID(id: $id) {
+        result: findClassByID(id: $id) {
           _id
           assignments {
             data {
