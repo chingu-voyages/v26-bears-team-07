@@ -8,6 +8,7 @@ type User {
   owns: [Class]! @relation(name: "owner_role")
   teaches: [Class]! @relation(name: "teacher_role")
   attends: [Class]! @relation(name: "student_role")
+  assignments: [Assignment] @relation(name: "assignee")
 }
 
 """
@@ -24,6 +25,7 @@ type Class {
   subject: String
   room: String
   streams: [Stream] @relation
+  assignments: [Assignment] @relation
 }
 
 """
@@ -41,6 +43,33 @@ type Comment {
   message: String!
   author: User!
   stream: Stream!
+}
+
+type Assignment {
+  title: String!
+  text: String!
+  points: Int!
+  due: Date!
+  creator: User!
+  assignees: [User]! @relation(name: "assignee")
+  type: AssignmentType!
+  class: Class!
+  created: Time!
+  # _ts used for last edited timestamp
+  comments: [AssignmentComment] @relation
+  topic: String # TODO: Optional field for topics
+}
+
+enum AssignmentType {
+  ESSAY
+  SHORT_ANSWER
+  MULTIPLE_CHOICE
+}
+
+type AssignmentComment {
+  message: String!
+  author: User!
+  assignment: Assignment!
 }
 
 #  TODO: This is a custom query / mutation example
