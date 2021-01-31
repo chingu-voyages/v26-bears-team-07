@@ -47,7 +47,7 @@ export const queryOp = (gqlQuery, variables) =>
  * in a component.
  * Usage:
  * ```js
- * const [noteStore, noteCreate] = useCreateNote();
+ * const [noteCreate, noteStore] = useCreateNote();
  * ```
  */
 export function useMutation(gqlMutation, cbVarsObj = (variables) => variables) {
