@@ -6,7 +6,7 @@
  -->
 <script>
   import { fly, fade } from "svelte/transition";
-  import { clickOutside } from "../../utils/utils";
+  import { clickOutside, sleep } from "../../utils/utils";
 
   export let disabled = false;
   export let optionsData = [];
@@ -42,16 +42,31 @@
     allOptionIDs = options.map(({ _id }) => _id);
     selected = [...allOptionIDs];
   }
-  function handleOpen() {
-    open = !open;
-    skipCount = 0;
+
+  // prevent visible bugs during transition in
+  let handleClickOutside = null;
+  let hover = false;
+  let handleSelect = handleOpen;
+  function handleClose() {
+    // reset states
+    handleClickOutside = null;
+    hover = false;
+    open = false;
+    handleSelect = handleOpen;
   }
-  let skipCount = 0;
+  async function handleOpen() {
+    // mount open
+    open = true;
+    await sleep(300);
+    handleSelect = handleClose;
+    handleClickOutside = handleClose;
+    hover = true;
+  }
 </script>
 
 <select
-  on:mousedown|preventDefault={handleOpen}
-  on:keydown|preventDefault={handleOpen}
+  on:mousedown|preventDefault={handleSelect}
+  on:keydown|preventDefault={handleSelect}
   name="students"
   {disabled}
 >
@@ -70,15 +85,9 @@
     in:fly={{ y: -80, duration: 300 }}
     out:fade={{ duration: 200 }}
     use:clickOutside
-    on:click_outside={() => {
-      // skip one because bug where event happens even though it just opened
-      if (skipCount > 0) {
-        open = false;
-      }
-      skipCount++;
-    }}
+    on:click_outside={handleClickOutside}
   >
-    <ul>
+    <ul class:hover>
       <li>
         <input
           type="checkbox"
@@ -128,7 +137,7 @@
     place-items: center;
     padding: 0.5rem 1rem;
   }
-  li:hover {
+  .hover li:hover {
     transition: background-color ease 0.2s;
     background-color: #eee;
     outline: 1px solid transparent;
@@ -140,6 +149,12 @@
   label {
     white-space: nowrap;
     font-size: 0.9rem;
+  }
+  li,
+  input,
+  label,
+  select {
+    cursor: pointer;
   }
 
   select {
