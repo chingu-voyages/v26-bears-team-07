@@ -53,7 +53,6 @@
   on:mousedown|preventDefault={handleOpen}
   on:keydown|preventDefault={handleOpen}
   name="students"
-  class="students-options"
   {disabled}
 >
   <option
@@ -79,7 +78,7 @@
       skipCount++;
     }}
   >
-    <ul class="menu">
+    <ul>
       <li>
         <input
           type="checkbox"
@@ -93,6 +92,7 @@
         <li>
           <input
             type="checkbox"
+            name={_id}
             id={_id}
             bind:group={selected}
             value={_id}
@@ -111,45 +111,49 @@
   .box {
     position: absolute;
   }
-  .menu {
+  ul {
+    padding: 0.5rem 0;
     box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2),
       0 1px 1px 0 rgba(0, 0, 0, 0.141), 0 1px 3px 0 rgba(0, 0, 0, 0.122);
     border-radius: 4px;
     position: absolute;
     top: -2rem;
-    left: 0rem;
+    left: 0.1rem;
     max-width: 280px;
     background: #fff;
   }
-  ul {
-    padding: 0;
-  }
   li {
-    margin: 0 1rem;
     list-style: none;
     display: flex;
     place-items: center;
+    padding: 0.5rem 1rem;
   }
-  input {
-    margin-right: 0.5rem;
+  li:hover {
+    background-color: #eee;
+    outline: 1px solid transparent;
+  }
+  input[type="checkbox"] {
+    transform: scale(1.25);
+    margin-right: 1rem;
   }
   label {
     white-space: nowrap;
+    font-size: 0.9rem;
   }
 
-  .students-options {
+  select {
     padding: 10px 22px;
     border: unset;
     color: rgba(0, 0, 0, 0.678);
     border-radius: 3px;
   }
 
-  .students-options:focus {
+  select:focus {
     outline: none;
     background-color: rgba(169, 169, 169, 0.164);
   }
 
-  .students-options:hover {
+  select:hover {
     background-color: rgba(169, 169, 169, 0.164);
   }
 </style>
