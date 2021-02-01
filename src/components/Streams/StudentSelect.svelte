@@ -129,6 +129,7 @@
     padding: 0.5rem 1rem;
   }
   li:hover {
+    transition: background-color ease 0.2s;
     background-color: #eee;
     outline: 1px solid transparent;
   }
