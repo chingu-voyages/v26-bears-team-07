@@ -29,17 +29,15 @@ a {
   text-decoration: none;
 }
 
-button {
+button,
+input[type="submit"] {
   border-radius: 2px;
   border: 0.8px solid #dadce0;
   background: none;
   font-weight: 500;
   line-height: 1.71429;
   padding: 2px 24px 0;
-}
-
-button:focus {
-  outline: none;
+  width: fit-content;
 }
 
 input {

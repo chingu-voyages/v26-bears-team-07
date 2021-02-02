@@ -56,7 +56,8 @@
   .menu button:focus {
     outline: none;
   }
-  .menu button:hover {
+  .menu button:hover,
+  .menu button:focus {
     background-color: #eee;
   }
 </style>

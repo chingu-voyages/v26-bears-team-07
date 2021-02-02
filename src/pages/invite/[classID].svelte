@@ -31,7 +31,7 @@
 </script>
 
 {#if isValid}
-  <div class="box center">
+  <main class="box center">
     <div class="top center">
       <h2>Bear Class</h2>
       <p>Class helps classes communicate, save time, and stay organized.</p>
@@ -44,7 +44,7 @@
         }}>Join Class</button
       >
     </div>
-  </div>
+  </main>
 {:else if !$classData.fetching}
   <h2>Class not found</h2>
   <p>Look for it on classes or double-check your link</p>

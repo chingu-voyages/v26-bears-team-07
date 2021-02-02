@@ -66,7 +66,7 @@
 
 <select
   on:mousedown|preventDefault={handleSelect}
-  on:keydown|preventDefault={handleSelect}
+  on:keydown|preventDefault={!open && handleSelect}
   name="students"
   {disabled}
 >
@@ -137,7 +137,8 @@
     place-items: center;
     padding: 0.5rem 1rem;
   }
-  .hover li:hover {
+  .hover li:hover,
+  .hover li:focus {
     transition: background-color ease 0.2s;
     background-color: #eee;
     outline: 1px solid transparent;

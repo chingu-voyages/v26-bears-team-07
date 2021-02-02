@@ -18,14 +18,19 @@
     {#if allClasses.length}
       {#each allClasses as { name, _id, invite, isOpen }}
         <li in:fade={{ duration: 200 }}>
-          <a class="top-box" href={$url("./stream/:classID", { classID: _id })}>
+          <a
+            tabindex="-1"
+            class="top-box"
+            href={$url("./stream/:classID", { classID: _id })}
+          >
             <div class="top">
               <a href={$url("./stream/:classID", { classID: _id })}>
                 {name}
               </a>
               <button
                 class="btn-opts"
-                on:click|preventDefault={() => (isOpen = !isOpen)}>
+                on:click|preventDefault={() => (isOpen = !isOpen)}
+              >
                 <!-- prettier-ignore -->
                 <svg focusable="false" width="24" height="24" viewBox="0 0 24 24"><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"></path></svg>
                 {#if isOpen}
@@ -144,7 +149,8 @@
   .btn-opts-menu button:focus {
     outline: none;
   }
-  .btn-opts-menu button:hover {
+  .btn-opts-menu button:hover,
+  .btn-opts-menu button:focus {
     background-color: #eee;
   }
 

@@ -50,7 +50,7 @@
       <button type="reset" value="reset" on:click={closeAnnoucement}
         >Cancel</button
       >
-      <button type="submit">Post</button>
+      <input type="submit" value="Post" />
     </div>
   </div>
 </form>
@@ -131,7 +131,7 @@
     padding: 7px 20px;
   }
 
-  .posts button:nth-child(2) {
+  .posts input[type="submit"] {
     background-color: rgba(169, 169, 169, 0.164);
   }
 

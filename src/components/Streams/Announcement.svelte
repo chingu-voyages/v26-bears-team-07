@@ -140,7 +140,6 @@
     border: 2.5px solid #5784f6a4;
     transition: all linear 0.2s;
   }
-  
   .input-wrapper input::placeholder {
     opacity: 0.5;
   }

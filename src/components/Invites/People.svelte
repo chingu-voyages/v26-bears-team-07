@@ -30,7 +30,7 @@
       <button type="reset" on:click={() => dispatch("closeModal")}
         >Cancel</button
       >
-      <button disabled type="submit"> Invite</button>
+      <input disabled type="submit" value="Invite" />
     </div>
   </section>
 </form>
@@ -62,7 +62,7 @@
     filter: opacity(50%);
   }
 
-  input {
+  input.open-sans {
     font-size: 16px;
     font-weight: 500;
     letter-spacing: 0.1px;
@@ -94,7 +94,8 @@
     margin: 15px 0;
   }
 
-  button {
+  button,
+  input[type="submit"] {
     border: unset;
     padding: 10px;
   }

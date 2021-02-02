@@ -97,7 +97,7 @@
               : ""
           }`}>{!up ? "Create account" : "Sign in instead"}</a
     >
-    <button>{!up ? "Sign In" : "Sign Up"}</button>
+    <input type="submit" value={!up ? "Sign In" : "Sign Up"} />
   </div>
 </form>
 
@@ -117,8 +117,9 @@
   input[type="password"] {
     margin-top: 1rem;
   }
-  button {
+  input[type="submit"] {
     display: block;
+    width: fit-content;
   }
   .btn-group {
     display: flex;
