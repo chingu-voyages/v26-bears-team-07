@@ -6,41 +6,43 @@ Sort of like a landing home page. TBD -->
   // metatags.title = 'My Routify app'
   // metatags.description = 'Description coming soon...'
   import { authStore } from "../stores/auth";
-  import {  classroom_blue } from "../utils/image-constants";
+  import { classroom_blue } from "../utils/image-constants";
+
+  // onMount(()=> {if($authStore?.secret) location.pathname="/home"})
 </script>
 
 <svelte:head>
   <title>Bear Class</title>
 </svelte:head>
 
-<main class="flex-r">
-  <section class="white">
-    <div class="white-wrapper flex-c">
-      <img src={classroom_blue} alt="classroom" />
-    </div>
-  </section>
-  <section class="blue flex-c">
-    <div class="blue-top flex-r">
-      <a href="/signin" target="_self" class="link">Sign in</a>
-      <a href="/signup" target="_self" class="link">Sign up</a>
-    </div>
-    <div id="footer">
-      <p>
-        ©2021 <a href="https://chingu.io" target="_blank">chingu</a>
-        <a
-          href="https://github.com/chingu-voyages/v26-bears-team-07"
-          target="_blank">Bears-Team-07</a
-        > Voyage 26
-      </p>
-    </div>
-  </section>
-
-  {#if $authStore?.secret}
-    <!-- <hr />
-    <h2>Gated content</h2> -->
-    <a href="/home">Home</a>
-  {/if}
-</main>
+{#if $authStore?.secret}
+  <div style="display:none;">
+    {(location.pathname = "/home")}
+  </div>
+{:else}
+  <main class="flex-r">
+    <section class="white">
+      <div class="white-wrapper flex-c">
+        <img src={classroom_blue} alt="classroom" />
+      </div>
+    </section>
+    <section class="blue flex-c">
+      <div class="blue-top flex-r">
+        <a href="/signin" target="_self" class="link">Sign in</a>
+        <a href="/signup" target="_self" class="link">Sign up</a>
+      </div>
+      <div id="footer">
+        <p>
+          ©2021 <a href="https://chingu.io" target="_blank">chingu</a>
+          <a
+            href="https://github.com/chingu-voyages/v26-bears-team-07"
+            target="_blank">Bears-Team-07</a
+          > Voyage 26
+        </p>
+      </div>
+    </section>
+  </main>
+{/if}
 
 <style>
   main {
