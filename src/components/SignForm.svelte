@@ -128,7 +128,6 @@
   }
   input[type="submit"] {
     display: block;
-    width: fit-content;
     border: rgba(128, 128, 128, 0.123) solid 1px;
     padding: 7px;
     flex-basis: 50%;
