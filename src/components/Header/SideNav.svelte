@@ -1,14 +1,18 @@
 <script>
   import { createEventDispatcher } from "svelte";
+  import { url } from "@roxi/routify";
   import { clickOutside, isOdd } from "../../../src/utils/utils";
+  import { classesByUserID } from "../../stores/query";
+  import { authStore } from "../../stores/auth";
   import {
     classes,
     archive,
-    review,
     settings,
     calendar,
   } from "../../utils/image-constants";
   import Icon from "../Icon.svelte";
+  import InnerSideNav from "./InnerSideNav.svelte";
+
 
   export let open = false;
 
@@ -16,13 +20,24 @@
   let tabOptions = [
     { icon: classes, name: "Classes", link: "/home" },
     { icon: calendar, name: "Calendar", link: "/calendar" },
-    { icon: review, name: "To review", link: deadLink },
     { icon: archive, name: "Archived classes", link: "/home" },
     { icon: settings, name: "Settings", link: deadLink },
   ];
   let dispatch = createEventDispatcher();
 
   const handleClose = () => dispatch("sidenavclosed");
+
+  const userClasses = classesByUserID({ id: $authStore.id });
+  $: allClasses = $userClasses.data
+    ? (() =>
+        $userClasses.data.result.teaches.data.map((val) => {
+          let classObj = Object.create(null);
+          classObj.icon = null;
+          classObj.name = val.name;
+          classObj.link = $url("./stream/:classID", { classID: val._id });
+          return classObj;
+        }))()
+    : [];
 </script>
 
 <div
@@ -32,6 +47,9 @@
   on:click_outside={handleClose}
 >
   {#each tabOptions as { icon, name, link }, i}
+    {#if allClasses && i === 2}
+      <InnerSideNav toClose={handleClose} userClasses={allClasses} />
+    {/if}
     <div class="{isOdd(i) ? 'flex-r link1' : 'flex-r'} menu-container">
       <div class={i == 0 ? "selected" : "side-menu"}>
         <a href={link} on:click={handleClose} class="flex-r">
