@@ -62,11 +62,25 @@
     handleClickOutside = handleClose;
     hover = true;
   }
+
+  function handleKeydown({ code: key }) {
+    switch (key) {
+      case "Tab":
+        // normally, to make this more accessible, you'd focus on (via bind:this) the first item on menu while it's open
+        // example: firstMenuEl.focus();
+        break;
+      case "Enter":
+        handleClose();
+        break;
+      default:
+        break;
+    }
+  }
 </script>
 
 <select
   on:mousedown|preventDefault={handleSelect}
-  on:keydown|preventDefault={!open && handleSelect}
+  on:keydown|preventDefault={open ? handleKeydown : handleSelect}
   name="students"
   {disabled}
 >
