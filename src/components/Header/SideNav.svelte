@@ -3,7 +3,6 @@
   import { url } from "@roxi/routify";
   import { clickOutside, isOdd } from "../../../src/utils/utils";
   import { classesByUserID } from "../../stores/query";
-  import { authStore } from "../../stores/auth";
   import {
     classes,
     archive,
@@ -24,11 +23,13 @@
     { icon: settings, name: "Settings", link: deadLink },
   ];
   let dispatch = createEventDispatcher();
-
+  let userClasses;
+  export let userId = undefined;
   const handleClose = () => dispatch("sidenavclosed");
 
-  const userClasses = classesByUserID({ id: $authStore.id });
-  $: allClasses = $userClasses.data
+  userClasses =  classesByUserID({ id: userId })
+
+  $: allClasses = userClasses && $userClasses.data
     ? (() =>
         $userClasses.data.result.teaches.data.map((val) => {
           let classObj = Object.create(null);

@@ -5,6 +5,7 @@
   import { fade } from "svelte/transition";
   import { clickOutside } from "../utils/utils";
 
+
   const classes = classesByUserID({ id: $authStore.id });
   $: allClasses = $classes.data
     ? (({ teaches, attends }) => [...teaches.data, ...attends.data])(

@@ -9,7 +9,7 @@
 <!-- routify:options preload="proximity" -->
 <!-- render header only if logged in -->
 {#if $authStore?.secret}
-  <Header />
+  <Header userID={$authStore.id} />
 {/if}
 <slot decorator={FadeDectorator} />
 
