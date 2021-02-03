@@ -100,6 +100,7 @@
     out:fade={{ duration: 200 }}
     use:clickOutside
     on:click_outside={handleClickOutside}
+    on:keydown={({ code }) => code == "Escape" && handleClose()}
   >
     <ul class:hover>
       <li>
