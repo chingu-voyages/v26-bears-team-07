@@ -54,7 +54,8 @@
     open = false;
     handleSelect = handleOpen;
   }
-  async function handleOpen() {
+  async function handleOpen(e) {
+    e.preventDefault();
     // mount open
     open = true;
     await sleep(300);
@@ -74,28 +75,21 @@
     setTimeout(initMenuTabbables);
   }
 
-  function handleKeydown({ code: key }) {
+  function handleKeydown(e) {
+    let { key } = e;
     switch (key) {
       case "Tab":
         // normally, to make this more accessible, you'd focus on (via bind:this) the first item on menu while it's open
         // example: firstMenuEl.focus();
-        if (menuTabbables.length) menuTabbables[0].focus();
-        else {
-          focusNext();
-          function focusNext() {
-            handleClose();
-            let allTabbables = Array.from(
-              document.querySelectorAll(tabbableSelectors)
-            );
-
-            let activeEl = allTabbables.findIndex(
-              (el) => el == document.activeElement
-            );
-            allTabbables[activeEl + 1].focus();
-          }
+        if (menuTabbables.length) {
+          e.preventDefault();
+          menuTabbables[0].focus();
+        } else {
+          handleClose();
         }
         break;
       case "Enter":
+        e.preventDefault();
         handleClose();
         break;
       default:
@@ -106,7 +100,7 @@
 
 <select
   on:mousedown|preventDefault={handleSelect}
-  on:keydown|preventDefault={open ? handleKeydown : handleSelect}
+  on:keydown={open ? handleKeydown : handleSelect}
   name="students"
   {disabled}
 >
