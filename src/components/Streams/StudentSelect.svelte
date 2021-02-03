@@ -55,13 +55,20 @@
     handleSelect = handleOpen;
   }
   async function handleOpen(e) {
-    e.preventDefault();
     // mount open
-    open = true;
-    await sleep(300);
-    handleSelect = handleClose;
-    handleClickOutside = handleClose;
-    hover = true;
+    e.preventDefault();
+    if (e?.key != "Tab") {
+      open = true;
+      await sleep(300);
+      handleSelect = handleClose;
+      handleClickOutside = handleClose;
+      hover = true;
+    } else {
+      let active = document.activeElement;
+      let allEls = Array.from(document.querySelectorAll(tabbableSelectors));
+      let i = allEls.findIndex((el) => el == active);
+      allEls[i + 1].focus();
+    }
   }
 
   let menuEl;
