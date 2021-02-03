@@ -1,8 +1,6 @@
 <script>
   import { createEventDispatcher } from "svelte";
-  import { url } from "@roxi/routify";
   import { clickOutside, isOdd } from "../../../src/utils/utils";
-  import { classesByUserID } from "../../stores/query";
   import {
     classes,
     archive,
@@ -23,22 +21,8 @@
     { icon: settings, name: "Settings", link: deadLink },
   ];
   let dispatch = createEventDispatcher();
-  let userClasses;
   export let userId = undefined;
   const handleClose = () => dispatch("sidenavclosed");
-
-  userClasses =  classesByUserID({ id: userId })
-
-  $: allClasses = userClasses && $userClasses.data
-    ? (() =>
-        $userClasses.data.result.teaches.data.map((val) => {
-          let classObj = Object.create(null);
-          classObj.icon = null;
-          classObj.name = val.name;
-          classObj.link = $url("./stream/:classID", { classID: val._id });
-          return classObj;
-        }))()
-    : [];
 </script>
 
 <div
@@ -48,9 +32,9 @@
   on:click_outside={handleClose}
 >
   {#each tabOptions as { icon, name, link }, i}
-    {#if allClasses && i === 2}
-      <InnerSideNav toClose={handleClose} userClasses={allClasses} />
-    {/if}
+    {#if userId && i === 2}
+    <InnerSideNav toClose={handleClose}  teacherId={userId} />
+  {/if}
     <div class="{isOdd(i) ? 'flex-r link1' : 'flex-r'} menu-container">
       <div class={i == 0 ? "selected" : "side-menu"}>
         <a href={link} on:click={handleClose} class="flex-r">

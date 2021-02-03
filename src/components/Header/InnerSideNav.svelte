@@ -1,15 +1,32 @@
 <script>
+  import { url } from "@roxi/routify";
   import Icon from "../Icon.svelte";
   import UserNameTag from "../UserNameTag.svelte";
   import { review } from "../../utils/image-constants";
+  import { classesByUserID } from "../../stores/query";
 
   export let toClose;
-  export let userClasses = [];
+  export let userClasses;
+  export let teacherId = '';
   let deadLink = "https/dead";
   let innerTabOptions = [{ icon: review, name: "To review", link: deadLink }];
 
+
+  userClasses =  classesByUserID({ id: teacherId })
+
+  $: allClasses = $userClasses.data
+    ? (() =>
+        $userClasses.data.result.teaches.data.map((val) => {
+          let classObj = Object.create(null);
+          classObj.icon = null;
+          classObj.name = val.name;
+          classObj.link = $url("./stream/:classID", { classID: val._id });
+          return classObj;
+        }))()
+    : [];
+
   $: innerMenuOption = innerTabOptions.concat(
-    userClasses !== [] ? userClasses : []
+    allClasses !== [] ? allClasses : []
   );
   $: classSize = innerMenuOption.length - 1;
 </script>
