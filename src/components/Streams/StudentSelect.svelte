@@ -3,10 +3,10 @@
   @prop `tickAllStudents` {Boolean} If all students are selected.
   @prop `selected` {Array} Selected IDs.
   If `tickAllStudents` is true, `selected` is unnecessary.
- -->
+-->
 <script>
   import { fly, fade } from "svelte/transition";
-  import { clickOutside, sleep } from "../../utils/utils";
+  import { clickOutside} from "../../utils/utils";
 
   export let disabled = false;
   export let optionsData = [];
@@ -16,20 +16,13 @@
   let options = [];
   let allOptionIDs = [];
   let open;
+  let ready = true; // prevent visible bugs during transition in
 
-  $: if (optionsData.length) {
-    init();
-  }
-  $: if (tickAllStudents == true) {
-    selected = [...allOptionIDs];
-  } else if (tickAllStudents == false) {
-    selected = [];
-  }
-  $: if (selected.length == options.length) {
-    tickAll();
-  } else if (selected.length < options.length) {
-    tickAll(false);
-  }
+  $: if (optionsData.length) init();
+  $: if (tickAllStudents) selected = [...allOptionIDs];
+  else selected = [];
+  $: if (selected.length == options.length) tickAll();
+  else if (selected.length < options.length) tickAll(false);
 
   function tickAll(bool = true) {
     tickAllStudents = bool;
@@ -43,71 +36,43 @@
     selected = [...allOptionIDs];
   }
 
-  // prevent visible bugs during transition in
-  let handleClickOutside = null;
-  let hover = false;
-  let handleSelect = handleOpen;
-  function handleClose() {
-    // reset states
-    handleClickOutside = null;
-    hover = false;
-    open = false;
-    handleSelect = handleOpen;
+  let tabbableSelectors =
+    'a[href], area[href], input:not([disabled]):not([type="hidden"]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, [tabindex="0"], [contenteditable], audio[controls], video[controls], summary, [tabindex^="0"], [tabindex^="1"], [tabindex^="2"], [tabindex^="3"], [tabindex^="4"], [tabindex^="5"], [tabindex^="6"], [tabindex^="7"], [tabindex^="8"], [tabindex^="9"]';
+
+  let menuEl;
+  let menuTabbables;
+  $: open && setTimeout(initMenuTabbables);
+  function initMenuTabbables() {
+    menuTabbables = Array.from(menuEl.querySelectorAll(tabbableSelectors));
   }
-  async function handleOpen(e) {
-    // mount open
-    e.preventDefault();
-    if (e?.key != "Tab") {
-      open = true;
-      await sleep(300);
-      handleSelect = handleClose;
-      handleClickOutside = handleClose;
-      hover = true;
-    } else {
-      let active = document.activeElement;
+
+  function handleSelect({ key, target }) {
+    if (key != "Tab") {
+      if (!key || key == "Enter") toggle();
+      return;
+    }
+
+    // Tab handling
+    if (open) {
+      // focus first item if not disabled
+      if (menuTabbables.length) menuTabbables[0].focus();
+      else toggle();
+    } else if (!open) {
+      // Proceed w/ normal tabbing
       let allEls = Array.from(document.querySelectorAll(tabbableSelectors));
-      let i = allEls.findIndex((el) => el == active);
+      let i = allEls.findIndex((el) => el == target);
       allEls[i + 1].focus();
     }
   }
 
-  let menuEl;
-  let menuTabbables;
-  let tabbableSelectors =
-    'a[href], area[href], input:not([disabled]):not([type="hidden"]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, [tabindex="0"], [contenteditable], audio[controls], video[controls], summary, [tabindex^="0"], [tabindex^="1"], [tabindex^="2"], [tabindex^="3"], [tabindex^="4"], [tabindex^="5"], [tabindex^="6"], [tabindex^="7"], [tabindex^="8"], [tabindex^="9"]';
-  function initMenuTabbables() {
-    menuTabbables = Array.from(menuEl.querySelectorAll(tabbableSelectors));
-  }
-  $: if (open) {
-    setTimeout(initMenuTabbables);
-  }
-
-  function handleKeydown(e) {
-    let { key } = e;
-    switch (key) {
-      case "Tab":
-        // normally, to make this more accessible, you'd focus on (via bind:this) the first item on menu while it's open
-        // example: firstMenuEl.focus();
-        if (menuTabbables.length) {
-          e.preventDefault();
-          menuTabbables[0].focus();
-        } else {
-          handleClose();
-        }
-        break;
-      case "Enter":
-        e.preventDefault();
-        handleClose();
-        break;
-      default:
-        break;
-    }
+  function toggle() {
+    open = !open;
   }
 </script>
 
 <select
   on:mousedown|preventDefault={handleSelect}
-  on:keydown={open ? handleKeydown : handleSelect}
+  on:keydown|preventDefault={handleSelect}
   name="students"
   {disabled}
 >
@@ -124,13 +89,15 @@
   <div
     class="box"
     in:fly={{ y: -80, duration: 300 }}
+    on:introstart={() => (ready = false)}
+    on:introend={() => (ready = true)}
     out:fade={{ duration: 200 }}
     use:clickOutside
-    on:click_outside={handleClickOutside}
-    on:keydown={({ code }) => code == "Escape" && handleClose()}
+    on:click_outside={ready && toggle}
+    on:keydown={({ code }) => code == "Escape" && toggle}
     bind:this={menuEl}
   >
-    <ul class:hover>
+    <ul class:hover={ready}>
       <li>
         <input
           type="checkbox"
