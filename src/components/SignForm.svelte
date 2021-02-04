@@ -53,31 +53,34 @@
 <section>
   <form on:submit|preventDefault={handleSubmit} class="flex-c">
     <h1>{title}</h1>
-    <label for="username" />
+    <label for="username">Enter your username</label>
     <input
       type="text"
+      id="username"
       placeholder="Username"
       autocomplete="username"
       use:focus
       bind:value={name}
       required
     />
-    <label for="password" />
+    <label for="password">Enter your password</label>
     <input
       type="password"
+      id="password"
       placeholder="Password"
       autocomplete="current-password"
       bind:value={password}
       required
     />
     {#if up}
-      <label for="confirm" />
+      <label for="confirm">Confirm your password</label>
       <input
         on:change={({ currentTarget }) =>
           currentTarget.setCustomValidity(
             confirm == password ? "" : "Passwords do not match"
           )}
         type="password"
+        id="confirm"
         placeholder="Confirm"
         autocomplete="new-password"
         bind:value={confirm}
@@ -104,6 +107,9 @@
 </section>
 
 <style>
+  label {
+    display: none;
+  }
   form {
     padding: 40px;
     border-radius: 0.5rem;
