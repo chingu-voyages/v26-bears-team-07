@@ -46,22 +46,19 @@
     menuTabbables = Array.from(menuEl.querySelectorAll(tabbableSelectors));
   }
 
-  function handleSelect({ key, target }) {
-    if (key != "Tab") {
-      if (!key || key == "Enter") toggle();
+  function handleSelect(e) {
+    if (e.key != "Tab") {
+      e.preventDefault();
+      if (!e.key || e.key == "Enter") toggle();
       return;
     }
 
     // Tab handling
     if (open) {
+      e.preventDefault();
       // focus first item if not disabled
       if (menuTabbables.length) menuTabbables[0].focus();
       else toggle();
-    } else if (!open) {
-      // Proceed w/ normal tabbing
-      let allEls = Array.from(document.querySelectorAll(tabbableSelectors));
-      let i = allEls.findIndex((el) => el == target);
-      allEls[i + 1].focus();
     }
   }
 
@@ -74,7 +71,7 @@
 <select
   id="studentselect"
   on:mousedown|preventDefault={handleSelect}
-  on:keydown|preventDefault={handleSelect}
+  on:keydown={handleSelect}
   name="students"
   {disabled}
 >
