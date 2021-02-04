@@ -6,7 +6,7 @@
 -->
 <script>
   import { fly, fade } from "svelte/transition";
-  import { clickOutside} from "../../utils/utils";
+  import { clickOutside } from "../../utils/utils";
 
   export let disabled = false;
   export let optionsData = [];
@@ -70,7 +70,9 @@
   }
 </script>
 
+<label class="sr-only" for="studentselect">Select students to announce</label>
 <select
+  id="studentselect"
   on:mousedown|preventDefault={handleSelect}
   on:keydown|preventDefault={handleSelect}
   name="students"

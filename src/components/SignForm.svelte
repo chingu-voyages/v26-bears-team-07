@@ -53,7 +53,7 @@
 <section>
   <form on:submit|preventDefault={handleSubmit} class="flex-c">
     <h1>{title}</h1>
-    <label for="username">Enter your username</label>
+    <label for="username" class="sr-only">Enter your username</label>
     <input
       type="text"
       id="username"
@@ -63,7 +63,7 @@
       bind:value={name}
       required
     />
-    <label for="password">Enter your password</label>
+    <label for="password" class="sr-only">Enter your password</label>
     <input
       type="password"
       id="password"
@@ -73,7 +73,7 @@
       required
     />
     {#if up}
-      <label for="confirm">Confirm your password</label>
+      <label for="confirm" class="sr-only">Confirm your password</label>
       <input
         on:change={({ currentTarget }) =>
           currentTarget.setCustomValidity(
@@ -107,9 +107,6 @@
 </section>
 
 <style>
-  label {
-    display: none;
-  }
   form {
     padding: 40px;
     border-radius: 0.5rem;
