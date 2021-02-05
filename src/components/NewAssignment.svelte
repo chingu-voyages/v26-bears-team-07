@@ -18,7 +18,8 @@
 
   const dispatch = createEventDispatcher();
 
-  const [createAssignment] = useCreateAssignment();
+  const [createAssignment, createAssignStore] = useCreateAssignment();
+  $: console.log($createAssignStore);
   //append students list from database
   const users = usersByClassID({ classID: $params.classID });
   let allStudents = [];
