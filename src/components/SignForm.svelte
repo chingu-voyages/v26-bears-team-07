@@ -28,7 +28,6 @@
       };
 
       localStorage.setItem("auth", JSON.stringify(authData));
-      $authStore = authData;
 
       if ($params?.cjc)
         location.href = `${location.origin}/invite/${$params.classID}?cjc=${$params.cjc}`;
