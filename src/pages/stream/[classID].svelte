@@ -7,6 +7,7 @@
   import Tasks from "../../components/Streams/Tasks.svelte";
   import { findClass, findStreams } from "../../stores/query";
   import Assignments from "../../components/Streams/Assignments.svelte";
+  import dayjs from "dayjs";
 
   let classData = findClass({ classID: $params.classID });
   let inviteCode, className;
@@ -48,6 +49,18 @@
   const closeAddAnouncementWindow = () => {
     addAnnouncement = false;
   };
+
+  function formatDate(ts) {
+    let d = dayjs(ts / 1000);
+    let now = dayjs();
+    let dayAgo = now.subtract(1, "day");
+
+    return dayAgo.isBefore(d)
+      ? d.format("h:mm A")
+      : now.isSame(d, "year")
+      ? d.format("MMM D")
+      : d.format("MMM YYYY"); // not same year
+  }
 </script>
 
 <main>
@@ -87,16 +100,13 @@
       <!-- this is the end of a default announcement view for preview only -->
       <!-- announcement name, array of comments, data created -->
       {#each announcementsArray as { username, _ts, message, comments, _id }}
-        <Announcement
-          dateCreated={new Date(_ts / 1000).toDateString().slice(4, 10)}
-          {username}
-          {_id}
-        >
+        <Announcement dateCreated={formatDate(_ts)} {username} {_id}>
           <p slot="classwork" class="open-sans slot-head">{message}</p>
           <div slot="comments" class="comments roboto">
             {#each comments as { name: username, message, _ts }}
               <p>{username}</p>
               <p>{message}</p>
+              <p>{formatDate(_ts)}</p>
             {/each}
           </div>
         </Announcement>
