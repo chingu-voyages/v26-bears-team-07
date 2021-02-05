@@ -1,8 +1,6 @@
 <!-- Layout is for any layout components like Header/Nav, Footer, or a container. 
   Similar to layout in Gatsby, present on all pages -->
 <script>
-  import { isActive } from "@roxi/routify";
-
   import Header from "../components/Header/Header.svelte";
   import { authStore } from "../stores/auth";
   import FadeDectorator from "./_FadeDecorator.svelte";
@@ -10,7 +8,7 @@
 
 <!-- routify:options preload="proximity" -->
 <!-- render header only if logged in -->
-{#if $authStore?.secret && $isActive("")}
+{#if $authStore?.secret}
   <Header userID={$authStore.id} />
 {/if}
 <slot decorator={FadeDectorator} />
