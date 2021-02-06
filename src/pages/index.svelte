@@ -6,7 +6,7 @@ Sort of like a landing home page. TBD -->
   // metatags.title = 'My Routify app'
   // metatags.description = 'Description coming soon...'
   import { authStore } from "../stores/auth";
-  import { classroom_blue, bear } from "../utils/image-constants";
+  import { bear } from "../utils/image-constants";
 
   // onMount(()=> {if($authStore?.secret) location.pathname="/home"})
 </script>
