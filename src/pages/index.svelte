@@ -6,7 +6,7 @@ Sort of like a landing home page. TBD -->
   // metatags.title = 'My Routify app'
   // metatags.description = 'Description coming soon...'
   import { authStore } from "../stores/auth";
-  import { classroom_blue } from "../utils/image-constants";
+  import { classroom_blue, bear } from "../utils/image-constants";
 
   // onMount(()=> {if($authStore?.secret) location.pathname="/home"})
 </script>
@@ -21,16 +21,21 @@ Sort of like a landing home page. TBD -->
   </div>
 {:else}
   <main class="flex-r">
-    <section class="white">
+    <section class="white flex-c">
       <div class="white-wrapper flex-c">
-        <img src={classroom_blue} alt="classroom" />
+        <img src={bear} alt="home-bear" />
+        <!-- <img src={classroom_blue} alt="classroom" /> -->
       </div>
     </section>
     <section class="blue flex-c">
-      <div class="blue-top flex-r">
-        <a href="/signin" target="_self" class="link">Sign in</a>
-        <a href="/signup" target="_self" class="link">Sign up</a>
-      </div>
+      <!-- <div class="blue-top flex-c"> -->
+        <!-- <div class="bg-bear"><img src={bear} alt="home-bear" /></div> -->
+        <div class="blue-top flex-r">
+          <a href="/signin" target="_self" class="link">Sign in</a>
+          <a href="/signup" target="_self" class="link">Sign up</a>
+        </div>
+      <!-- </div> -->
+
       <div id="footer">
         <p>
           ©2021 <a href="https://chingu.io" target="_blank">chingu</a>
@@ -60,6 +65,20 @@ Sort of like a landing home page. TBD -->
     align-items: center;
     flex-grow: 1;
   }
+/* 
+  .blue-top{
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+  } */
+  /* .bg-bear {
+    margin-bottom: 40px;
+  }
+
+
+  .bg-bear img {
+    width: 100%;
+  } */
 
   .blue .link:nth-child(1),
   .blue .link:nth-child(2) {
@@ -67,6 +86,7 @@ Sort of like a landing home page. TBD -->
     padding: 20px;
     font-weight: normal;
     transition: font-weight ease-in-out;
+    z-index: 3;
   }
 
   .blue .link:hover {
@@ -87,13 +107,15 @@ Sort of like a landing home page. TBD -->
     justify-content: space-between;
     height: 100vh;
     border: unset;
+    justify-content: center;
+    align-items: center;
   }
 
   .white-wrapper img {
     z-index: 3;
-    width: 100%;
+    width: 50%;
     flex-shrink: 1;
-    opacity: 0.7;
+    top: 50px;
   }
 
   .blue-top {

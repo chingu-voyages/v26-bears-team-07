@@ -4,8 +4,8 @@
 </script>
 
 <div class="outer">
-  <div class="inner flex-c">
-    <span class="open-sans">{firstLetter}</span>
+  <div class={"inner flex-c "}>
+    <span class={"open-sans"}>{firstLetter}</span>
   </div>
 </div>
 
