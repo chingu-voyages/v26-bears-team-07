@@ -9,10 +9,12 @@ const CLASS_FIELDS = gql`
   }
 `;
 
-/** Creates a classroom. Must provide a name and owner id.
- * Invite code can be auto-generated and is optional.
+/** Creates a classroom.
+ * @param name
+ * @param id - owner ID
+ * @param [invite] code can be auto-generated and is optional.
  *
- * `_id` of the doc is used as the link to route to.
+ * * `_id` of the doc is used as the link to route to.
  */
 export const useCreateClass = () =>
   useMutation(
@@ -120,7 +122,7 @@ export const findClass = ({ classID }) =>
   );
 
 /** Joins a class provided a classID and userID
- * warn: Seems difficult to secure on the client side with privileges. In a prod env, likely easier to handle logic via serverless func.
+ * ! Seems difficult to secure on the client side with privileges. In a prod env, likely easier to handle logic via serverless func.
  */
 export const useJoinClass = () =>
   useMutation(gql`
