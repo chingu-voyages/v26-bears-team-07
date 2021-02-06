@@ -29,11 +29,11 @@ Sort of like a landing home page. TBD -->
     </section>
     <section class="blue flex-c">
       <!-- <div class="blue-top flex-c"> -->
-        <!-- <div class="bg-bear"><img src={bear} alt="home-bear" /></div> -->
-        <div class="blue-top flex-r">
-          <a href="/signin" target="_self" class="link">Sign in</a>
-          <a href="/signup" target="_self" class="link">Sign up</a>
-        </div>
+      <!-- <div class="bg-bear"><img src={bear} alt="home-bear" /></div> -->
+      <div class="blue-top flex-r">
+        <a href="/signin" target="_self" class="link">Sign in</a>
+        <a href="/signup" target="_self" class="link">Sign up</a>
+      </div>
       <!-- </div> -->
 
       <div id="footer">
@@ -65,7 +65,7 @@ Sort of like a landing home page. TBD -->
     align-items: center;
     flex-grow: 1;
   }
-/* 
+  /* 
   .blue-top{
     flex-grow: 1;
     justify-content: center;
@@ -115,7 +115,7 @@ Sort of like a landing home page. TBD -->
     z-index: 3;
     width: 50%;
     flex-shrink: 1;
-    top: 50px;
+    top: -15px;
   }
 
   .blue-top {
@@ -141,9 +141,16 @@ Sort of like a landing home page. TBD -->
       position: absolute;
     }
 
+    .white-wrapper img {
+      position: relative;
+      top: -107px;
+      z-index: 4;
+      left: 55px;
+    }
+
     .blue {
       z-index: 3;
-      background-color: #335bfdab;
+      /* background-color: #335bfdab; */
     }
   }
 </style>
