@@ -17,7 +17,8 @@
   let due = "";
   let className = "";
   let topic = "";
-  let type = "essay";
+  let type = "ESSAY";
+  let assignees = [];
 
   const dispatch = createEventDispatcher();
 
@@ -30,6 +31,14 @@
   $: if ($users.data) allStudents = [...$users.data.result.students.data];
   const submit = () => {
     createAssignment({
+      title,
+      text,
+      points: parseInt(points),
+      due,
+      creator: $authStore.id,
+      type,
+      created: dayjs.utc().format("YYYY-MM-DDTHH:mm:ss.SSS[Z]"),
+      assignees
       /** TODO: Read this comment and add in the variables object.
 
       expected args, view in query.js
@@ -92,9 +101,9 @@
       </div>
       <TextInput bind:value={title} placeholder="Title" />
       <select bind:value={type} name="type" class="type">
-        <option value="essay">Essay</option>
-        <option value="short">Short Answer</option>
-        <option value="multiple">Multiple Choice</option>
+        <option value="ESSAY">Essay</option>
+        <option value="SHORT_ANSWER">Short Answer</option>
+        <option value="MULTIPLE_CHOICE">Multiple Choice</option>
       </select>
       <TextInput
         bind:value={text}
