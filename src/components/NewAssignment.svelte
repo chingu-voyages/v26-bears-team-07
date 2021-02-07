@@ -7,6 +7,9 @@
   import { plus } from "../utils/image-constants";
   import Button from "./Header/Button.svelte";
   import TextInput from "./Header/TextInput.svelte";
+  import dayjs from "dayjs";
+  import utc from "dayjs/plugin/utc";
+  dayjs.extend(utc);
 
   let title = "";
   let text = "";
@@ -27,8 +30,7 @@
   $: if ($users.data) allStudents = [...$users.data.result.students.data];
   const submit = () => {
     createAssignment({
-      /*
-      TODO: Read this comment and add in the variables object.
+      /** TODO: Read this comment and add in the variables object.
 
       expected args, view in query.js
       $title: String!
@@ -40,23 +42,26 @@
       $assignees: [ID]!
       $creator: ID!
 
-      example variables usage in createAssignment:
-      {
+      usage example:
+      createAssignment({
         title: "5th Essay",
         text: "It's an essay",
-        points: 5
-        due: "2021-04-25" // string with format yyyy-MM-dd
-        type: "ESSAY" // other valid enumerations available in schema
-        created: "2021-03-25T02:38:41.359Z" // string with format yyyy-MM-ddTHH:mm:ss.SSSZ
-        assignees: ["8218917489"] // an array of IDs. Can be an empty array. Check
-                                  above  declared allStudents arr for student selection and IDs
-        creator: $authStore.id
-      }
+        points: 5,
+        due: dayjs().format("YYYY-MM-DD"), // string with format yyyy-MM-dd
+        type: "ESSAY", // other valid enumerations available in schema.gql under enum AssignmentType
+        created: dayjs.utc().format("YYYY-MM-DDTHH:mm:ss.SSS[Z]"), // string with format yyyy-MM-ddTHH:mm:ss.SSSZ
+        assignees: [], // an array of IDs. Can be an empty array. Check above  declared allStudents arr for student
+        // selection and IDs. This is set to nothing for now to get it working ASAP.
+        creator: $authStore.id,
+      })
       
-      Dates are in accordance to ISO8601.
-      For date conversion API, refer to Day.js library docs. Package is already added.
-      Ask in Discord for further questions, like if you want to check when the mutation completed
-        or need the new created assignment's data returned.
+      ! UPDATE: Do not touch dates. They are finished & imported. What you should be wiring up to get it working:
+      - title
+      - text
+      - points (it's a number, not string) e.g. 5 not "5"
+      - type (allcaps string, must be valid enum) e.g. "ESSAY" or "SHORT_ANSWER"
+
+      Ask in Discord for further questions.
       */
     });
   };
