@@ -23,24 +23,24 @@ export const initClient = (secret) =>
   });
 
 /** Creates a query for a component to consume.
- * @param {object} variables
+ * @param {object} [variables]
  */
 export const queryOp = (gqlQuery, variables) =>
   query(operationStore(gqlQuery, variables));
 
 /** Creates a mutation hook for a component to consume.
- * @param {function} cbVarsObj A callback that should destructure & restructure the object with variables passed in by
- * the component. It can set defaults/fallbacks and shape its returned variables object. If none specified, will pass var obj supplied unmodified.
- * Example:
+ * @param {function} [cbVarsObj] Callback that de+restructures the query variables object passed in.
+ * Useful for defaults/fallbacks. If undefined, will pass the var obj unmodified.
+ * Example restructuring:
  * ```js
  * ({ name = "no name entered", id }) => ({ name, id })
  * ```
- * @returns {Array} Tuple w/ mutation & store. Call tuple within component.
+ * @returns {Array} Tuple w/ mutation func & its op store.
  * Usage:
  * ```js
- * const [noteCreate, noteStore] = useCreateNote();
+ * const [createNote, noteStore] = useCreateNote();
  * $noteStore
- * noteCreate(variablesObj)
+ * createNote(varsObj)
  * ```
  */
 export function useMutation(gqlMutation, cbVarsObj = (variables) => variables) {
