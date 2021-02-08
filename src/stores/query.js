@@ -298,3 +298,34 @@ export const assignmentsByClassID = ({ classID }) =>
     `,
     { id: classID }
   );
+
+export const allAssignmentsByUserID = (id) =>
+  queryOp(
+    gql`
+query AllAssignmentsByUserID($id: ID!) {
+  result: findUserByID(id: $id) {
+    attends {
+      ...AssignmentsField
+    }
+    teaches {
+      ...AssignmentsField
+    }
+  }
+}
+
+fragment AssignmentsField on ClassPage {
+  data {
+    assignments {
+      data {
+        title
+        created
+        _id
+      }
+    }
+  }
+}
+    `,
+    {
+      id,
+    }
+  );

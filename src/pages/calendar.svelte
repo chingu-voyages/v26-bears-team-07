@@ -3,17 +3,21 @@
   import { onMount } from "svelte";
   import { left, right } from "../utils/image-constants";
   import { formatWeekDisplay, generatePresentWeek } from "../utils/utils";
+  import { allAssignmentsByUserID } from "../stores/query";
+  import { authStore } from "../stores/auth";
+
+  // console.log(dayjs().format("YYYY-MM-DDTHH:mm:ss.SSS[Z]")); // yyyy-02-SuT18:28:47.947+01:00
 
   let presentWeek = [];
   let startOfWeek;
   let endOfWeek;
   let weeks;
   let today;
-  let assignmentArray = [
+  let assignmentsData = [
     {
       timeCreated: "10:08PM",
       title: "Data works",
-      dateCreated: "Fri 29 January 2021",
+      dateCreated: "Fri 29 January 2021", //timestamp { id, timestamp}
     },
     {
       timeCreated: "11:08PM",
@@ -21,7 +25,20 @@
       dateCreated: "Fri 29 January 2021",
     },
   ];
+  ("289891020343083528");
   let classes = ["AllClasses"];
+
+  const assignmentsQuery = allAssignmentsByUserID($authStore.id);
+  // const { result } = $assignmentsQuery.data;
+  // const { result } = $assignmentsQuery.data;
+  // const { teaches } = result;
+  // const { data } = teaches;
+
+  // $: if ($assignmentsQuery.data) {
+  //   for (const { assignments } of data) {
+  //     console.log(assignments);
+  //   }
+  // }
 
   onMount(() => {
     startOfWeek = dayjs().startOf("week");
@@ -76,7 +93,7 @@
     {/each}
     {#each presentWeek as day, i}
       <div class={i != 6 ? "border-edge flex-c bottom" : "flex-c bottom"}>
-        {#each assignmentArray as { timeCreated, title, dateCreated }}
+        {#each assignmentsData as { timeCreated, title, dateCreated }}
           {#if dateCreated === day.join(" ")}
             <span class="inserted">{timeCreated}{title}</span>
           {/if}
