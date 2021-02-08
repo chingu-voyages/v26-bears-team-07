@@ -241,6 +241,7 @@ export const useCreateAssignment = () =>
       $created: Time!
       $assignees: [ID]!
       $creator: ID!
+      $classID: ID!
     ) {
       result: createAssignment(
         data: {
@@ -252,6 +253,7 @@ export const useCreateAssignment = () =>
           created: $created
           assignees: { connect: $assignees }
           creator: { connect: $creator }
+          class: { connect: $classID }
         }
       ) {
         _id
@@ -302,28 +304,28 @@ export const assignmentsByClassID = ({ classID }) =>
 export const allAssignmentsByUserID = (id) =>
   queryOp(
     gql`
-query AllAssignmentsByUserID($id: ID!) {
-  result: findUserByID(id: $id) {
-    attends {
-      ...AssignmentsField
-    }
-    teaches {
-      ...AssignmentsField
-    }
-  }
-}
-
-fragment AssignmentsField on ClassPage {
-  data {
-    assignments {
-      data {
-        title
-        created
-        _id
+      query AllAssignmentsByUserID($id: ID!) {
+        result: findUserByID(id: $id) {
+          attends {
+            ...AssignmentsField
+          }
+          teaches {
+            ...AssignmentsField
+          }
+        }
       }
-    }
-  }
-}
+
+      fragment AssignmentsField on ClassPage {
+        data {
+          assignments {
+            data {
+              title
+              created
+              _id
+            }
+          }
+        }
+      }
     `,
     {
       id,

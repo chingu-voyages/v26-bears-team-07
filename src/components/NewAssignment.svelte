@@ -19,6 +19,7 @@
   let topic = "";
   let type = "ESSAY";
   let assignees = [];
+  export let classID;
 
   const dispatch = createEventDispatcher();
 
@@ -38,7 +39,8 @@
       creator: $authStore.id,
       type,
       created: dayjs.utc().format("YYYY-MM-DDTHH:mm:ss.SSS[Z]"),
-      assignees
+      assignees,
+      classID
       /** TODO: Read this comment and add in the variables object.
 
       expected args, view in query.js
@@ -73,6 +75,7 @@
       Ask in Discord for further questions.
       */
     });
+    dispatch("exit");
   };
 </script>
 

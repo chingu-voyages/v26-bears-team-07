@@ -4,6 +4,9 @@
   import NewAssignment from "../../components/NewAssignment.svelte";
   import AssignmentCard from "../../components/AssignmentCard.svelte";
   import { assignmentsByClassID } from "../../stores/query";
+  import { assign } from "svelte/internal";
+  import Announce from "../../components/Streams/Announce.svelte";
+  import Announcement from "../../components/Streams/Announcement.svelte";
 
   // TODO: fetch class data
   const assignmentsQuery = assignmentsByClassID({ classID: $params.classID });
@@ -21,10 +24,7 @@
 
 <!-- TODO: only include for teachers -->
 {#if showForm}
-  <NewAssignment
-    on:submit={() => console.log("submit")}
-    on:exit={() => (showForm = false)}
-  />
+  <NewAssignment classID={$params.classID} on:exit={() => (showForm = false)} />
 {/if}
 
 <div class="container">
@@ -51,7 +51,18 @@
       >Create</Button
     >
     <div class="content">
-      <AssignmentCard />
+      {#if assignments.length > 0}
+        {#each assignments as assignment}
+          <AssignmentCard
+            title={assignment.title}
+            text={assignment.text}
+            due={assignment.due}
+            timeCreated={assignment.created}
+          />
+        {/each}
+      {:else}
+        <p>No assignments yet!</p>
+      {/if}
     </div>
   </main>
 </div>

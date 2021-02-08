@@ -12,6 +12,8 @@
   export let text = "Sample text";
 
   let showDetail = false;
+
+  title = `${title.substring(0, 25)}${title.length > 25 ? "..." : ""}`;
 </script>
 
 <div class="assignment-card" class:outline={showDetail}>
@@ -22,7 +24,6 @@
         <img src={notes} class="user" alt="students" />
       </div>
       <div class="work-details flex-c">
-        <!-- TODO: limit title length -->
         <span>{title}</span>
       </div>
     </section>
@@ -95,6 +96,14 @@
 <style>
   .assignment-card {
     border-radius: 8px;
+  }
+
+  .assignment-card::after {
+    content: "";
+    display: block;
+    margin: 0 auto;
+    width: 95%;
+    border-bottom: 1px solid #ccc;
   }
 
   main {
