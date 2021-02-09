@@ -43,9 +43,6 @@
     <textarea bind:value={message} />
   </div>
   <div class="flex-r form-footer">
-    <button class="flex-r attach-button">
-      <span>Add</span>
-    </button>
     <div class="flex-r posts open-sans">
       <button type="reset" value="reset" on:click={closeAnnoucement}
         >Cancel</button
@@ -110,15 +107,9 @@
   }
 
   .form-footer {
-    justify-content: space-between;
+    justify-content: flex-end;
     text-align: center;
     margin-top: 10px;
-  }
-
-  .attach-button {
-    border-radius: 4px;
-    text-align: center;
-    color: #1b68d2;
   }
 
   .posts * {
