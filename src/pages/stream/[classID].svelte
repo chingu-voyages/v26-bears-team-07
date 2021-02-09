@@ -72,7 +72,10 @@
         {#if !addAnnouncement}
           <Announcer on:add_announcement={createAnnouncement} />
         {:else}
-          <Announce on:closeAddAnouncement={closeAddAnouncementWindow} />
+          <Announce
+            {className}
+            on:closeAddAnouncement={closeAddAnouncementWindow}
+          />
         {/if}
       </div>
       <!-- this is a default assignment view for preview only -->

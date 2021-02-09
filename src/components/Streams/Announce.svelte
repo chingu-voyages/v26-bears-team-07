@@ -5,7 +5,7 @@
   import { useCreateStream, usersByClassID } from "../../stores/query";
   import StudentSelect from "./StudentSelect.svelte";
 
-  let className;
+  export let className;
   let dispatch = createEventDispatcher();
   let message;
 
