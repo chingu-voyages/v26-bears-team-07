@@ -19,7 +19,6 @@
   let showForm = false;
 </script>
 
-<!-- TODO: set up topics ordering -->
 <!-- TODO: allow draging for reordering -->
 
 <!-- TODO: only include for teachers -->

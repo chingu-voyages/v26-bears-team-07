@@ -13,18 +13,17 @@
 
   let title = "";
   let text = "";
-  let points = "";
+  let points = "100";
   let due = "";
-  let className = "";
   let topic = "";
   let type = "ESSAY";
-  let assignees = [];
+  let assignees = 'all';
+  let chioces = [];
   export let classID;
 
   const dispatch = createEventDispatcher();
 
   const [createAssignment, createAssignStore] = useCreateAssignment();
-  $: console.log($createAssignStore);
   //append students list from database
   const users = usersByClassID({ classID: $params.classID });
   let allStudents = [];
@@ -39,7 +38,7 @@
       creator: $authStore.id,
       type,
       created: dayjs.utc().format("YYYY-MM-DDTHH:mm:ss.SSS[Z]"),
-      assignees,
+      assignees: assignees === 'all' ? [...allStudents] : assignees,
       classID
       /** TODO: Read this comment and add in the variables object.
 
@@ -77,6 +76,8 @@
     });
     dispatch("exit");
   };
+
+  $: console.log(assignees);
 </script>
 
 <div transition:fly={{ y: -500 }} class="shadow">
@@ -92,13 +93,18 @@
   <div class="container">
     <main>
       <div class="top">
-        <label for="assignment">For</label>
         <div class="top-select">
-          <select name="class">
-            <option value="">this class</option>
-          </select>
-          <select name="students">
+          <select bind:value="{assignees}" name="students" multiple>
             <option value="all">All students</option>
+            {#each allStudents as student}
+              <option value="{student.id}">{student.name}</option>
+            {/each}
+            <option value="student1">student 1</option>
+            <option value="student2">student 2</option>
+            <option value="student3">student 3</option>
+            <option value="student4">student 4</option>
+            <option value="student5">student 5</option>
+            <option value="student6">student 6</option>
           </select>
         </div>
       </div>
@@ -115,7 +121,7 @@
         maxRows={40}
         placeholder="Instructions (optional)"
       />
-      {#if type === "multiple"}
+      {#if type === "MULTIPLE_CHOICE"}
         <ul>
           <li><TextInput /></li>
         </ul>
@@ -123,13 +129,18 @@
     </main>
     <aside>
       <div class="top">
-        <label for="assignment">For</label>
         <div class="top-select">
-          <select bind:value={className} name="class">
-            <option value="">this class</option>
-          </select>
-          <select name="students">
+          <select bind:value="{assignees}" name="students" multiple>
             <option value="all">All students</option>
+            {#each allStudents as student}
+              <option value="{student.id}">{student.name}</option>
+            {/each}
+            <option value="student1">student 1</option>
+            <option value="student2">student 2</option>
+            <option value="student3">student 3</option>
+            <option value="student4">student 4</option>
+            <option value="student5">student 5</option>
+            <option value="student6">student 6</option>
           </select>
         </div>
       </div>
