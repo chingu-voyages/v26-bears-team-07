@@ -1,5 +1,12 @@
 # v26-bears-team-07
 
+## Our Team
+- [Fang🦁](https://github.com/armchair-traveller)
+- [Olajide Olaniyan](https://github.com/jidemobell)
+- [Tim Leonard](https://github.com/iamtimleonard)
+
+## Our Project idea
+
 [🎼 Bear Class](https://bearclass.netlify.app/) | Voyage-26 | https://chingu.io/ | Twitter: https://twitter.com/ChinguCollabs
 
 We're creating a Google Classroom clone with the purpose of streamlining the process surrounding music teaching. It's going to be great! 😉
@@ -23,3 +30,7 @@ Platform: Netlify
 Media: TBD
 
 Architecture: JAMstack (Serverless, so hot right now 🌶. Serverless)
+
+## Our Goals
+
+We used this project as an opportunity to take a deep dive into the world of Svelte.
