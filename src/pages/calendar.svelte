@@ -29,6 +29,7 @@
   let classes = ["AllClasses"];
 
   const assignmentsQuery = allAssignmentsByUserID($authStore.id);
+
   // const { result } = $assignmentsQuery.data;
   // const { result } = $assignmentsQuery.data;
   // const { teaches } = result;

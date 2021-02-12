@@ -12,15 +12,16 @@
   import StudentSelect from "./Streams/StudentSelect.svelte";
   dayjs.extend(utc);
 
-  let title = "";
-  let text = "";
-  let points = "100";
-  let due = "";
-  let topic = "";
-  let type = "ESSAY";
-  let assignees = 'all';
-  let chioces = [];
+  export let title = "";
+  export let text = "";
+  export let points = "100";
+  export let due = "";
+  export let topic = "";
+  export let type = "ESSAY";
+  export let assignees = "all";
   export let classID;
+  export let assignmentID;
+  export let update = false;
 
   const dispatch = createEventDispatcher();
 
@@ -31,50 +32,21 @@
   $: console.log(allStudents);
   $: if ($users.data) allStudents = [...$users.data.result.students.data];
   const submit = () => {
-    createAssignment({
-      title,
-      text,
-      points: parseInt(points),
-      due,
-      creator: $authStore.id,
-      type,
-      created: dayjs.utc().format("YYYY-MM-DDTHH:mm:ss.SSS[Z]"),
-      assignees: [...allStudents],
-      classID
-      /** TODO: Read this comment and add in the variables object.
-
-      expected args, view in query.js
-      $title: String!
-      $text: String!
-      $points: Int!
-      $due: Date! 
-      $type: AssignmentType!
-      $created: Time!
-      $assignees: [ID]!
-      $creator: ID!
-
-      usage example:
+    if (!update) {
       createAssignment({
-        title: "5th Essay",
-        text: "It's an essay",
-        points: 5,
-        due: dayjs().format("YYYY-MM-DD"), // string with format yyyy-MM-dd
-        type: "ESSAY", // other valid enumerations available in schema.gql under enum AssignmentType
-        created: dayjs.utc().format("YYYY-MM-DDTHH:mm:ss.SSS[Z]"), // string with format yyyy-MM-ddTHH:mm:ss.SSSZ
-        assignees: [], // an array of IDs. Can be an empty array. Check above  declared allStudents arr for student
-        // selection and IDs. This is set to nothing for now to get it working ASAP.
+        title,
+        text,
+        points: parseInt(points),
+        due,
         creator: $authStore.id,
-      })
-      
-      ! UPDATE: Do not touch dates. They are finished & imported. What you should be wiring up to get it working:
-      - title
-      - text
-      - points (it's a number, not string) e.g. 5 not "5"
-      - type (allcaps string, must be valid enum) e.g. "ESSAY" or "SHORT_ANSWER"
-
-      Ask in Discord for further questions.
-      */
-    });
+        type,
+        created: dayjs.utc().format("YYYY-MM-DDTHH:mm:ss.SSS[Z]"),
+        assignees: [...allStudents],
+        classID,
+      });
+    } else {
+      //findAssignmentByIDandUpdate
+    }
     dispatch("exit");
   };
 
@@ -89,7 +61,9 @@
       </div>
       <h3>Assignment</h3>
     </div>
-    <Button on:click={submit} type="confirm-filled">Assign</Button>
+    <Button on:click={submit} type="confirm-filled"
+      >{update ? "Update" : "Assign"}</Button
+    >
   </header>
   <div class="container">
     <main>
