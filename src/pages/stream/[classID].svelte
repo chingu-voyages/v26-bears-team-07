@@ -9,6 +9,8 @@
   import Assignments from "../../components/Streams/Assignments.svelte";
   import dayjs from "dayjs";
   import { teacher } from "../../utils/image-constants";
+  import { assignmentsByClassID } from "../../stores/query";
+  const assignmentsQuery = assignmentsByClassID({ classID: $params.classID });
 
   let classData = findClass({ classID: $params.classID });
   let inviteCode, className;
@@ -16,6 +18,8 @@
   /**All assignments from database*/
   let announcementsArray = [];
   let assignmentsArray = [];
+  $: if ($assignmentsQuery.data)
+    assignmentsArray = [...$assignmentsQuery.data.result.assignments.data];
 
   // get data from DB
   let streamData = findStreams({ classID: $params.classID });
@@ -67,7 +71,19 @@
 <main>
   <Badge {inviteCode} {className} />
   <div class="flex-r announcements">
-    <div class="task"><Tasks /></div>
+    <div class="task">
+      <Tasks>
+        <ul>
+          {#each assignmentsArray as { due, title }}
+            <li>
+              {`${dayjs(due).format("DD/MM")} - ${title.substring(0, 10)}${
+                title.length > 15 ? "..." : ""
+              }`}
+            </li>
+          {/each}
+        </ul>
+      </Tasks>
+    </div>
     <section>
       <div>
         {#if !addAnnouncement}
@@ -149,6 +165,12 @@
 
   section {
     flex-grow: 1;
+  }
+
+  ul {
+    list-style: none;
+    line-height: 1.5rem;
+    padding: 0;
   }
 
   .slot-head {

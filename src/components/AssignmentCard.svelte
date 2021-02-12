@@ -3,6 +3,7 @@
   import { notes, menu_down, plus } from "../utils/image-constants";
   import Button from "./Header/Button.svelte";
   import Modal from "./Reusable/Modal.svelte";
+  import dayjs from 'dayjs';
 
   export let title = "Assignment Title";
   export let comments = undefined;
@@ -29,8 +30,10 @@
     </section>
     <section class="edit flex-r">
       <span>
-        Posted {timeCreated || "10:08PM"}
-        {#if due} (Due {due}) {/if}
+        {#if !showDetail}
+        Posted {dayjs(timeCreated).format('DD/MM/YYYY') || "10:08PM"}
+        {/if}
+        {#if due} (Due {dayjs(due).format('DD/MM/YYYY')}) {/if}
       </span>
       <span class="menu">
         <img class="user" src={menu_down} alt="menu" />
@@ -41,8 +44,10 @@
     <div transition:fade class="wide-detail">
       <section class="wide-text">
         <span>
-          Posted {timeCreated || "10:08PM"}
+          
+          Posted {dayjs(timeCreated).format('DD/MM/YYYY') || "10:08PM"}
           {#if edited} (Edited {edited}) {/if}
+          
         </span>
         <p>{text}</p>
         {#if comments}
@@ -79,8 +84,8 @@
         </section>
         <section class="modal-text">
           <span>
-            Posted {timeCreated || "10:08PM"}
-            {#if due} (Due {due}) {/if}
+            Posted {dayjs(timeCreated).format('DD/MM/YYYY') || "10:08PM"}
+            {#if due} (Due {dayjs(due).format('DD/MM/YYYY')}) {/if}
           </span>
           <p>{text}</p>
         </section>

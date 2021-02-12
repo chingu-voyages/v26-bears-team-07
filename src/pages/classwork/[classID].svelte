@@ -28,12 +28,6 @@
 
 <div class="container">
   <aside class="topics-menu">
-    <ul>
-      <li>topic 1</li>
-      <li>topic 2</li>
-      <li>topic 4</li>
-      <li>topic 5</li>
-    </ul>
   </aside>
   <main>
     <!-- dropdown menu for mobile -->

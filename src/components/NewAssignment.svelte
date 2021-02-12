@@ -9,6 +9,7 @@
   import TextInput from "./Header/TextInput.svelte";
   import dayjs from "dayjs";
   import utc from "dayjs/plugin/utc";
+  import StudentSelect from "./Streams/StudentSelect.svelte";
   dayjs.extend(utc);
 
   let title = "";
@@ -38,7 +39,7 @@
       creator: $authStore.id,
       type,
       created: dayjs.utc().format("YYYY-MM-DDTHH:mm:ss.SSS[Z]"),
-      assignees: assignees === 'all' ? [...allStudents] : assignees,
+      assignees: [...allStudents],
       classID
       /** TODO: Read this comment and add in the variables object.
 
@@ -94,18 +95,7 @@
     <main>
       <div class="top">
         <div class="top-select">
-          <select bind:value="{assignees}" name="students" multiple>
-            <option value="all">All students</option>
-            {#each allStudents as student}
-              <option value="{student.id}">{student.name}</option>
-            {/each}
-            <option value="student1">student 1</option>
-            <option value="student2">student 2</option>
-            <option value="student3">student 3</option>
-            <option value="student4">student 4</option>
-            <option value="student5">student 5</option>
-            <option value="student6">student 6</option>
-          </select>
+          <StudentSelect />
         </div>
       </div>
       <TextInput bind:value={title} placeholder="Title" />
@@ -130,18 +120,7 @@
     <aside>
       <div class="top">
         <div class="top-select">
-          <select bind:value="{assignees}" name="students" multiple>
-            <option value="all">All students</option>
-            {#each allStudents as student}
-              <option value="{student.id}">{student.name}</option>
-            {/each}
-            <option value="student1">student 1</option>
-            <option value="student2">student 2</option>
-            <option value="student3">student 3</option>
-            <option value="student4">student 4</option>
-            <option value="student5">student 5</option>
-            <option value="student6">student 6</option>
-          </select>
+          <StudentSelect />
         </div>
       </div>
       <div class="form">
