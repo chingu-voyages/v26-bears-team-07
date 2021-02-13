@@ -105,6 +105,12 @@
   </form>
 </section>
 
+<!-- 
+  @component
+  Sign in & up form in one.
+  Defaults to sign in.
+  @prop {boolean} `up` Pass in for signup form & functionality.
+ -->
 <style>
   form {
     padding: 40px;
@@ -124,6 +130,7 @@
     margin-right: 4px;
     flex-basis: 50%;
     text-align: center;
+    white-space: nowrap;
   }
   input[type="password"] {
     margin-top: 1rem;

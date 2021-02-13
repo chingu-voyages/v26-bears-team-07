@@ -22,7 +22,7 @@
   .inner {
     background-color: #004da5;
     border-radius: 50%;
-    width: 100%;
+    width: 33px;
     height: 100%;
     justify-content: center;
     align-items: center;
