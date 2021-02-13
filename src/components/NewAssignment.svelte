@@ -3,7 +3,11 @@
   import { createEventDispatcher } from "svelte";
   import { fly } from "svelte/transition";
   import { authStore } from "../stores/auth";
-  import { useCreateAssignment, usersByClassID } from "../stores/query";
+  import {
+    useCreateAssignment,
+    usersByClassID,
+    useUpdateAssignment,
+  } from "../stores/query";
   import { plus } from "../utils/image-constants";
   import Button from "./Header/Button.svelte";
   import TextInput from "./Header/TextInput.svelte";
@@ -16,18 +20,20 @@
   export let text = "";
   export let points = "100";
   export let due = "";
-  export let topic = "";
   export let type = "ESSAY";
-  export let assignees = "all";
   export let classID;
   export let assignmentID;
+  let assignees;
   export let update = false;
+  let allStudents;
 
   const dispatch = createEventDispatcher();
 
+  let users = usersByClassID({ classID: $params.classID });
+
   const [createAssignment, createAssignStore] = useCreateAssignment();
 
-  // $: console.log($createAssignStore, "assignment stores");
+  $: console.log($createAssignStore, "assignment stores");
   $: if ($users.data) allStudents = [...$users.data.result.students.data];
   const submit = () => {
     if (!update) {
@@ -43,7 +49,18 @@
         classID,
       });
     } else {
-      //findAssignmentByIDandUpdate
+      useUpdateAssignment({
+        id: assignmentID,
+        title,
+        text,
+        points: parseInt(points),
+        due,
+        creator: $authStore.id,
+        type,
+        created: dayjs.utc().format("YYYY-MM-DDTHH:mm:ss.SSS[Z]"),
+        assignees: [...allStudents],
+        classID,
+      });
     }
     dispatch("exit");
   };
@@ -74,14 +91,13 @@
       <select bind:value={type} name="type" class="type">
         <option value="ESSAY">Essay</option>
         <option value="SHORT_ANSWER">Short Answer</option>
-        <option value="MULTIPLE_CHOICE">Multiple Choice</option>
       </select>
       <TextInput
         bind:value={text}
         controlType="textarea"
         minRows={4}
         maxRows={40}
-        placeholder="Instructions (optional)"
+        placeholder="Instructions"
       />
       {#if type === "MULTIPLE_CHOICE"}
         <ul>
@@ -100,10 +116,6 @@
         <input bind:value={points} type="number" />
         <label for="due">Due</label>
         <input bind:value={due} type="date" />
-        <label for="topic" />
-        <select bind:value={topic} name="topic">
-          <option value="none">No topic</option>
-        </select>
       </div>
     </aside>
   </div>

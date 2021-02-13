@@ -261,6 +261,30 @@ export const useCreateAssignment = () =>
     }
   `);
 
+export const findAssignment = ({ assignmentID }) =>
+  queryOp(
+    gql`
+      query FindAssignment($assignmentID: ID!) {
+        result: findAssignmentByID(id: $assignmentID)
+          {
+            title
+            text
+            points
+            due
+            creator {
+              name
+              _id
+            }
+            classData: class {
+              name
+              _id
+            }
+        }
+      }
+    `,
+    { assignmentID }
+  );
+
 export const assignmentsByClassID = ({ classID }) =>
   queryOp(
     gql`

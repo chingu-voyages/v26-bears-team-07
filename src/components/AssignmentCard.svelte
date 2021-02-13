@@ -5,6 +5,7 @@
   import Button from "./Header/Button.svelte";
   import Modal from "./Reusable/Modal.svelte";
   import dayjs from "dayjs";
+  import { clickOutside } from "../utils/utils";
 
   export let title = "Assignment Title";
   export let comments = undefined;
@@ -28,7 +29,12 @@
   };
 </script>
 
-<div class="assignment-card" class:outline={showDetail}>
+<div
+  use:clickOutside
+  on:click_outside={() => (showDetail = false)}
+  class="assignment-card"
+  class:outline={showDetail}
+>
   <main on:click={() => (showDetail = !showDetail)} class="roboto flex-r">
     <section class="work-tag flex-r">
       <div class="flex-c image-wrapper">
@@ -49,7 +55,7 @@
     </section>
   </main>
   {#if showDetail}
-    <div transition:fade class="wide-detail">
+    <div in:fade class="wide-detail">
       <section class="wide-text">
         <span>
           Posted {dayjs(timeCreated).format("MM/DD/YYYY") || "10:08PM"}
@@ -66,7 +72,9 @@
       </section>
       <section class="wide-footer">
         <!-- TODO: link to assignment route -->
-        <Button type="confirm">View Assignment</Button>
+        <Button type="confirm"
+          ><a href="/assignments/{id}">View Assignment</a></Button
+        >
         <!-- TODO: check user's role -->
         <Button on:click={deleteAssignment}>Delete</Button>
         <Button on:click={edit}>Edit</Button>
@@ -100,7 +108,9 @@
         </section>
         <section class="modal-footer">
           <!-- TODO: link to assignment route -->
-          <Button type="confirm">View Assignment</Button>
+          <Button type="confirm"
+            ><a href="/assignments/{id}">View Assignment</a></Button
+          >
           <Button on:click={deleteAssignment}>Delete</Button>
           <Button on:click={edit}>Edit</Button>
         </section>

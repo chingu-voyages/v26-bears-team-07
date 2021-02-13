@@ -4,19 +4,14 @@
   import NewAssignment from "../../components/NewAssignment.svelte";
   import AssignmentCard from "../../components/AssignmentCard.svelte";
   import { assignmentsByClassID } from "../../stores/query";
-  import { assign } from "svelte/internal";
-  import Announce from "../../components/Streams/Announce.svelte";
-  import Announcement from "../../components/Streams/Announcement.svelte";
 
   let title = "";
   let text = "";
   let points = "100";
   let due = "";
-  let topic = "";
   let type = "ESSAY";
   let assignees = "all";
   let choices = [];
-  let classID;
   let assignmentID;
   let update = false;
 
@@ -26,14 +21,12 @@
   $: if ($assignmentsQuery.data)
     assignments = [...$assignmentsQuery.data.result.assignments.data];
 
-  $: console.log(assignments);
-
   let showForm = false;
-
   const create = () => {
     title = "";
     text = "";
     type = "ESSAY";
+    due = "";
     showForm = true;
   };
 
