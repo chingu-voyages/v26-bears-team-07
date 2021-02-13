@@ -12,10 +12,10 @@
   const assignmentsQuery = assignmentsByClassID({ classID: $params.classID });
   let assignments = [];
   $: if ($assignmentsQuery.data)
-    assignments = [...$assignmentsQuery.data.result.assignments.data];
-  $: console.log(assignments);
+    assignments = [...$assignmentsQuery.data.result.assignments.data].filter(
+      (x) => x !== null
+    );
 
-  console.log($params.classID);
   let showForm = false;
 </script>
 
@@ -67,6 +67,7 @@
   </main>
 </div>
 
+<!-- TODO: only include for teachers -->
 <style>
   .container {
     display: flex;

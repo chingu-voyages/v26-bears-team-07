@@ -26,19 +26,19 @@
     },
   ];
   ("289891020343083528");
+
+  let assignmentsData2 = [];
   let classes = ["AllClasses"];
+  let selectValue = classes[0];
 
-  const assignmentsQuery = allAssignmentsByUserID($authStore.id);
-  // const { result } = $assignmentsQuery.data;
-  // const { result } = $assignmentsQuery.data;
-  // const { teaches } = result;
-  // const { data } = teaches;
+  const userAssignements = allAssignmentsByUserID($authStore.id);
+  let taughtAssignments;
+  console.log($authStore.id)
+  $: if ($userAssignements.data){
+    console.log($userAssignements.data.result.teaches.data, "finding teaches data")
+  }
 
-  // $: if ($assignmentsQuery.data) {
-  //   for (const { assignments } of data) {
-  //     console.log(assignments);
-  //   }
-  // }
+  // console.log(taughtAssignments, "checking assignment data");
 
   onMount(() => {
     startOfWeek = dayjs().startOf("week");
@@ -63,12 +63,13 @@
 <main>
   <section class="controls flex-r">
     <div id="classworks" class="flex-c top-control">
-      <select name="classworks" id="classes">
+      <select name="classworks" id="classes" bind:value={selectValue}>
         {#each classes as className}
           <option value={className}>{className}</option>
         {/each}
       </select>
     </div>
+
     <div id="weekrange" class="flex-r roboto">
       <span on:click={generatePreviousWeek(presentWeek)}
         ><img src={left} alt="last-week" /></span

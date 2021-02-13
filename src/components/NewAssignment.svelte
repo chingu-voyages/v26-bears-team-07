@@ -9,6 +9,7 @@
   import TextInput from "./Header/TextInput.svelte";
   import dayjs from "dayjs";
   import utc from "dayjs/plugin/utc";
+import ClassId from "../pages/stream/[classID].svelte";
   dayjs.extend(utc);
 
   let title = "";
@@ -24,7 +25,8 @@
   const dispatch = createEventDispatcher();
 
   const [createAssignment, createAssignStore] = useCreateAssignment();
-  $: console.log($createAssignStore);
+  // $: console.log($createAssignStore, "assignment stores");
+ 
   //append students list from database
   const users = usersByClassID({ classID: $params.classID });
   let allStudents = [];

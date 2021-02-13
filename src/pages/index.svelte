@@ -132,7 +132,7 @@ Sort of like a landing home page. TBD -->
     text-decoration: underline;
   }
 
-  @media (max-width: 320px) {
+  @media (max-width: 375px) {
     main {
       position: relative;
     }

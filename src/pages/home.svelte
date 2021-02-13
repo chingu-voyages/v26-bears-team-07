@@ -12,11 +12,13 @@
         $classes.data.result
       )
     : [];
+
+
 </script>
 
 {#if $classes.data}
   <ol>
-    {#if allClasses.length}
+    {#if allClasses.length} 
       {#each allClasses as { name, _id, invite, isOpen }}
         <li in:fade={{ duration: 200 }}>
           <a
