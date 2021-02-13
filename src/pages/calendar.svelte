@@ -3,42 +3,66 @@
   import { onMount } from "svelte";
   import { left, right } from "../utils/image-constants";
   import { formatWeekDisplay, generatePresentWeek } from "../utils/utils";
-  import { allAssignmentsByUserID } from "../stores/query";
+  import { allAssignmentsByUserID, classesByUserID } from "../stores/query";
   import { authStore } from "../stores/auth";
 
   // console.log(dayjs().format("YYYY-MM-DDTHH:mm:ss.SSS[Z]")); // yyyy-02-SuT18:28:47.947+01:00
-
+  let classOptions;
   let presentWeek = [];
   let startOfWeek;
-  let endOfWeek;
   let weeks;
   let today;
-  let assignmentsData = [
-    {
-      timeCreated: "10:08PM",
-      title: "Data works",
-      dateCreated: "Fri 29 January 2021", //timestamp { id, timestamp}
-    },
-    {
-      timeCreated: "11:08PM",
-      title: "Data works 2",
-      dateCreated: "Fri 29 January 2021",
-    },
-  ];
-  ("289891020343083528");
 
-  let assignmentsData2 = [];
-  let classes = ["AllClasses"];
-  let selectValue = classes[0];
+  let assignmentsData = [];
+  let classes = [];
+  let classAssignments = [];
+  let selectedClass = "All Classes";
+  let selectedIndex = 0;
 
-  const userAssignements = allAssignmentsByUserID($authStore.id);
-  let taughtAssignments;
-  console.log($authStore.id)
-  $: if ($userAssignements.data){
-    console.log($userAssignements.data.result.teaches.data, "finding teaches data")
-  }
+  //query operation for class select options
+  const classesQuery = classesByUserID({ id: $authStore.id });
+  $: if ($classesQuery.data)
+    classOptions = [...$classesQuery.data.result.teaches.data];
+  $: if (classOptions)
+    classes = ["All Classes", ...classOptions.map((data) => data.name)];
 
-  // console.log(taughtAssignments, "checking assignment data");
+  const getSelecteddIndex = (selected, classes) => classes.indexOf(selected);
+
+  $: selectedIndex =
+    getSelecteddIndex(selectedClass, classes) === (0 || -1)
+      ? 0
+      : getSelecteddIndex(selectedClass, classes);
+
+  //get assignments per class or return all
+  const formatAssignmentsData = (allAssignments, index) => {
+    let thisAssignmentData = [];
+    if (index !== 0) {
+      thisAssignmentData = allAssignments[index - 1];
+      return thisAssignmentData.assignments.data;
+    } else {
+      allAssignments.forEach((val) => {
+        for (const iterator of val.assignments.data) {
+          thisAssignmentData.push(iterator);
+        }
+      });
+      return thisAssignmentData;
+    }
+  };
+
+  //query operation to get all assignments
+  const assignmentQuery = allAssignmentsByUserID($authStore.id);
+  $: if ($assignmentQuery.data)
+    assignmentsData = assignmentQuery.data.result.teaches.data;
+  $: if (assignmentsData)
+    classAssignments = formatAssignmentsData(assignmentsData, selectedIndex);
+
+  const formatTimeAndDate = (dataTime) => {
+    // 2021-02-12T22:16:41.177Z
+    return {
+      date: dayjs(dataTime).format("ddd D MMMM YYYY"),
+      time: dayjs(dataTime).format("HH:mm a"),
+    };
+  };
 
   onMount(() => {
     startOfWeek = dayjs().startOf("week");
@@ -63,7 +87,7 @@
 <main>
   <section class="controls flex-r">
     <div id="classworks" class="flex-c top-control">
-      <select name="classworks" id="classes" bind:value={selectValue}>
+      <select name="classworks" id="classes" bind:value={selectedClass}>
         {#each classes as className}
           <option value={className}>{className}</option>
         {/each}
@@ -94,9 +118,12 @@
     {/each}
     {#each presentWeek as day, i}
       <div class={i != 6 ? "border-edge flex-c bottom" : "flex-c bottom"}>
-        {#each assignmentsData as { timeCreated, title, dateCreated }}
-          {#if dateCreated === day.join(" ")}
-            <span class="inserted">{timeCreated}{title}</span>
+        {#each classAssignments as { title, created }}
+          {#if formatTimeAndDate(created).date === day.join(" ")}
+            <div class="inserted flex-r">
+              <span>{title}</span>
+              <span>({formatTimeAndDate(created).time})</span>
+            </div>
           {/if}
         {/each}
       </div>
@@ -109,14 +136,14 @@
     margin: 3rem auto;
     width: 90%;
     max-width: 1000px;
-    height: 90vh;
+    height: 70vh;
   }
   .grid-container {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    grid-template-rows: 20% auto;
+    grid-template-rows: 20%;
     width: 100%;
-    height: 70%;
+    height: 100%;
     border: 1px solid rgba(128, 128, 128, 0.363);
     border-radius: 5px;
   }
@@ -199,9 +226,13 @@
     font-size: 12px;
     line-height: 20px;
     border-radius: 3px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
+    font-size: 10px;
+    font-weight: 600;
+  }
+
+  .inserted span:nth-child(1) {
+    margin-right: 4px;
   }
 </style>

@@ -1,10 +1,4 @@
-<!-- TODO: We should decide whether the main page should display information on the app
-Sort of like a landing home page. TBD -->
 <script>
-  // TODO: If you care about dynamic metatags, add them here. Otherwise, delete example later.
-  // import { metatags } from '@roxi/routify'
-  // metatags.title = 'My Routify app'
-  // metatags.description = 'Description coming soon...'
   import { authStore } from "../stores/auth";
   import { bear } from "../utils/image-constants";
 
@@ -24,7 +18,6 @@ Sort of like a landing home page. TBD -->
     <section class="white flex-c">
       <div class="white-wrapper flex-c">
         <img src={bear} alt="home-bear" />
-        <!-- <img src={classroom_blue} alt="classroom" /> -->
       </div>
     </section>
     <section class="blue flex-c">

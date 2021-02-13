@@ -5,7 +5,6 @@
   import { fade } from "svelte/transition";
   import { clickOutside } from "../utils/utils";
 
-
   const classes = classesByUserID({ id: $authStore.id });
   $: allClasses = $classes.data
     ? (({ teaches, attends }) => [...teaches.data, ...attends.data])(
@@ -31,7 +30,7 @@
                 {name}
               </a>
               <button
-                class="btn-opts"
+                class="btn-opts outline"
                 on:click|preventDefault={() => (isOpen = !isOpen)}
               >
                 <!-- prettier-ignore -->
@@ -54,8 +53,7 @@
                         }}>Copy invite link</button
                       >
                       <!-- <button>Edit</button> -->
-                      <!-- <button>Copy</button> -->
-                      <!-- <button>Archive</button> -->
+
                     </div>
                   </div>
                 {/if}
@@ -122,9 +120,6 @@
   }
   .btn-opts:hover {
     background-color: rgba(232, 234, 237, 0.039);
-  }
-  .btn-opts:focus {
-    outline: none;
   }
   .btn-opts-menu {
     position: absolute;

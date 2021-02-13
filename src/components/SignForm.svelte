@@ -33,7 +33,7 @@
         location.href = `${location.origin}/invite/${$params.classID}?cjc=${$params.cjc}`;
       else location.pathname = "/home";
     } else {
-      // TODO: Client-side error handling if password/user incorrect
+      // You can deal w/ errors here, likely password invalid or network error.
     }
   }
 </script>
@@ -105,6 +105,12 @@
   </form>
 </section>
 
+<!-- 
+  @component
+  Sign in & up form in one.
+  Defaults to sign in.
+  @prop {boolean} `up` Pass in for signup form & functionality.
+ -->
 <style>
   form {
     padding: 40px;
@@ -124,6 +130,7 @@
     margin-right: 4px;
     flex-basis: 50%;
     text-align: center;
+    white-space: nowrap;
   }
   input[type="password"] {
     margin-top: 1rem;
@@ -143,5 +150,4 @@
     flex-direction: row;
     margin-top: 2rem;
   }
-  /* TODO: Desktop dimensions at min-width 601px */
 </style>

@@ -55,6 +55,14 @@ select {
   border-radius: 5px;
 }
 
+.outline {
+  transition: box-shadow ease 0.2s;
+}
+.outline:focus {
+  outline: none;
+  box-shadow: rgb(0 0 0 / 60%) 0px 0px 0px 3px;
+}
+
 /* screen reader only util class */
 .sr-only:not(:focus):not(:active) {
   clip: rect(0 0 0 0);

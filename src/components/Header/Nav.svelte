@@ -16,13 +16,12 @@
   function openSideNav() {
     dispatch("opensidenav");
   }
-  
 </script>
 
 <nav class="global-nav flex-r">
   <div class="left-content">
     <button
-      class="class-burger"
+      class="class-burger outline"
       aria-label="Main Menu"
       tabindex="0"
       on:click={openSideNav}
@@ -66,7 +65,7 @@
       <img alt="add-class" src={plus} />
     </li>
     <li class="user" on:click={() => (userMenuOpen = !userMenuOpen)}>
-      <button class="avatar"
+      <button class="avatar outline"
         ><img src="https://placekitten.com/50/50" alt="kitten avatar" /></button
       >
     </li>

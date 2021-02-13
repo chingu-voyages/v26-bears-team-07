@@ -1,8 +1,10 @@
 <script>
   import { fade } from "svelte/transition";
   import { notes, menu_down, plus } from "../utils/image-constants";
+  import { createEventDispatcher } from "svelte";
   import Button from "./Header/Button.svelte";
   import Modal from "./Reusable/Modal.svelte";
+  import dayjs from "dayjs";
 
   export let title = "Assignment Title";
   export let comments = undefined;
@@ -10,10 +12,20 @@
   export let timeCreated = undefined;
   export let edited = undefined;
   export let text = "Sample text";
+  export let id;
 
+  let dispatch = createEventDispatcher();
   let showDetail = false;
 
   title = `${title.substring(0, 25)}${title.length > 25 ? "..." : ""}`;
+
+  const deleteAssignment = () => {
+    // deletes assignment
+  };
+
+  const edit = () => {
+    dispatch("editAssignment");
+  };
 </script>
 
 <div class="assignment-card" class:outline={showDetail}>
@@ -29,11 +41,10 @@
     </section>
     <section class="edit flex-r">
       <span>
-        Posted {timeCreated || "10:08PM"}
-        {#if due} (Due {due}) {/if}
-      </span>
-      <span class="menu">
-        <img class="user" src={menu_down} alt="menu" />
+        {#if !showDetail}
+          Posted {dayjs(timeCreated).format("MM/DD/YYYY") || "10:08PM"}
+        {/if}
+        {#if due} (Due {dayjs(due).format("MM/DD/YYYY")}) {/if}
       </span>
     </section>
   </main>
@@ -41,7 +52,7 @@
     <div transition:fade class="wide-detail">
       <section class="wide-text">
         <span>
-          Posted {timeCreated || "10:08PM"}
+          Posted {dayjs(timeCreated).format("MM/DD/YYYY") || "10:08PM"}
           {#if edited} (Edited {edited}) {/if}
         </span>
         <p>{text}</p>
@@ -56,6 +67,9 @@
       <section class="wide-footer">
         <!-- TODO: link to assignment route -->
         <Button type="confirm">View Assignment</Button>
+        <!-- TODO: check user's role -->
+        <Button on:click={deleteAssignment}>Delete</Button>
+        <Button on:click={edit}>Edit</Button>
       </section>
     </div>
   {/if}
@@ -79,14 +93,16 @@
         </section>
         <section class="modal-text">
           <span>
-            Posted {timeCreated || "10:08PM"}
-            {#if due} (Due {due}) {/if}
+            Posted {dayjs(timeCreated).format("MM/DD/YYYY") || "10:08PM"}
+            {#if due} (Due {dayjs(due).format("MM/DD/YYYY")}) {/if}
           </span>
           <p>{text}</p>
         </section>
         <section class="modal-footer">
           <!-- TODO: link to assignment route -->
           <Button type="confirm">View Assignment</Button>
+          <Button on:click={deleteAssignment}>Delete</Button>
+          <Button on:click={edit}>Edit</Button>
         </section>
       </div>
     </Modal>
@@ -96,14 +112,6 @@
 <style>
   .assignment-card {
     border-radius: 8px;
-  }
-
-  .assignment-card::after {
-    content: "";
-    display: block;
-    margin: 0 auto;
-    width: 95%;
-    border-bottom: 1px solid #ccc;
   }
 
   main {
@@ -136,10 +144,6 @@
   .edit span {
     font-size: 10px;
     margin-right: 20px;
-  }
-
-  .edit img {
-    width: 25px;
   }
 
   .image-wrapper {
