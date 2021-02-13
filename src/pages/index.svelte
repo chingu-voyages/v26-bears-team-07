@@ -125,7 +125,7 @@
     text-decoration: underline;
   }
 
-  @media (max-width: 375px) {
+  @media (max-width: 425px) {
     main {
       position: relative;
     }
@@ -138,12 +138,30 @@
       position: relative;
       top: -107px;
       z-index: 4;
-      left: 55px;
+      left: 105px;
+      margin-bottom: 40px;
     }
 
     .blue {
       z-index: 3;
       /* background-color: #335bfdab; */
+    }
+
+    .blue .link:nth-child(1),
+    .blue .link:nth-child(2) {
+      padding: 14px;
+    }
+  }
+
+  @media (max-width: 375px) {
+    .white-wrapper img {
+      left: 80px;
+    }
+  }
+
+  @media (max-width: 325px) {
+    .white-wrapper img {
+      left: 60px;
     }
   }
 </style>
