@@ -57,7 +57,7 @@ type Assignment {
   created: Time!
   # _ts used for last edited timestamp
   comments: [AssignmentComment] @relation
-  topic: String # TODO: Optional field for topics
+  topic: String
 }
 
 enum AssignmentType {
@@ -71,11 +71,3 @@ type AssignmentComment {
   author: User!
   assignment: Assignment!
 }
-
-#  TODO: This is a custom query / mutation example
-
-#  There's no need for a custom query or mutation at the moment.
-
-#  type Query {
-#    allUsersByClass(classId): [User]! @resolver
-#  }
