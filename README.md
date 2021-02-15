@@ -1,6 +1,6 @@
 ## [**🎼 Bear Class**](https://bearclass.netlify.app/)
 
-Voyage-26 | https://chingu.io/ | Twitter: https://twitter.com/ChinguCollabs
+Voyage-26 | [chingu.io](https://chingu.io) | [Twitter](https://twitter.com/ChinguCollabs)
 
 ### We created a Google Classroom clone with the purpose of streamlining the process surrounding music teaching.
 
