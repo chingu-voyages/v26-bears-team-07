@@ -3,15 +3,15 @@ import {
   operationStore,
   query,
   mutation,
-  defaultExchanges,
+  // defaultExchanges, // ! for dev only
 } from "@urql/svelte";
-import { devtoolsExchange } from "@urql/devtools"; // TODO: for dev only. Remove on prod
+// import { devtoolsExchange } from "@urql/devtools"; // ! for dev only
 
 /** urql preconfigured fauna client */
 export const initClient = (secret) =>
   urqlInit({
     url: "https://graphql.fauna.com/graphql",
-    exchanges: [devtoolsExchange, ...defaultExchanges], // TODO: for dev only. Remove on prod
+    // exchanges: [devtoolsExchange, ...defaultExchanges], // ! for dev only
     fetchOptions() {
       return {
         headers: {

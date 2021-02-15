@@ -6,7 +6,6 @@
   import Announcement from "../../components/Streams/Announcement.svelte";
   import Tasks from "../../components/Streams/Tasks.svelte";
   import { findClass, findStreams } from "../../stores/query";
-  import Assignments from "../../components/Streams/Assignments.svelte";
   import dayjs from "dayjs";
   import { teacher } from "../../utils/image-constants";
   import { assignmentsByClassID } from "../../stores/query";
@@ -95,17 +94,6 @@
           />
         {/if}
       </div>
-      <!-- this is a default assignment view for preview only -->
-      <!-- TODO: remove this block  -->
-      <Assignments />
-      {#each assignmentsArray as assignment}
-        <Assignments {...assignment} />
-      {/each}
-      <!-- TODO: remove this block  -->
-      <!-- this is the end of a default announcement view for preview only -->
-      <!-- announcement name, array of comments, data created -->
-      <!-- this is a default announcement view for preview only -->
-      <!-- TODO: remove this block  -->
       <Announcement>
         <p slot="classwork" class="open-sans slot-head">
           This is test announcement
@@ -116,8 +104,6 @@
           <p>this is test comment 3</p>
         </div>
       </Announcement>
-      <!-- TODO: remove this block  -->
-      <!-- this is the end of a default announcement view for preview only -->
       <!-- announcement name, array of comments, data created -->
       {#each announcementsArray as { username, _ts, message, comments, _id }}
         <Announcement dateCreated={formatDate(_ts)} {username} {_id}>
