@@ -25,7 +25,7 @@ You'll need a Netlify and Fauna account.
         - ROLES tab: Create a new role of `user` and use the `User` collection for membership. Give it access to all Collections & Indexes privileges (or as you see fit for fine-grained privileges).
         - KEYS tab: Create a new server role key and add it to your Netlify [environment variables](https://docs.netlify.com/configure-builds/environment-variables/#declare-variables) as `FAUNA_KEY`
 
-## The 🐻 **Team & Testimonials**
+## The 🐻 **Team**
 
 **[Fang🦁](https://github.com/armchair-traveller)**
 
