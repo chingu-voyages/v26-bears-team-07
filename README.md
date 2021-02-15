@@ -10,6 +10,8 @@ Voyage-26 | https://chingu.io/ | Twitter: https://twitter.com/ChinguCollabs
   </p>
 </a>
 
+**[See it live!](https://bearclass.netlify.app/)**
+
 ## How Do I Deploy?
 
 You'll need a Netlify and Fauna account.
