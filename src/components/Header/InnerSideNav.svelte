@@ -7,12 +7,11 @@
 
   export let toClose;
   export let userClasses;
-  export let teacherId = '';
+  export let teacherId = "";
   let deadLink = "https/dead";
   let innerTabOptions = [{ icon: review, name: "To review", link: deadLink }];
 
-
-  userClasses =  classesByUserID({ id: teacherId })
+  userClasses = classesByUserID({ id: teacherId });
 
   $: allClasses = $userClasses.data
     ? (() =>
@@ -40,7 +39,7 @@
     <div class="side-menu">
       <a href={link} on:click={toClose} class="flex-r">
         {#if i !== 0}
-          <UserNameTag className={name} />
+          <UserNameTag className={name}  />
         {:else}
           <Icon name={icon} />
         {/if}

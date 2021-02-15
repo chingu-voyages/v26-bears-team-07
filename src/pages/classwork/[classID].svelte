@@ -5,57 +5,90 @@
   import AssignmentCard from "../../components/AssignmentCard.svelte";
   import { assignmentsByClassID } from "../../stores/query";
 
+  let title = "";
+  let text = "";
+  let points = "100";
+  let due = "";
+  let type = "ESSAY";
+  let assignees = "all";
+  let choices = [];
+  let assignmentID;
+  let update = false;
+
   // TODO: fetch class data
   const assignmentsQuery = assignmentsByClassID({ classID: $params.classID });
   let assignments = [];
   $: if ($assignmentsQuery.data)
     assignments = [...$assignmentsQuery.data.result.assignments.data];
-  $: console.log(assignments);
 
-  console.log($params.classID);
   let showForm = false;
+  const create = () => {
+    title = "";
+    text = "";
+    type = "ESSAY";
+    due = "";
+    showForm = true;
+  };
+
+  const edit = () => {
+    console.log("hi");
+  };
 </script>
 
-<!-- TODO: set up topics ordering -->
 <!-- TODO: allow draging for reordering -->
-
+<!-- [null, {}] -->
 <!-- TODO: only include for teachers -->
 {#if showForm}
   <NewAssignment
-    on:submit={() => console.log("submit")}
-    on:exit={() => (showForm = false)}
+    {title}
+    {text}
+    {type}
+    {update}
+    {due}
+    {assignmentID}
+    classID={$params.classID}
+    on:exit={() => {
+      showForm = false;
+      update = false;
+    }}
   />
 {/if}
 
 <div class="container">
-  <aside class="topics-menu">
-    <ul>
-      <li>topic 1</li>
-      <li>topic 2</li>
-      <li>topic 4</li>
-      <li>topic 5</li>
-    </ul>
-  </aside>
+  <aside class="topics-menu" />
   <main>
     <!-- dropdown menu for mobile -->
-    <select>
-      <option value="">All topics</option>
-      <option value="topic 1">topic 1</option>
-      <option value="topic 2">topic 2</option>
-      <option value="topic 3">topic 3</option>
-      <option value="topic 4">topic 4</option>
-      <option value="topic 5">topic 5</option>
-    </select>
     <!-- TODO: only show for teachers -->
-    <Button on:click={() => (showForm = true)} type="confirm-filled"
-      >Create</Button
-    >
+    <Button on:click={create} type="confirm-filled">Create</Button>
     <div class="content">
-      <AssignmentCard />
+      {#if assignments.length > 0}
+        {#each assignments as assignment}
+          <AssignmentCard
+            title={assignment.title}
+            text={assignment.text}
+            due={assignment.due}
+            timeCreated={assignment.created}
+            id={assignment._id}
+            on:editAssignment={() => {
+              title = assignment.title;
+              text = assignment.text;
+              due = assignment.due;
+              type = assignment.type;
+              assignmentID = assignment._id;
+              showForm = true;
+              update = true;
+              console.log(assignmentID);
+            }}
+          />
+        {/each}
+      {:else}
+        <p>No assignments yet!</p>
+      {/if}
     </div>
   </main>
 </div>
 
+<!-- TODO: only include for teachers -->
 <style>
   .container {
     display: flex;

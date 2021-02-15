@@ -72,9 +72,9 @@
   }
 
   .date-tag span:nth-child(1) {
-    font-weight: 500;
+    font-weight: 600;
     margin-bottom: 7px;
-    font-size: 15px;
+    font-size: 0.8rem;
   }
 
   .date-tag span:nth-child(2) {

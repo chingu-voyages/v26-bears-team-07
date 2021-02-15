@@ -3,63 +3,69 @@
   import { createEventDispatcher } from "svelte";
   import { fly } from "svelte/transition";
   import { authStore } from "../stores/auth";
-  import { useCreateAssignment, usersByClassID } from "../stores/query";
+  import {
+    useCreateAssignment,
+    usersByClassID,
+    // useUpdateAssignment,
+  } from "../stores/query";
   import { plus } from "../utils/image-constants";
   import Button from "./Header/Button.svelte";
   import TextInput from "./Header/TextInput.svelte";
+  import dayjs from "dayjs";
+  import utc from "dayjs/plugin/utc";
+  import StudentSelect from "./Streams/StudentSelect.svelte";
+  dayjs.extend(utc);
 
-  let title = "";
-  let text = "";
-  let points = "";
-  let due = "";
-  let className = "";
-  let topic = "";
-  let type = "essay";
+  export let title = "";
+  export let text = "";
+  export let points = "100";
+  export let due = "";
+  export let type = "ESSAY";
+  export let classID;
+  export let assignmentID;
+  let assignees;
+  export let update = false;
+  let allStudents;
 
   const dispatch = createEventDispatcher();
 
+  let users = usersByClassID({ classID: $params.classID });
+
   const [createAssignment, createAssignStore] = useCreateAssignment();
-  $: console.log($createAssignStore);
-  //append students list from database
-  const users = usersByClassID({ classID: $params.classID });
-  let allStudents = [];
-  $: console.log(allStudents);
+
+  $: console.log($createAssignStore, "assignment stores");
   $: if ($users.data) allStudents = [...$users.data.result.students.data];
   const submit = () => {
-    createAssignment({
-      /*
-      TODO: Read this comment and add in the variables object.
-
-      expected args, view in query.js
-      $title: String!
-      $text: String!
-      $points: Int!
-      $due: Date! 
-      $type: AssignmentType!
-      $created: Time!
-      $assignees: [ID]!
-      $creator: ID!
-
-      example variables usage in createAssignment:
-      {
-        title: "5th Essay",
-        text: "It's an essay",
-        points: 5
-        due: "2021-04-25" // string with format yyyy-MM-dd
-        type: "ESSAY" // other valid enumerations available in schema
-        created: "2021-03-25T02:38:41.359Z" // string with format yyyy-MM-ddTHH:mm:ss.SSSZ
-        assignees: ["8218917489"] // an array of IDs. Can be an empty array. Check
-                                  above  declared allStudents arr for student selection and IDs
-        creator: $authStore.id
-      }
-      
-      Dates are in accordance to ISO8601.
-      For date conversion API, refer to Day.js library docs. Package is already added.
-      Ask in Discord for further questions, like if you want to check when the mutation completed
-        or need the new created assignment's data returned.
-      */
-    });
+    if (!update) {
+      createAssignment({
+        title,
+        text,
+        points: parseInt(points),
+        due,
+        creator: $authStore.id,
+        type,
+        created: dayjs.utc().format("YYYY-MM-DDTHH:mm:ss.SSS[Z]"),
+        assignees: [...allStudents],
+        classID,
+      });
+    } else {
+      // useUpdateAssignment({
+      //   id: assignmentID,
+      //   title,
+      //   text,
+      //   points: parseInt(points),
+      //   due,
+      //   creator: $authStore.id,
+      //   type,
+      //   created: dayjs.utc().format("YYYY-MM-DDTHH:mm:ss.SSS[Z]"),
+      //   assignees: [...allStudents],
+      //   classID,
+      // });
+    }
+    dispatch("exit");
   };
+
+  $: console.log(assignees);
 </script>
 
 <div transition:fly={{ y: -500 }} class="shadow">
@@ -70,35 +76,30 @@
       </div>
       <h3>Assignment</h3>
     </div>
-    <Button on:click={submit} type="confirm-filled">Assign</Button>
+    <Button on:click={submit} type="confirm-filled"
+      >{update ? "Update" : "Assign"}</Button
+    >
   </header>
   <div class="container">
     <main>
       <div class="top">
-        <label for="assignment">For</label>
         <div class="top-select">
-          <select name="class">
-            <option value="">this class</option>
-          </select>
-          <select name="students">
-            <option value="all">All students</option>
-          </select>
+          <StudentSelect />
         </div>
       </div>
       <TextInput bind:value={title} placeholder="Title" />
       <select bind:value={type} name="type" class="type">
-        <option value="essay">Essay</option>
-        <option value="short">Short Answer</option>
-        <option value="multiple">Multiple Choice</option>
+        <option value="ESSAY">Essay</option>
+        <option value="SHORT_ANSWER">Short Answer</option>
       </select>
       <TextInput
         bind:value={text}
         controlType="textarea"
         minRows={4}
         maxRows={40}
-        placeholder="Instructions (optional)"
+        placeholder="Instructions"
       />
-      {#if type === "multiple"}
+      {#if type === "MULTIPLE_CHOICE"}
         <ul>
           <li><TextInput /></li>
         </ul>
@@ -106,14 +107,8 @@
     </main>
     <aside>
       <div class="top">
-        <label for="assignment">For</label>
         <div class="top-select">
-          <select bind:value={className} name="class">
-            <option value="">this class</option>
-          </select>
-          <select name="students">
-            <option value="all">All students</option>
-          </select>
+          <StudentSelect />
         </div>
       </div>
       <div class="form">
@@ -121,10 +116,6 @@
         <input bind:value={points} type="number" />
         <label for="due">Due</label>
         <input bind:value={due} type="date" />
-        <label for="topic" />
-        <select bind:value={topic} name="topic">
-          <option value="none">No topic</option>
-        </select>
       </div>
     </aside>
   </div>

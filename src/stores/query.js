@@ -9,10 +9,12 @@ const CLASS_FIELDS = gql`
   }
 `;
 
-/** Creates a classroom. Must provide a name and owner id.
- * Invite code can be auto-generated and is optional.
+/** Creates a classroom.
+ * @param name
+ * @param id - owner ID
+ * @param [invite] code can be auto-generated and is optional.
  *
- * `_id` of the doc is used as the link to route to.
+ * * `_id` of the doc is used as the link to route to.
  */
 export const useCreateClass = () =>
   useMutation(
@@ -120,7 +122,7 @@ export const findClass = ({ classID }) =>
   );
 
 /** Joins a class provided a classID and userID
- * warn: Seems difficult to secure on the client side with privileges. In a prod env, likely easier to handle logic via serverless func.
+ * ! Seems difficult to secure on the client side with privileges. In a prod env, likely easier to handle logic via serverless func.
  */
 export const useJoinClass = () =>
   useMutation(gql`
@@ -239,6 +241,7 @@ export const useCreateAssignment = () =>
       $created: Time!
       $assignees: [ID]!
       $creator: ID!
+      $classID: ID!
     ) {
       result: createAssignment(
         data: {
@@ -250,12 +253,37 @@ export const useCreateAssignment = () =>
           created: $created
           assignees: { connect: $assignees }
           creator: { connect: $creator }
+          class: { connect: $classID }
         }
       ) {
         _id
       }
     }
   `);
+
+export const findAssignment = ({ assignmentID }) =>
+  queryOp(
+    gql`
+      query FindAssignment($assignmentID: ID!) {
+        result: findAssignmentByID(id: $assignmentID)
+          {
+            title
+            text
+            points
+            due
+            creator {
+              name
+              _id
+            }
+            classData: class {
+              name
+              _id
+            }
+        }
+      }
+    `,
+    { assignmentID }
+  );
 
 export const assignmentsByClassID = ({ classID }) =>
   queryOp(
@@ -295,4 +323,36 @@ export const assignmentsByClassID = ({ classID }) =>
       }
     `,
     { id: classID }
+  );
+
+export const allAssignmentsByUserID = (id) =>
+  queryOp(
+    gql`
+      query AllAssignmentsByUserID($id: ID!) {
+        result: findUserByID(id: $id) {
+          attends {
+            ...AssignmentsField
+          }
+          teaches {
+            ...AssignmentsField
+          }
+        }
+      }
+
+      fragment AssignmentsField on ClassPage {
+        data {
+          assignments {
+            data {
+              title
+              created
+              
+              _id
+            }
+          }
+        }
+      }
+    `,
+    {
+      id,
+    }
   );

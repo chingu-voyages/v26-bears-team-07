@@ -12,6 +12,3 @@
   <Header userID={$authStore.id} />
 {/if}
 <slot decorator={FadeDectorator} />
-
-
-

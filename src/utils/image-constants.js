@@ -22,3 +22,4 @@ export const classroom = "/images/class.svg";
 export const classroom_blue = "/images/classblue.svg";
 export const left = "/icons/double-left.png";
 export const right = "/icons/double-right.png";
+export const bear = "/images/bears.svg";

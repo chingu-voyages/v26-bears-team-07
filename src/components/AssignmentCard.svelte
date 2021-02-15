@@ -1,8 +1,11 @@
 <script>
   import { fade } from "svelte/transition";
   import { notes, menu_down, plus } from "../utils/image-constants";
+  import { createEventDispatcher } from "svelte";
   import Button from "./Header/Button.svelte";
   import Modal from "./Reusable/Modal.svelte";
+  import dayjs from "dayjs";
+  import { clickOutside } from "../utils/utils";
 
   export let title = "Assignment Title";
   export let comments = undefined;
@@ -10,11 +13,28 @@
   export let timeCreated = undefined;
   export let edited = undefined;
   export let text = "Sample text";
+  export let id;
 
+  let dispatch = createEventDispatcher();
   let showDetail = false;
+
+  title = `${title.substring(0, 25)}${title.length > 25 ? "..." : ""}`;
+
+  const deleteAssignment = () => {
+    // deletes assignment
+  };
+
+  const edit = () => {
+    dispatch("editAssignment");
+  };
 </script>
 
-<div class="assignment-card" class:outline={showDetail}>
+<div
+  use:clickOutside
+  on:click_outside={() => (showDetail = false)}
+  class="assignment-card"
+  class:outline={showDetail}
+>
   <main on:click={() => (showDetail = !showDetail)} class="roboto flex-r">
     <section class="work-tag flex-r">
       <div class="flex-c image-wrapper">
@@ -22,25 +42,23 @@
         <img src={notes} class="user" alt="students" />
       </div>
       <div class="work-details flex-c">
-        <!-- TODO: limit title length -->
         <span>{title}</span>
       </div>
     </section>
     <section class="edit flex-r">
       <span>
-        Posted {timeCreated || "10:08PM"}
-        {#if due} (Due {due}) {/if}
-      </span>
-      <span class="menu">
-        <img class="user" src={menu_down} alt="menu" />
+        {#if !showDetail}
+          Posted {dayjs(timeCreated).format("MM/DD/YYYY") || "10:08PM"}
+        {/if}
+        {#if due} (Due {dayjs(due).format("MM/DD/YYYY")}) {/if}
       </span>
     </section>
   </main>
   {#if showDetail}
-    <div transition:fade class="wide-detail">
+    <div in:fade class="wide-detail">
       <section class="wide-text">
         <span>
-          Posted {timeCreated || "10:08PM"}
+          Posted {dayjs(timeCreated).format("MM/DD/YYYY") || "10:08PM"}
           {#if edited} (Edited {edited}) {/if}
         </span>
         <p>{text}</p>
@@ -54,7 +72,12 @@
       </section>
       <section class="wide-footer">
         <!-- TODO: link to assignment route -->
-        <Button type="confirm">View Assignment</Button>
+        <Button type="confirm"
+          ><a href="/assignments/{id}">View Assignment</a></Button
+        >
+        <!-- TODO: check user's role -->
+        <Button on:click={deleteAssignment}>Delete</Button>
+        <Button on:click={edit}>Edit</Button>
       </section>
     </div>
   {/if}
@@ -78,14 +101,18 @@
         </section>
         <section class="modal-text">
           <span>
-            Posted {timeCreated || "10:08PM"}
-            {#if due} (Due {due}) {/if}
+            Posted {dayjs(timeCreated).format("MM/DD/YYYY") || "10:08PM"}
+            {#if due} (Due {dayjs(due).format("MM/DD/YYYY")}) {/if}
           </span>
           <p>{text}</p>
         </section>
         <section class="modal-footer">
           <!-- TODO: link to assignment route -->
-          <Button type="confirm">View Assignment</Button>
+          <Button type="confirm"
+            ><a href="/assignments/{id}">View Assignment</a></Button
+          >
+          <Button on:click={deleteAssignment}>Delete</Button>
+          <Button on:click={edit}>Edit</Button>
         </section>
       </div>
     </Modal>
@@ -127,10 +154,6 @@
   .edit span {
     font-size: 10px;
     margin-right: 20px;
-  }
-
-  .edit img {
-    width: 25px;
   }
 
   .image-wrapper {

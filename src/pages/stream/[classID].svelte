@@ -6,8 +6,10 @@
   import Announcement from "../../components/Streams/Announcement.svelte";
   import Tasks from "../../components/Streams/Tasks.svelte";
   import { findClass, findStreams } from "../../stores/query";
-  import Assignments from "../../components/Streams/Assignments.svelte";
   import dayjs from "dayjs";
+  import { teacher } from "../../utils/image-constants";
+  import { assignmentsByClassID } from "../../stores/query";
+  const assignmentsQuery = assignmentsByClassID({ classID: $params.classID });
 
   let classData = findClass({ classID: $params.classID });
   let inviteCode, className;
@@ -15,6 +17,8 @@
   /**All assignments from database*/
   let announcementsArray = [];
   let assignmentsArray = [];
+  $: if ($assignmentsQuery.data)
+    assignmentsArray = [...$assignmentsQuery.data.result.assignments.data];
 
   // get data from DB
   let streamData = findStreams({ classID: $params.classID });
@@ -66,26 +70,30 @@
 <main>
   <Badge {inviteCode} {className} />
   <div class="flex-r announcements">
-    <div class="task"><Tasks /></div>
+    <div class="task">
+      <Tasks>
+        <ul>
+          {#each assignmentsArray as { due, title }}
+            <li>
+              {`${dayjs(due).format("DD/MM")} - ${title.substring(0, 10)}${
+                title.length > 15 ? "..." : ""
+              }`}
+            </li>
+          {/each}
+        </ul>
+      </Tasks>
+    </div>
     <section>
       <div>
         {#if !addAnnouncement}
           <Announcer on:add_announcement={createAnnouncement} />
         {:else}
-          <Announce on:closeAddAnouncement={closeAddAnouncementWindow} />
+          <Announce
+            {className}
+            on:closeAddAnouncement={closeAddAnouncementWindow}
+          />
         {/if}
       </div>
-      <!-- this is a default assignment view for preview only -->
-      <!-- remove this block  -->
-      <Assignments />
-      {#each assignmentsArray as assignment}
-        <Assignments {...assignment} />
-      {/each}
-      <!-- remove this block  -->
-      <!-- this is the end of a default announcement view for preview only -->
-      <!-- announcement name, array of comments, data created -->
-      <!-- this is a default announcement view for preview only -->
-      <!-- remove this block  -->
       <Announcement>
         <p slot="classwork" class="open-sans slot-head">
           This is test announcement
@@ -96,17 +104,27 @@
           <p>this is test comment 3</p>
         </div>
       </Announcement>
-      <!-- remove this block  -->
-      <!-- this is the end of a default announcement view for preview only -->
       <!-- announcement name, array of comments, data created -->
       {#each announcementsArray as { username, _ts, message, comments, _id }}
         <Announcement dateCreated={formatDate(_ts)} {username} {_id}>
           <p slot="classwork" class="open-sans slot-head">{message}</p>
           <div slot="comments" class="comments roboto">
+            {#if comments.length}
+              <p>
+                {comments.length} class comment{comments.length > 1 ? "s" : ""}
+              </p>
+            {/if}
             {#each comments as { name: username, message, _ts }}
-              <p>{username}</p>
-              <p>{message}</p>
-              <p>{formatDate(_ts)}</p>
+              <section class="comment">
+                <img src={teacher} alt="Announcer icon" />
+
+                <p class="comment-info">
+                  <span class="username">{username}</span>
+                  <span class="date">{formatDate(_ts)}</span>
+                </p>
+
+                <p class="message">{message}</p>
+              </section>
             {/each}
           </div>
         </Announcement>
@@ -135,16 +153,53 @@
     flex-grow: 1;
   }
 
+  ul {
+    list-style: none;
+    line-height: 1.5rem;
+    padding: 0;
+  }
+
   .slot-head {
     margin-left: 15px;
   }
 
   .comments {
     margin: 15px;
+    margin-top: 0;
   }
 
   .comments p {
     color: rgba(0, 0, 0, 0.692);
+  }
+  .comments p:first-child {
+    margin-top: 0;
+  }
+
+  .comment {
+    display: grid;
+    grid-template-columns: 2rem auto;
+    grid-auto-rows: max-content;
+    gap: 0.5rem 1rem;
+    margin-top: 1rem;
+  }
+  .comment p {
+    margin: 0;
+  }
+  .comment img {
+    width: 2.4rem;
+    grid-row: 1/3;
+    place-self: center;
+  }
+  .message {
+    grid-row: 2/3;
+  }
+  .username {
+    font-weight: 600;
+    font-size: 0.8rem;
+    margin-right: 0.2rem;
+  }
+  .date {
+    font-size: 0.6rem;
   }
 
   @media (max-width: 780px) {

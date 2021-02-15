@@ -19,7 +19,7 @@
   # to = "/.netlify/functions/ssr"
   # status = 200
   
-  # TODO: Enable SSR on prod by switching these redirects
+  # Optional: Enable SSR on prod by switching these redirects
   # SPA only is enabled as Netlify Dev fails with SSR
   # SPA only
   from = "/*"
