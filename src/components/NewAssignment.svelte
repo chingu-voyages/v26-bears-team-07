@@ -6,7 +6,7 @@
   import {
     useCreateAssignment,
     usersByClassID,
-    useUpdateAssignment,
+    // useUpdateAssignment,
   } from "../stores/query";
   import { plus } from "../utils/image-constants";
   import Button from "./Header/Button.svelte";
@@ -49,18 +49,18 @@
         classID,
       });
     } else {
-      useUpdateAssignment({
-        id: assignmentID,
-        title,
-        text,
-        points: parseInt(points),
-        due,
-        creator: $authStore.id,
-        type,
-        created: dayjs.utc().format("YYYY-MM-DDTHH:mm:ss.SSS[Z]"),
-        assignees: [...allStudents],
-        classID,
-      });
+      // useUpdateAssignment({
+      //   id: assignmentID,
+      //   title,
+      //   text,
+      //   points: parseInt(points),
+      //   due,
+      //   creator: $authStore.id,
+      //   type,
+      //   created: dayjs.utc().format("YYYY-MM-DDTHH:mm:ss.SSS[Z]"),
+      //   assignees: [...allStudents],
+      //   classID,
+      // });
     }
     dispatch("exit");
   };
