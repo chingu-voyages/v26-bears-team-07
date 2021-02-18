@@ -94,16 +94,6 @@
           />
         {/if}
       </div>
-      <Announcement>
-        <p slot="classwork" class="open-sans slot-head">
-          This is test announcement
-        </p>
-        <div slot="comments" class="comments roboto">
-          <p>this is test comment</p>
-          <p>this is test comment 2</p>
-          <p>this is test comment 3</p>
-        </div>
-      </Announcement>
       <!-- announcement name, array of comments, data created -->
       {#each announcementsArray as { username, _ts, message, comments, _id }}
         <Announcement dateCreated={formatDate(_ts)} {username} {_id}>
